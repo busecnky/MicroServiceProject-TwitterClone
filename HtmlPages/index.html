@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Home Page</title>
+</head>
+<body>
+
+<header>
+    <h1>
+        <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
+    </h1>
+    <nav>
+        <ul>
+            <li><img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt=""> <a href="#">Home</a></li>
+            <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
+            <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Contact</a></li>
+            <button onclick="logout()" class="logout">Log Out</button>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <aside>
+        <section class="profile__section">
+            <img class="avatar"
+                 src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                 alt="">
+            <label>10 paws</label>
+        </section>
+
+        <label>My Post</label>
+        <label onclick="profile()">Profile</label>
+
+    </aside>
+
+    <section class="main__section">
+        <!-- pawerbox Starts-->
+        <section class="pawerbox">
+            <form>
+                <section class="pawerbox__input">
+                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                         alt="">
+                    <textarea type="text" id="textarea" class="md-textarea"
+                              placeholder="What's happening?"></textarea>
+
+                </section>
+                <button class="pawbutton" onclick="pawPost()">Paw</button>
+            </form>
+        </section>
+        <!-- pawerbox ends-->
+        <div id="feed"> </div>
+    </section>
+
+
+
+    <section class="section__darklight">
+            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode
+            </span>
+    </section>
+
+</main>
+
+
+
+
+        <!-- posts ends-->
+        <div class="container">
+            <div class="pagination-wrapper">
+                <svg class="btn btn--prev" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
+                    <path d="M0-.5h24v24H0z" fill="none" />
+                </svg>
+
+                <div class="pagination-container">
+                    <div class="little-dot  little-dot--first"></div>
+                    <div class="little-dot">
+                        <div class="big-dot-container">
+                            <div class="big-dot"></div>
+                        </div>
+                    </div>
+                    <div class="little-dot  little-dot--last"></div>
+                </div>
+
+                <svg class="btn btn--next" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" />
+                    <path d="M0-.25h24v24H0z" fill="none" />
+                </svg>
+            </div>
+        </div>
+    <!-- Feed Ends-->
+
+
+    <script src="../HtmlPages/js/pagination.js"></script>
+<script>
+
+    let mode = document.getElementById('dark_mode');
+    console.log(mode.textContent)
+
+    function lightdarkmode() {
+        document.body.classList.toggle("dark-theme");
+        if (document.body.classList.contains("dark-theme")) {
+            mode.textContent = 'light_mode';
+            mode.id = 'light_mode';
+            console.log(mode.textContent)
+            console.log(mode.id)
+        } else {
+            mode.textContent = "dark_mode";
+            mode.id = 'dark_mode';
+        }
+
+    }
+    function profile(){
+        window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/profile.html';
+    }
+
+    function homepage(){
+        window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+    }
+
+    function logout(){
+        sessionStorage.setItem("token", null);
+        window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/login.html';
+
+    }
+
+
+
+    window.addEventListener('load', getData);
+
+
+
+    function getData() {
+        const token = sessionStorage.getItem("token");
+        const name = document.getElementById('name');
+        const username = document.getElementById('username');
+        const content = document.getElementById('content');
+        const date = document.getElementById('date');
+        const time = document.getElementById('time');
+
+        const data = JSON.stringify({
+            "name": name,
+            "username": username,
+            "content": content,
+            "date":date,
+            "time":time
+        });
+
+        fetch("http://localhost:6160/post/findallpage", {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+                for (let index = 0; index < response.content.length; index++) {
+                        document.getElementById("feed").innerHTML += `<div class="post">
+                    <div class="post__avatar">
+                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                            alt="">
+                    </div>
+
+                    <div class="post__body">
+                        <div class="post__header">
+                            <div class="post__headerText">
+                                <h3>
+                                    <span class="post__headerSpecial">
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="post__headerDescription">
+                                <p>${response.content[index].content}</p>
+                            </div>
+                        </div>
+                        <div class="post__timer">
+                            <span class="postdate">${response.content[index].date}</span>
+                            <span class="post__time">${response.content[index].time}</span>
+                         </div>
+                        <div class="post__footer">
+                            <span class="material-symbols-outlined likecomment">chat</span>
+                            <span class="material-symbols-outlined likecomment">favorite</span>
+                        </div>
+                        <div class="commentwrite">
+                            <div class="commentwrite__input">
+                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                    alt="">
+                                <textarea type="text" id="textarea" class="commentwrite-textarea"
+                                    placeholder="Write a comment"></textarea>
+
+                            </div>
+                            <button class="commentbutton">Comment</button>
+                        </div>
+                        <div class="commentread">
+                            <div class="commentread__avatar">
+                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                    alt="">
+                            </div>
+
+                            <div class="commentread__body">
+                                <div class="commentread__header">
+                                    <div class="commentread__headerText">
+                                        <h3>
+                                            <span class="commentread__headerSpecial">
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="commentread__headerDescription">
+                                        <p></p>
+                                    </div>
+                                    <div class="commentread__timer">
+                                        <span class="commentread__date">${response.content[index].date}</span>
+                                        <span class="commentread__time">${response.content[index].time}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                    }
+
+            })
+            .catch(error => console.log('error', error));
+    }
+
+
+
+//*****************************Paw Tuşu
+    function pawPost(){
+        let token = sessionStorage.getItem("token");
+        const content = document.getElementById('content').value;
+
+        const data = {
+            "content": content,
+            "token": token
+        }
+
+        fetch("http://localhost:6260/user/createPost",{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response)=>response.json())
+            .then((response)=>{
+                if (response===true){
+                    console.log("Lets go")
+                    window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+                }
+                else{
+                    console.log(response.message)
+                    alert(response.message)
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
+
+
+
+</script>
+</body>
+</html>

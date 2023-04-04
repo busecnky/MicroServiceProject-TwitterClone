@@ -1,0 +1,22 @@
+server:
+  port: 6160
+
+spring:
+  zipkin:
+    enabled: true
+    base-url: http://localhost:9411
+    service:
+      name: driver-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: user
+
+  data:
+    mongodb:
+      host: localhost    #104.197.195.2
+      port: 29000
+      username: "croweruser"
+      password: "root"
+      database: PostDB

@@ -1,0 +1,4 @@
+include 'UserMicroService'
+include 'AuthMicroService'
+include 'PostMicroService'
+

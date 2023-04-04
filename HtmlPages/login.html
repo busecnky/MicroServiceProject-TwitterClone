@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../HtmlPages/css/login.css">
+</head>
+<body>
+
+    <br>
+    <br>
+        <div class="cont">
+            <div class="form sign-in">
+                <div class="logo-right">
+                    <img class="logo1" src="../HtmlPages/images/logolight.png" alt="">
+                </div>
+                <div>
+                    <h2>Welcome</h2>
+
+                        <label>
+                            <span>Username</span>
+                            <input type="text" id="loginusername"/>
+                        </label>
+                        <label>
+                            <span>Password</span>
+                            <input type="password" id="loginpassword" />
+                        </label>
+                        <p class="forgot-pass">Forgot password?</p>
+                        <button type="submit" class="submitbutton" onclick="login()">Sign In</button>
+
+
+                </div>
+
+             
+            </div>
+            <div class="sub-cont">
+                <div class="img">
+                    <div class="img__text m--up">
+                     
+                        <h3>Don't have an account? Please Sign up!</h3>
+                    </div>
+                    <div class="img__text m--in">
+                    
+                        <h3>If you already has an account, just sign in.</h3>
+                    </div>
+                    <div class="img__btn">
+                        <span class="m--up">Sign Up</span>
+                        <span class="m--in">Sign In</span>
+                    </div>
+    
+                </div>
+
+                <div class="form sign-up">
+                    <div class="logo-left">
+                        <img class="logo2" src="../HtmlPages/images/logolight.png" alt="">
+                    </div>
+                    <div>
+                        <h2>Create your Account</h2>
+
+                            <label>
+                                <span>Username</span>
+                                <input type="text" id="registerusername"/>
+                            </label>
+                            <label>
+                                <span>Name</span>
+                                <input type="text" id="registername"/>
+                            </label>
+                            <label>
+                                <span>Surname</span>
+                                <input type="text" id="registersurname"/>
+                            </label>
+                            <label>
+                                <span>Email</span>
+                                <input type="email" pattern="[a-zA-Z0-9!#$%&'+/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)"
+                                       id="registeremail" />
+                            </label>
+                            <label>
+                                <span>Password</span>
+                                <input type="password" id="registerpassword" />
+                            </label>
+                            <label>
+                                <span>Repassword</span>
+                                <input type="password" id="registerrepassword" />
+                            </label>
+
+                            <button type="submit" class="submitbutton" onclick="register()">Sign Up</button>
+
+
+
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </div>
+
+    <div>
+        <input type="text" id="txttoken" style="width: 50% ">
+    </div>
+
+    <script>
+            document.querySelector('.img__btn').addEventListener('click', function() {
+                document.querySelector('.cont').classList.toggle('s--signup');
+            });
+
+            function register(){
+                const username = document.getElementById('registerusername').value;
+                const name = document.getElementById('registername').value;
+                const surname = document.getElementById('registersurname').value;
+                const password = document.getElementById('registerpassword').value;
+                const repassword = document.getElementById('registerrepassword').value;
+                const email = document.getElementById('registeremail').value;
+                const data = {
+                    "username": username,
+                    "name": name,
+                    "surname": surname,
+                    "password": password,
+                    "repassword": repassword,
+                    "email": email
+                }
+
+                    fetch("http://localhost:6060/auth/register",{
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then((response)=>response.json())
+                        .then((response)=>{
+                            if (response===true){
+                                console.log("Lets go")
+                                window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/login.html';
+                            }
+                            else{
+                                console.log(response.message)
+                                alert(response.message)
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        });
+            }
+
+            function login() {
+                const username = document.getElementById('loginusername').value;
+                const password = document.getElementById('loginpassword').value;
+
+                fetch('http://localhost:6060/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+
+                    },
+                    body: JSON.stringify({
+                        'username': username,
+                        'password': password
+                    })
+                }).then((response) => response.json())
+                    .then((response) => {
+                        if (response.message===undefined){
+                            sessionStorage.setItem("token", response.token)
+
+                            window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+                        }
+                        else{
+                            console.log(response.message)
+                            alert(response.message)
+                        }
+
+                    })
+
+            }
+
+        </script>
+</body>
+</html>

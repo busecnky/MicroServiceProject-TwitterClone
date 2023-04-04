@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../HtmlPages/css/changepass.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+
+</head>
+<body>
+
+<br>
+<br>
+<div class="cont">
+    <div class="form sign-in">
+        <div class="logo-right">
+            <img class="logo1" src="../HtmlPages/images/logolight.png" alt="">
+        </div>
+        <div>
+            <label>
+                <span>Old Password</span>
+                <input type="password" id="oldpassword"/>
+            </label>
+            <label>
+                <span>Create New Password</span>
+                <input type="password" id="newpassword"/>
+            </label>
+            <label>
+                <span>Confirm New Password</span>
+                <input type="password" id="confirmpassword"/>
+            </label>
+            <button type="submit" class="submitbutton" onclick="changepass()">Change Password</button>
+
+
+        </div>
+
+
+    </div>
+    <div class="sub-cont">
+        <div class="img">
+            <div class="img__text">
+
+                <h3>Update Your Profile</h3>
+            </div>
+
+            <div class="img__btn" >
+                <button onclick="profile()">UPDATE PROFILE</button>
+
+            </div>
+            <br>
+            <br>
+            <div class="img__btn" >
+                <button onclick="homepage()">HOME</button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<script>
+    function homepage(){
+        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/index.html';
+    }
+
+    function profile(){
+        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/profile.html';
+    }
+    function changepass() {
+        const token = sessionStorage.getItem("token");
+        const oldpassword = document.getElementById('oldpassword').value;
+        const newpassword = document.getElementById('newpassword').value;
+        const confirmpassword = document.getElementById('confirmpassword').value;
+
+        const data = {
+            "token": token,
+            "oldpassword": oldpassword,
+            "newpassword": newpassword,
+            "confirmpassword": confirmpassword
+        }
+
+        fetch("http://localhost:6060/auth/changepassword", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response===true){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your password is changed',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+            }
+            else{
+                console.log(response.message)
+                alert(response.message)
+            }
+
+            })
+            .catch(error => console.log('error', error));
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+</body>
+</html>
