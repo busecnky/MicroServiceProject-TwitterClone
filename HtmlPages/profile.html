@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../HtmlPages/css/profile.css">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+</head>
+<body>
+
+<br>
+<br>
+    <div class="cont">
+    <div class="form sign-in">
+        <div class="logo-right">
+            <img class="logo1" src="../HtmlPages/images/logolight.png" alt="">
+        </div>
+        <div>
+            <label>
+                <img src="https://i.pinimg.com/564x/a6/58/32/a65832155622ac173337874f02b218fb--people-icon-avatar.jpg" alt="">
+                <input type="text" id="avatar" readonly/>
+            </label>
+            <label>
+                <span>Username</span>
+                <input type="text" id="username" readonly/>
+            </label>
+            <label>
+                <span>Name</span>
+                <input type="text" id="name"/>
+            </label>
+            <label>
+                <span>Surname</span>
+                <input type="text" id="surname"/>
+            </label>
+            <label>
+                <span>Age</span>
+                <input type="text" id="age" />
+            </label>
+
+            <button type="submit" class="submitbutton" onclick="update()">Update</button>
+
+
+        </div>
+
+
+    </div>
+    <div class="sub-cont">
+        <div class="img">
+            <div class="img__text">
+
+                <h3>Update Your Profile</h3>
+            </div>
+
+            <div class="img__btn" >
+                <button onclick="changepass()">CHANGE PASSWORD</button>
+
+            </div>
+            <br>
+            <br>
+            <div class="img__btn" >
+                <button onclick="homepage()">HOME</button>
+
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="img__btn delete__button" >
+                <button onclick="deleteuser()">DELETE USER</button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<script>
+    function homepage(){
+        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/index.html';
+    }
+    function deleteuser(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/login.html';
+            }
+        })
+
+    }
+    function changepass(){
+        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/changepass.html';
+    }
+
+    window.addEventListener('load', getData);
+
+    function getData(){
+        const token = sessionStorage.getItem("token");
+        const data = {
+            "token": token,
+        }
+
+        fetch("http://localhost:6260/user/findbyid?token="+token,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response)=>response.json())
+            .then((result)=>{
+                    console.log("Lets go")
+                document.getElementById('username').value = result.username ;
+                document.getElementById('name').value = result.name ;
+                document.getElementById('surname').value = result.surname ;
+                document.getElementById('age').value = result.age ;
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
+
+
+    function update() {
+        const token = sessionStorage.getItem("token");
+        const username = document.getElementById('username').value;
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+        const age = document.getElementById('age').value;
+
+        const data = {
+            "username": username,
+            "name": name,
+            "surname": surname,
+            "token":token,
+            "age":age
+        };
+
+        fetch("http://localhost:6260/user/update", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (response===true) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    console.log("Lets go")
+                }else{
+                    console.log(response.message)
+                    alert(response.message)
+                }
+            })
+
+            .catch(error => console.log('error', error));
+    }
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</body>
+</html>
