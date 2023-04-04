@@ -1,6 +1,7 @@
 package com.pawer.controller;
 
 
+import com.pawer.dto.request.CommentToPostDto;
 import com.pawer.dto.request.CreatePostDto;
 import com.pawer.dto.request.FindByIdRequestDto;
 import com.pawer.dto.request.UpdateUserProfileRequestDto;
@@ -39,5 +40,12 @@ public class UserController {
     public ResponseEntity<FindByIdResponseDto> findById(FindByIdRequestDto dto){
         return ResponseEntity.ok(userService.findByIdFromToken(dto));
     }
+
+    @PostMapping("/createcommenttopost")
+    @CrossOrigin("*")
+    public ResponseEntity<Boolean> createCommentToPost(@RequestBody CommentToPostDto dto){
+        return ResponseEntity.ok(userService.createCommentToPost(dto));
+    }
+
 
 }

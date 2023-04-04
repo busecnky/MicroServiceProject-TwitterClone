@@ -1,5 +1,6 @@
 package com.pawer.service;
 
+import com.pawer.dto.request.CommentToPostDto;
 import com.pawer.dto.request.CreatePostDto;
 import com.pawer.dto.request.FindByIdRequestDto;
 import com.pawer.dto.request.UpdateUserProfileRequestDto;
@@ -65,7 +66,7 @@ public class UserService extends ServiceManagerImpl<User,Long> {
         user.setSurname(dto.getSurname());
         user.setAge(dto.getAge());
         update(user);
-        ModelUpdateUser modelUpdateUser= ModelUpdateUser.builder()
+        ModelUpdateUser modelUpdateUser=ModelUpdateUser.builder()
                 .authId(user.getAuthId())
                 .surname(user.getSurname())
                 .name(user.getName())
@@ -76,7 +77,6 @@ public class UserService extends ServiceManagerImpl<User,Long> {
     }
 
     public FindByIdResponseDto findByIdFromToken(FindByIdRequestDto dto){
-        System.out.println("mavişim mavilendim************" + dto.getToken());
         Optional<Long> userId=jwtTokenManager.validToken(dto.getToken());
         if (userId.isEmpty()){
             throw new UserException(EErrorType.INVALID_TOKEN);
@@ -84,7 +84,11 @@ public class UserService extends ServiceManagerImpl<User,Long> {
         Optional<User> user = findById(userId.get());
 
         return IUserMapper.INSTANCE.toFindByIdResponseDto(user.get());
-
-
     }
+
+    public boolean createCommentToPost(CommentToPostDto dto){
+        producerDirectService.sendCreateCommentToPost(IPostMapper.INSTANCE.toCreateComment(dto));
+        return true;
+    }
+
 }

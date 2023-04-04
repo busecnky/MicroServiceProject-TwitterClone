@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.pawer.exception.PostException;
 import com.pawer.exception.EErrorType;
+import com.pawer.exception.PostException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.Date;
@@ -21,7 +21,7 @@ public class JwtTokenManager {
         try {
             token = JWT.create().withAudience()
                     .withClaim("id", id)
-                    .withIssuer("CROWER")
+                    .withIssuer("pawer")
                     .withIssuedAt(new Date())
                     .withExpiresAt(new Date(System.currentTimeMillis() + exTime))
                     .sign(Algorithm.HMAC512(sifreAnahtari));
@@ -33,7 +33,7 @@ public class JwtTokenManager {
     public Optional<Long> validToken(String token){
         try {
             Algorithm algorithm= Algorithm.HMAC512(sifreAnahtari);
-            JWTVerifier verifier= JWT.require(algorithm).withIssuer("CROWER").build();
+            JWTVerifier verifier= JWT.require(algorithm).withIssuer("pawer").build();
             DecodedJWT decodedJWT= verifier.verify(token);
             if (decodedJWT==null) return Optional.empty();
             return Optional.of(decodedJWT.getClaim("id").asLong());

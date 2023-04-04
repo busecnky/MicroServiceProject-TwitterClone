@@ -1,5 +1,6 @@
 package com.pawer.rabbitmq.producer;
 
+import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,11 @@ public class ProducerDirectService {
     public void sendUpdateUser(ModelUpdateUser model){
         rabbitTemplate.convertAndSend("exchange-direct","binding-key-update-user",model);
     }
+
+    public void sendCreateCommentToPost(ModelCreateCommentToPost model){
+        rabbitTemplate.convertAndSend("exchange-direct","binding-key-create-comment-to-post",model);
+    }
+
 
 
 }

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.aggregation.DateOperators;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -31,6 +30,7 @@ public class Post extends BaseEntity {
     private String date=LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     @Builder.Default
     private String  time= LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+
 
 
 

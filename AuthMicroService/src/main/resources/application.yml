@@ -1,23 +1,8 @@
-server:
-  port: 6060
-
 spring:
-  zipkin:
-    enabled: true
-    base-url: http://localhost:9411
-    service:
-      name: driver-service
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: user
-    password: user
-
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/CrowerAuthDB
-    username: postgres
-    password: 4628
-  jpa:
-    hibernate:
-      ddl-auto: update
+  cloud:
+    config:
+      uri: http://localhost:8888 #${CONFIG_URL}
+  config:
+    import: "configserver:"
+  application:
+    name: auth-micro-service
