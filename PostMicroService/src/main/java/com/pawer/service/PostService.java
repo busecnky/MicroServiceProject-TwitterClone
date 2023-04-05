@@ -72,6 +72,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return postrepository.findByUserId(userid,pageable);
     }
     public void createCommentToPost(ModelCreateCommentToPost model){
+        System.out.println("post servisi create comment");
         CommentToPost commentToPost= new CommentToPost();
         Long userId = jwtTokenManager.validToken(model.getToken()).get();
         commentToPost.setComment(model.getComment());

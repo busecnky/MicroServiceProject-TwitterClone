@@ -1,5 +1,5 @@
 :root{
-    --color7: #312d2e;
+    --color7: #656364;
     --color6: #c7c7c7;
     --color5: #85586F;
     --color4: #D0B8A8;
@@ -14,7 +14,7 @@
     --color4: #646464; /*post arka plani */
     --color5: #ea0808; /*yok */
     --color6: #ff0000; /*yok */
-    --color7: rgb(255, 252, 252); /*yazi rengi */
+    --color7: rgb(232, 6, 6); /*yazi rengi */
 }
 #lightmode{
     color: var(--color6);

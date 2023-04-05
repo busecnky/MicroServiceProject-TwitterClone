@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document
-public class CommentToPost {
+public class CommentToPost extends BaseEntity {
     private String id;
     private String postId;
     private Long userId;

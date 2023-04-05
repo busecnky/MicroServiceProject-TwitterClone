@@ -17,13 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/check")
-    public  ResponseEntity<String> getList(){
-        return ResponseEntity.ok().body("User Service is Working...");
 
-
-    }
-    @PostMapping("/createPost")
+    @PostMapping("/createpost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createPost(@RequestBody CreatePostDto dto) {
         System.out.println("bahça duvarından aştım");
@@ -44,6 +39,8 @@ public class UserController {
     @PostMapping("/createcommenttopost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createCommentToPost(@RequestBody CommentToPostDto dto){
+        System.out.println("user controller create comment");
+        System.out.println("dto nun post id'si"+dto.getPostId());
         return ResponseEntity.ok(userService.createCommentToPost(dto));
     }
 

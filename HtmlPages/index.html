@@ -37,7 +37,7 @@
             <label>10 paws</label>
         </section>
 
-        <label>My Post</label>
+        <label onclick="mypost()">My Post</label>
         <label onclick="profile()">Profile</label>
 
     </aside>
@@ -49,7 +49,7 @@
                 <section class="pawerbox__input">
                     <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
                          alt="">
-                    <textarea type="text" id="textarea" class="md-textarea"
+                    <textarea type="text" id="content" class="md-textarea"
                               placeholder="What's happening?"></textarea>
 
                 </section>
@@ -123,22 +123,30 @@
 
     }
     function profile(){
-        window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/profile.html';
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/profile.html';
     }
 
     function homepage(){
-        window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+    }
+
+    function mypost(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
     }
 
     function logout(){
         sessionStorage.setItem("token", null);
-        window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/login.html';
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
 
     }
 
 
 
     window.addEventListener('load', getData);
+
+
+
+
 
 
 
@@ -149,13 +157,16 @@
         const content = document.getElementById('content');
         const date = document.getElementById('date');
         const time = document.getElementById('time');
+        const id = document.getElementById('id');
+
 
         const data = JSON.stringify({
             "name": name,
             "username": username,
             "content": content,
             "date":date,
-            "time":time
+            "time":time,
+            "id": id
         });
 
         fetch("http://localhost:6160/post/findallpage", {
@@ -167,7 +178,9 @@
             .then(response => response.json())
             .then(response => { console.log(response)
                 for (let index = 0; index < response.content.length; index++) {
-                        document.getElementById("feed").innerHTML += `<div class="post">
+                        document.getElementById("feed").innerHTML += `
+
+<div class="post">
                     <div class="post__avatar">
                         <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
                             alt="">
@@ -197,12 +210,55 @@
                             <div class="commentwrite__input">
                                 <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
                                     alt="">
-                                <textarea type="text" id="textarea" class="commentwrite-textarea"
+                                <textarea type="text" id="comment" class="commentwrite-textarea"
                                     placeholder="Write a comment"></textarea>
 
                             </div>
-                            <button class="commentbutton">Comment</button>
+                            <span id="idpsan"> ${response.content[index].id} </span>
+
+                            <button class="commentbutton" onclick="commentbtn(document.getElementById('idpsan'))">Comment</button>
+
                         </div>
+
+                        <div id="commentsss" onload="getComment(document.getElementById('idpsan'))">
+
+
+
+                        </div>
+
+                    </div>
+                </div>`;
+                    }
+
+            })
+            .catch(error => console.log('error', error));
+    }
+
+
+
+
+    //***************** her sey tamamdır sadece bu metod calismiyor alert harekete geçmiyor.
+
+    function getComment(postIdD) {
+        const token = sessionStorage.getItem("token");
+        const comment = document.getElementById('comment');
+        alert("------------a-a-a-a--aa-a--a-a")
+
+
+        const data = JSON.stringify({
+            "comment": comment
+        });
+
+        fetch("http://localhost:6160/post/findallcomment"+"?postId="+postIdD, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+                for (let index = 0; index < response.content.length; index++) {
+                    document.getElementById("commentsss").innerHTML += `
                         <div class="commentread">
                             <div class="commentread__avatar">
                                 <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
@@ -218,37 +274,41 @@
                                         </h3>
                                     </div>
                                     <div class="commentread__headerDescription">
-                                        <p></p>
+                                        <p>${response.content[index].content}</p>
                                     </div>
                                     <div class="commentread__timer">
-                                        <span class="commentread__date">${response.content[index].date}</span>
-                                        <span class="commentread__time">${response.content[index].time}</span>
+                                        <span class="commentread__date"></span>
+                                        <span class="commentread__time"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>`;
-                    }
+                `;
+                }
 
             })
             .catch(error => console.log('error', error));
     }
 
 
+    //*****************
 
 //*****************************Paw Tuşu
     function pawPost(){
         let token = sessionStorage.getItem("token");
         const content = document.getElementById('content').value;
 
+        console.log(content)
+
         const data = {
             "content": content,
             "token": token
         }
 
-        fetch("http://localhost:6260/user/createPost",{
-            method: 'POST',
+
+
+        fetch("http://localhost:6260/user/createpost",{
+            method : "POST",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -258,7 +318,7 @@
             .then((response)=>{
                 if (response===true){
                     console.log("Lets go")
-                    window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+                    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
                 }
                 else{
                     console.log(response.message)
@@ -268,8 +328,50 @@
             .catch((err) => {
                 console.log(err)
             });
+        console.log(content)
+
     }
 
+
+
+    //*****************************comment Tuşu
+    function commentbtn(ids){
+        let token = sessionStorage.getItem("token");
+        const comment = document.getElementById('comment').value;
+
+        const data = {
+            "postId" : ids.textContent,
+            "comment": comment,
+            "token": token
+        }
+        alert("---> post id-->>> "+ids.textContent)
+        alert("tokenn :  "+token)
+        alert("commennttt:   "+comment)
+
+
+        fetch("http://localhost:6260/user/createcommenttopost",{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response)=>response.json())
+            .then((response)=>{
+                if (response===true){
+                    console.log("Lets go")
+                    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+                }
+                else{
+                    console.log(response.message)
+                    alert(response.message)
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+
+    }
 
 
 </script>

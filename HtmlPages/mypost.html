@@ -34,14 +34,16 @@
 
     </section>
 
-    <h3 class="mypostwith" >MY POST WITH</h3> <!--düzenlenecek -->
+    <label >Home</label>
+    <hr class="mypostwithline" >
+    <h3 class="mypostwith" >MY POST </h3> <!--düzenlenecek -->
     <label>Create Date</label>
     <label>Update Date</label>
     <label>A-Z</label>
     <label>Z-A</label>
     <hr class="mypostwithline" >
     <label onclick="profile()">Profile</label>
-    <label ></label>
+    <button onclick="logout()" class="logout">Log Out</button>
 
 
   </aside>
@@ -122,16 +124,16 @@
 
   }
   function profile(){
-    window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/profile.html';
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/profile.html';
   }
 
   function homepage(){
-    window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
   }
 
   function logout(){
     sessionStorage.setItem("token", null);
-    window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/login.html';
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
 
   }
 
@@ -156,12 +158,18 @@
       "date":date,
       "time":time
     });
+    const data2 = {
 
-    fetch("http://localhost:6160/post/findallpage", {
-      method: 'GET',
+      "token": token
+    }
+
+
+    fetch("http://localhost:6160/post/findallmypost", {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(data2)
     })
             .then(response => response.json())
             .then(response => { console.log(response)
@@ -192,40 +200,6 @@
                             <span class="material-symbols-outlined likecomment">chat</span>
                             <span class="material-symbols-outlined likecomment">favorite</span>
                         </div>
-                        <div class="commentwrite">
-                            <div class="commentwrite__input">
-                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                                    alt="">
-                                <textarea type="text" id="textarea" class="commentwrite-textarea"
-                                    placeholder="Write a comment"></textarea>
-
-                            </div>
-                            <button class="commentbutton">Comment</button>
-                        </div>
-                        <div class="commentread">
-                            <div class="commentread__avatar">
-                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                                    alt="">
-                            </div>
-
-                            <div class="commentread__body">
-                                <div class="commentread__header">
-                                    <div class="commentread__headerText">
-                                        <h3>
-                                            <span class="commentread__headerSpecial">
-                                            </span>
-                                        </h3>
-                                    </div>
-                                    <div class="commentread__headerDescription">
-                                        <p></p>
-                                    </div>
-                                    <div class="commentread__timer">
-                                        <span class="commentread__date">${response.content[index].date}</span>
-                                        <span class="commentread__time">${response.content[index].time}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>`;
               }
@@ -234,40 +208,6 @@
             .catch(error => console.log('error', error));
   }
 
-
-
-  //*****************************Paw Tuşu
-  function pawPost(){
-    let token = sessionStorage.getItem("token");
-    const content = document.getElementById('content').value;
-
-    const data = {
-      "content": content,
-      "token": token
-    }
-
-    fetch("http://localhost:6260/user/createPost",{
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
-    })
-            .then((response)=>response.json())
-            .then((response)=>{
-              if (response===true){
-                console.log("Lets go")
-                window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
-              }
-              else{
-                console.log(response.message)
-                alert(response.message)
-              }
-            })
-            .catch((err) => {
-              console.log(err)
-            });
-  }
 
 
 

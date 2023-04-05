@@ -24,7 +24,7 @@ public class PostController {
 
 
 
-    @PostMapping("/findallpage")
+    @GetMapping("/findallpage")
     @CrossOrigin("*")
     public ResponseEntity<Page<Post>> findallPage(@RequestParam(defaultValue = "10")Integer pageSize,
                                                   @RequestParam(defaultValue = "0")   int pageNumber,
@@ -69,7 +69,9 @@ public class PostController {
 
     @GetMapping("/findallcomment")
     @CrossOrigin("*")
-    public ResponseEntity<List<CommentToPost>> getCommentList(@RequestBody CommentToPostDto dto){
+    @ResponseBody
+    public ResponseEntity<List<CommentToPost>> getCommentList(CommentToPostDto dto){
+        System.out.println("getall post post dto -->>> "+dto.getPostId());
         return ResponseEntity.ok(postService.findAllComment(dto));
     }
 
