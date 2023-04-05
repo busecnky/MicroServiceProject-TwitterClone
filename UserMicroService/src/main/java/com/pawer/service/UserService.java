@@ -87,6 +87,9 @@ public class UserService extends ServiceManagerImpl<User,Long> {
     }
 
     public boolean createCommentToPost(CommentToPostDto dto){
+        if (dto.getComment() ==null || dto.getComment()==""|| dto.getToken()==null||dto.getToken()==""){
+            throw new UserException(EErrorType.BAD_REQUEST_ERROR,"create comment de hata eksik veya hatali bilgi");
+        }
         producerDirectService.sendCreateCommentToPost(IPostMapper.INSTANCE.toCreateComment(dto));
         return true;
     }

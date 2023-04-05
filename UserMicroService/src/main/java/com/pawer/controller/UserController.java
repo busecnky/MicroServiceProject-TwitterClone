@@ -6,6 +6,8 @@ import com.pawer.dto.request.CreatePostDto;
 import com.pawer.dto.request.FindByIdRequestDto;
 import com.pawer.dto.request.UpdateUserProfileRequestDto;
 import com.pawer.dto.response.FindByIdResponseDto;
+import com.pawer.exception.EErrorType;
+import com.pawer.exception.UserException;
 import com.pawer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
