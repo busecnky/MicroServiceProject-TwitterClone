@@ -1,5 +1,6 @@
 package com.pawer.repository.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,8 @@ public class User extends BaseEntity {
     private String phone;
     private String gender;
     private String age;
+
+
 
 
 }

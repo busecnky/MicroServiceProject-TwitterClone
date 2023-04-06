@@ -1,222 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter Clone</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../HtmlPages/css/styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/mypost.css">
+  <title>My Post </title>
 </head>
 <body>
 
-<div></div>
-<!-- Sidebar Starts-->
-<div class="sidebar light-mode">
-    <div hidden="hidden">
-        <p type="text" id="token" ></p>
-    </div>
-    <div class="logo">
-        <img class="logoo" src="../HtmlPages/images/logodark.png" alt="">
-    </div>
-    <div onclick="homepage()" class="sidebarOption ">
-        <span class="material-symbols-outlined">home</span>
-        <h2>Home</h2>
-    </div>
-    <div class="sidebarOption active">
-        <span class="material-symbols-outlined">list_alt</span>
-        <h2>My Posts</h2>
-    </div>
-    <div onclick="profile()" class="sidebarOption">
-        <span  class="material-symbols-outlined">person</span>
-        <h2>Profile</h2>
-    </div>
+<header>
+  <h1>
+    <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
+  </h1>
+  <nav>
+    <ul>
+      <li><img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt=""> <a href="#">Home</a></li>
+      <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
+      <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Contact</a></li>
+      <button onclick="logout()" class="logout">Log Out</button>
+    </ul>
+  </nav>
+</header>
 
-    <button class="sidebar__tweet logoutbutton" onclick="logout()">Log Out</button>
-</div>
-<!-- Sidebar Ends-->
+<main>
+  <aside>
+    <section class="profile__section">
 
-<!-- Feed Starts-->
-<div class="feed">
-    <div class="feed__header">
-        <h2>Home</h2>
-    </div>
+    </section>
 
-    <!-- tweetbox Starts-->
+    <label >Home</label>
+    <hr class="mypostwithline" >
+    <h3 class="mypostwith" >MY POST </h3> <!--düzenlenecek -->
+    <label>Create Date</label>
+    <label>Update Date</label>
+    <label>A-Z</label>
+    <label>Z-A</label>
+    <hr class="mypostwithline" >
+    <label onclick="profile()">Profile</label>
+    <button onclick="logout()" class="logout">Log Out</button>
 
-    <!-- tweetbox ends-->
 
-    <!-- posts starts-->
-    <!--        <ul id="list">-->
-    <!--            <li>-->
-    <!--        <form enctype="multipart/form-data">-->
+  </aside>
+
+  <section class="main__section">
+    <!-- pawerbox Starts-->
+    <section class="pawerbox">
+      <section class="profile__section">
+        <img class="mypostavatar"
+             src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+             alt="">
+        <label>10 paws</label>
+      </section>
+      <br>
+      <hr class="bottom-line">
+    </section>
+    <!-- pawerbox ends-->
     <div id="feed"> </div>
-    <!--        </form>-->
-
-    <!--            </li>-->
-
-    <!--        </ul>-->
+  </section>
 
 
 
+  <section class="section__darklight">
+            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode
+            </span>
+  </section>
 
-    <!-- posts ends-->
-    <div class="container">
-        <div class="pagination-wrapper">
-            <svg class="btn btn--prev" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
-                <path d="M0-.5h24v24H0z" fill="none" />
-            </svg>
+</main>
 
-            <div class="pagination-container">
-                <div class="little-dot  little-dot--first"></div>
-                <div class="little-dot">
-                    <div class="big-dot-container">
-                        <div class="big-dot"></div>
-                    </div>
-                </div>
-                <div class="little-dot  little-dot--last"></div>
-            </div>
 
-            <svg class="btn btn--next" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" />
-                <path d="M0-.25h24v24H0z" fill="none" />
-            </svg>
+
+
+<!-- posts ends-->
+<div class="container">
+  <div class="pagination-wrapper">
+    <svg class="btn btn--prev" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
+      <path d="M0-.5h24v24H0z" fill="none" />
+    </svg>
+
+    <div class="pagination-container">
+      <div class="little-dot  little-dot--first"></div>
+      <div class="little-dot">
+        <div class="big-dot-container">
+          <div class="big-dot"></div>
         </div>
+      </div>
+      <div class="little-dot  little-dot--last"></div>
     </div>
+
+    <svg class="btn btn--next" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" />
+      <path d="M0-.25h24v24H0z" fill="none" />
+    </svg>
+  </div>
 </div>
 <!-- Feed Ends-->
 
 
-
-
-
+<script src="../HtmlPages/js/pagination.js"></script>
 <script>
 
-    function profile(){
-        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/profile.html';
+  let mode = document.getElementById('dark_mode');
+  console.log(mode.textContent)
+
+  function lightdarkmode() {
+    document.body.classList.toggle("dark-theme");
+    if (document.body.classList.contains("dark-theme")) {
+      mode.textContent = 'light_mode';
+      mode.id = 'light_mode';
+      console.log(mode.textContent)
+      console.log(mode.id)
+    } else {
+      mode.textContent = "dark_mode";
+      mode.id = 'dark_mode';
     }
 
-    function homepage(){
-        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/index.html';
+  }
+  function profile(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/profile.html';
+  }
+
+  function homepage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+  }
+
+  function logout(){
+    sessionStorage.setItem("token", null);
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
+
+  }
+
+
+
+  window.addEventListener('load', getData);
+
+
+
+  function getData() {
+    const token = sessionStorage.getItem("token");
+    const name = document.getElementById('name');
+    const username = document.getElementById('username');
+    const content = document.getElementById('content');
+    const date = document.getElementById('date');
+    const time = document.getElementById('time');
+
+    const data = JSON.stringify({
+      "name": name,
+      "username": username,
+      "content": content,
+      "date":date,
+      "time":time
+    });
+    const data2 = {
+
+      "token": token
     }
 
-    function logout(){
-        sessionStorage.setItem("token", null);
-        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/login.html';
 
-    }
-
-
-
-    window.addEventListener('load', getData);
-
-    function foreachpost(result){
-        result.map(post => {
-            const postDiv = document.createElement('div');
-            postDiv.classList.add('post');
-
-
-            const bodyDiv = document.createElement('div');
-            bodyDiv.classList.add('post__body');
-
-            const headerDiv = document.createElement('div');
-            headerDiv.classList.add('post__header');
-
-            const headerTextDiv = document.createElement('div');
-            headerTextDiv.classList.add('post__headerText');
-            const nameH3 = document.createElement('h3');
-            const nameSpan = document.createElement('span');
-            nameSpan.classList.add('post__headerSpecial');
-            nameSpan.innerText = post.username;
-            nameH3.appendChild(nameSpan);
-            headerTextDiv.appendChild(nameH3);
-            headerDiv.appendChild(headerTextDiv);
-
-            const headerDescDiv = document.createElement('div');
-            headerDescDiv.classList.add('post__headerDescription');
-            const contentP = document.createElement('p');
-            contentP.innerText = post.content;
-            headerDescDiv.appendChild(contentP);
-            headerDiv.appendChild(headerDescDiv);
-
-            bodyDiv.appendChild(headerDiv);
-
-            const timeDiv = document.createElement('div');
-            timeDiv.classList.add('post__timer');
-            const dateSpan = document.createElement('span');
-            dateSpan.innerText = post.date;
-            dateSpan.classList.add('post__date');
-            timeDiv.appendChild(dateSpan);
-            const timeSpan = document.createElement('span');
-            timeSpan.innerText = post.time;
-            timeSpan.classList.add('post__time');
-            timeDiv.appendChild(timeSpan);
-
-            bodyDiv.appendChild(timeDiv);
-
-            const footerDiv = document.createElement('div');
-            footerDiv.classList.add('post__footer');
-            const likeCommentSpan = document.createElement('span');
-            likeCommentSpan.classList.add('material-symbols-outlined', 'likecomment');
-            likeCommentSpan.innerText = 'chat';
-            footerDiv.appendChild(likeCommentSpan);
-            const favoriteSpan = document.createElement('span');
-            favoriteSpan.classList.add('material-symbols-outlined', 'favcomment');
-            favoriteSpan.innerText = 'favorite';
-            footerDiv.appendChild(favoriteSpan);
-
-            bodyDiv.appendChild(footerDiv);
-
-            postDiv.appendChild(bodyDiv);
-
-            document.getElementById('feed').appendChild(postDiv);
-        });
-    }
-
-    function getData() {
-        const token = sessionStorage.getItem("token");
-        const name = document.getElementById('name');
-        const username = document.getElementById('username');
-        const content = document.getElementById('content');
-        const date = document.getElementById('date');
-        const time = document.getElementById('time');
-
-        const data = JSON.stringify({
-            "token":token,
-            "name": name,
-            "username": username,
-            "content": content,
-            "date":date,
-            "time":time
-        });
-
-        const data2 = {
-
-            "token": token
-        }
-
-        fetch("http://localhost:6160/post/findallmypost", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data2)
-        })
+    fetch("http://localhost:6160/post/findallmypost", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data2)
+    })
             .then(response => response.json())
-            .then(result => { foreachpost(result.content)
+            .then(response => { console.log(response)
+              for (let index = 0; index < response.content.length; index++) {
+                document.getElementById("feed").innerHTML += `<div class="post">
+                    <div class="post__avatar">
+                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                            alt="">
+                    </div>
+
+                    <div class="post__body">
+                        <div class="post__header">
+                            <div class="post__headerText">
+                                <h3>
+                                    <span class="post__headerSpecial">
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="post__headerDescription">
+                                <p>${response.content[index].content}</p>
+                            </div>
+                        </div>
+                        <div class="post__timer">
+                            <span class="postdate">${response.content[index].date}</span>
+                            <span class="post__time">${response.content[index].time}</span>
+                         </div>
+                        <div class="post__footer">
+                            <span class="material-symbols-outlined likecomment">chat</span>
+                            <span class="material-symbols-outlined likecomment">favorite</span>
+                        </div>
+                    </div>
+                </div>`;
+              }
 
             })
             .catch(error => console.log('error', error));
-    }
-
-
+  }
 
 
 
 
 </script>
-<script src="../HtmlPages/js/pagination.js"></script>
 </body>
 </html>

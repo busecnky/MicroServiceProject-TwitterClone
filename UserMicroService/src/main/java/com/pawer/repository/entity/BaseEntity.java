@@ -16,4 +16,5 @@ public class BaseEntity {
     private Long createDate;
     private Long UpdateDate;
     private boolean state;
+
 }

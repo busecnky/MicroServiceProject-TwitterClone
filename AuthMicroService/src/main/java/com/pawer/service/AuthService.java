@@ -24,7 +24,7 @@ public class AuthService extends ServiceManagerImpl<Auth,Long> {
     private final ProducerDirectSave producerDirectSave;
     private final JwtTokenManager jwtTokenManager;
 
-    public AuthService(IAuthRepository authRepository, ProducerDirectSave producerDirectSave,  JwtTokenManager jwtTokenManager) {
+    public AuthService(IAuthRepository authRepository, ProducerDirectSave producerDirectSave, JwtTokenManager jwtTokenManager) {
         super(authRepository);
         this.authRepository=authRepository;
         this.producerDirectSave = producerDirectSave;

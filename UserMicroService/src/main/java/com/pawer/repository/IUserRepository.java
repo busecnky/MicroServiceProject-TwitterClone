@@ -13,4 +13,6 @@ public interface IUserRepository extends JpaRepository<User,Long> {
     Optional<User> findOptionalByUsername(String username);
     Optional<User> findOptionalByAuthId(Long authId);
 
+
+
 }

@@ -45,6 +45,7 @@ allprojects{
         implementation libs.jwt
         implementation libs.springCloudSleuth
         implementation libs.springCloudSleuthZipkin
+        implementation libs.springCloudConfigClient
 
 
     }

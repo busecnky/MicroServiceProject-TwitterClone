@@ -1,5 +1,6 @@
 package com.pawer.rabbitmq.consumer;
 
+import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,7 @@ public class ConsumerCreatePost {
     public void createPostConsumerListener(ModelCreatePost modelCreatePost){
         postService.savePost(modelCreatePost);
     }
+    @RabbitListener(queues = "queue-create-comment-to-post")
+    public void createCommentToPost(ModelCreateCommentToPost model){postService.createCommentToPost(model);};
 
 }

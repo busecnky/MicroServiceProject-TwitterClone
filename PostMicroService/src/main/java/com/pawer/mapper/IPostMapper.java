@@ -5,7 +5,6 @@ import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.repository.entity.Post;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 

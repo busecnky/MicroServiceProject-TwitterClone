@@ -1,5 +1,6 @@
 package com.pawer.rabbitmq.consumer;
 
+
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
 import com.pawer.service.AuthService;
 import lombok.RequiredArgsConstructor;

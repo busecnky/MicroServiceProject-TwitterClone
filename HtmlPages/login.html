@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../HtmlPages/css/login.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
@@ -133,7 +133,7 @@
                         .then((response)=>{
                             if (response===true){
                                 console.log("Lets go")
-                                window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/login.html';
+                                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
                             }
                             else{
                                 console.log(response.message)
@@ -164,7 +164,7 @@
                         if (response.message===undefined){
                             sessionStorage.setItem("token", response.token)
 
-                            window.location.href = 'http://localhost:63342/MicroService_SocialMediaPawer/HtmlPages/index.html';
+                            window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
                         }
                         else{
                             console.log(response.message)
@@ -172,7 +172,6 @@
                         }
 
                     })
-
             }
 
         </script>
