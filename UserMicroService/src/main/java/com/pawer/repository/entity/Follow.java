@@ -1,6 +1,7 @@
 package com.pawer.repository.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -19,6 +20,10 @@ public class Follow extends  BaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long userId; // benim ıd'm
-    private Long followerId; // beni takip edenlerin id'si
-    //private int state; // 0 eklidegil 1_ istek attı 2_ takip ediyor.
+    private Long followId; //benim takip ettiğim insanların idsi
+    @Builder.Default
+    private int followRequest = 0; // 0 takipleşmiyor 1_ istek attı bekliyor 2_ takip ediyor.
+
+
+
 }

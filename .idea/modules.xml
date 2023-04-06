@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/SocialMedia_Pawer.ConfigServer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PostMicroService/SocialMedia_Pawer.PostMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PostMicroService/SocialMedia_Pawer.PostMicroService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/com.crower.SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/com.crower.SocialMedia_Pawer.ConfigServer.main.iml" />
     </modules>
   </component>
 </project>

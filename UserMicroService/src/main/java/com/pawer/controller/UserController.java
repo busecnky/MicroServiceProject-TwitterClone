@@ -1,10 +1,7 @@
 package com.pawer.controller;
 
 
-import com.pawer.dto.request.CommentToPostDto;
-import com.pawer.dto.request.CreatePostDto;
-import com.pawer.dto.request.FindByIdRequestDto;
-import com.pawer.dto.request.UpdateUserProfileRequestDto;
+import com.pawer.dto.request.*;
 import com.pawer.dto.response.FindByIdResponseDto;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.UserException;
@@ -46,5 +43,22 @@ public class UserController {
         return ResponseEntity.ok(userService.createCommentToPost(dto));
     }
 
+    @PostMapping("/follow")
+    @CrossOrigin("*")
+    public  ResponseEntity<Integer> followUser(@RequestBody FollowingUserRequestDto dto){
+        return  ResponseEntity.ok(userService.followUser(dto));
+    }
+
+    @PostMapping("/acceptfollower")
+    @CrossOrigin("*")
+    public  ResponseEntity<Integer> acceptFollower(@RequestBody AcceptFollowerRequestDto dto){
+        return  ResponseEntity.ok(userService.acceptFollower(dto));
+    }
+
+//    @PostMapping("/removefollower")
+//    @CrossOrigin("*")
+//    public  ResponseEntity<Integer> removeFollower(@RequestBody AcceptFollowerRequestDto dto){
+//        return  ResponseEntity.ok(userService.removeFollower(dto));
+//    }
 
 }
