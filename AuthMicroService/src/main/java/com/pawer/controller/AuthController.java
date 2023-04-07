@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @CrossOrigin("*")
-    public ResponseEntity<Boolean> register(@RequestBody @Valid AuthRegisterRequestDto dto){
+    public ResponseEntity<Boolean> register(@RequestBody /*@Valid*/ AuthRegisterRequestDto dto) throws InterruptedException {
         return ResponseEntity.ok( authService.register(dto));
 
     }

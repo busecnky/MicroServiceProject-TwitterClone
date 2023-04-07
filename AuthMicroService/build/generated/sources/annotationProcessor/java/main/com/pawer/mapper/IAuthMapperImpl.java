@@ -2,16 +2,16 @@ package com.pawer.mapper;
 
 import com.pawer.dto.request.AuthLoginDto;
 import com.pawer.dto.request.AuthRegisterRequestDto;
-import com.pawer.rabbitmq.messagemodel.ModelSave;
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
+import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.repository.entity.Auth;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-06T00:10:13+0300",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 17.0.6 (Amazon.com Inc.)"
+    date = "2023-04-06T18:05:21+0300",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 17.0.5 (Oracle Corporation)"
 )
 @Component
 public class IAuthMapperImpl implements IAuthMapper {
@@ -48,20 +48,20 @@ public class IAuthMapperImpl implements IAuthMapper {
     }
 
     @Override
-    public ModelSave ToModel(Auth auth) {
+    public ModelUserSave ToModel(Auth auth) {
         if ( auth == null ) {
             return null;
         }
 
-        ModelSave.ModelSaveBuilder modelSave = ModelSave.builder();
+        ModelUserSave.ModelUserSaveBuilder modelUserSave = ModelUserSave.builder();
 
-        modelSave.authId( auth.getId() );
-        modelSave.username( auth.getUsername() );
-        modelSave.name( auth.getName() );
-        modelSave.surname( auth.getSurname() );
-        modelSave.email( auth.getEmail() );
+        modelUserSave.authId( auth.getId() );
+        modelUserSave.username( auth.getUsername() );
+        modelUserSave.name( auth.getName() );
+        modelUserSave.surname( auth.getSurname() );
+        modelUserSave.email( auth.getEmail() );
 
-        return modelSave.build();
+        return modelUserSave.build();
     }
 
     @Override

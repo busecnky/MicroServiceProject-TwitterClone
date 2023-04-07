@@ -4,7 +4,7 @@ package com.pawer.mapper;
 
 import com.pawer.dto.request.AuthLoginDto;
 import com.pawer.dto.request.AuthRegisterRequestDto;
-import com.pawer.rabbitmq.messagemodel.ModelSave;
+import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
 import com.pawer.repository.entity.Auth;
 import org.mapstruct.Mapper;
@@ -23,7 +23,7 @@ public interface IAuthMapper {
     Auth toAuth(final AuthLoginDto dto);
 
     @Mapping(source = "id",target = "authId")
-    ModelSave ToModel(final Auth auth);
+    ModelUserSave ToModel(final Auth auth);
     @Mapping(source = "authId",target = "id")
     Auth toAuth(final ModelUpdateUser modelUpdateUser);
 }

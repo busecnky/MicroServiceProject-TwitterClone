@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tbl_crower_user")
+@Table(name = "tbl_user")
 @ToString
 public class User extends BaseEntity {
     @Id

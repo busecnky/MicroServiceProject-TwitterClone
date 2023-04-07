@@ -7,17 +7,19 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "tbl_follower")
+
+
 public class Follower extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private Long userId; // benim ıd'm
     private Long followerId; //beni takip eden insanların/ takipçi idsi
     private int statee; // 0 takipleşmiyor 1_ istek attı bekliyor 2_ takip ediyor.

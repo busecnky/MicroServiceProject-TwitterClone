@@ -22,7 +22,6 @@ public class ServiceManagerImpl<T extends BaseEntity,ID> implements IServiceMana
         return repository.save(t);
     }
 
-
     @Override
     public T update(T t) {
         t.setUpdateDate(System.currentTimeMillis());

@@ -1,7 +1,6 @@
 package com.pawer.repository.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -13,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "tbl_follow")
 //benim takip ettiklerim
 public class Follow extends  BaseEntity{
     @Id
@@ -21,8 +20,7 @@ public class Follow extends  BaseEntity{
     private Long id;
     private Long userId; // benim ıd'm
     private Long followId; //benim takip ettiğim insanların idsi
-    @Builder.Default
-    private int followRequest = 0; // 0 takipleşmiyor 1_ istek attı bekliyor 2_ takip ediyor.
+    private int followRequest ; // 0 takipleşmiyor 1_ istek attı bekliyor 2_ takip ediyor.
 
 
 
