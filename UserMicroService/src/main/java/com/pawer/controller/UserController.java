@@ -61,10 +61,11 @@ public class UserController {
         return  ResponseEntity.ok(followerService.acceptFollower(dto));
     }
 
-    @GetMapping("/distsiralama")
+    @GetMapping("/findalluser")
+    @ResponseBody
     @CrossOrigin("*")
-    public  ResponseEntity<List<User>> distsiralama(Long a){
-        return  ResponseEntity.ok(userService.findOptionaldistById(a).get());
+    public ResponseEntity<List<User>> findAllUser(){
+        return ResponseEntity.ok(userService.findAll());
     }
 
 

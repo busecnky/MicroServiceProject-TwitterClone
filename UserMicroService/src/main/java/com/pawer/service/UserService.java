@@ -17,6 +17,7 @@ import com.pawer.utility.ServiceManagerImpl;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +49,16 @@ public class UserService extends ServiceManagerImpl<User, Long> {
     public void createUser(ModelUserSave modelUserSave)  {
 
         User user = IUserMapper.INSTANCE.toUser(modelUserSave);
-        user.setCreateDate(System.currentTimeMillis()/1000);
-        user.setUpdateDate(System.currentTimeMillis()/100000);
+        user.setCreateDate(LocalDateTime.now().toString());
+        user.setUpdateDate(LocalDateTime.now().toString());
         save(user);
 
         new Thread(()->{
             followService.createFollowForNewUser(user.getId());
+        }).start();
+
+        new Thread(()->{
+            followerService.createFollowerForNewUser(user.getId());
         }).start();
     }
 

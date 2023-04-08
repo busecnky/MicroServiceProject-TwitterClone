@@ -30,41 +30,21 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
     }
 
     public void createFollowForNewUser(Long userId )  {
-        /**
-         * user service.findall metodları patlatıyor
-         * yoruma alınan kısımlar acilacak yanindakiler silinecek
-         *
-         * !! burada null olarak olustur ve tusa bastıgında tabloyu güncelle
-         */
-
         int i = 0;
-        while (   i <= userService.findAll().size()-1) {
-            int time = LocalDateTime.now().getHour();
-            int time2 = LocalDateTime.now().getMinute();
-            int time3 = LocalDateTime.now().getDayOfMonth();
-            int time4 = LocalDateTime.now().getMonthValue();
-            int time5= LocalDateTime.now().getSecond();
-            int time6= LocalDateTime.now().getYear();
-            String tm= LocalDateTime.now().toString();
+        while ( i <= userService.findAll().size()-1) {
 
-            System.out.println("diretk get : "+tm);
-
-            System.out.println("gethour: "+time);
-            System.out.println("getminute: "+time2);
-            System.out.println("getdayofmount: "+time3);
-            System.out.println("getmonthvalue: "+time4);
-            System.out.println("getdayofyear: "+time5);
-            System.out.println("getyear: "+time6);
-            String date= String.valueOf(time3+"."+time4+"."+time6 +"/"+time+":"+time2+":"+time5);
-            System.out.println("string datesi: "+date);
-            if ( userService.findAll().get(i).getId() == userId || userService.findAll().size()==0){}else  {
-                Follow follow = new Follow();
+            if ( userService.findAll().get(i).getId() == userId || userService.findAll().size()==0){
+            }else  {
+                Follow follow = new Follow(); // yeni eklenen kişi icin eski kisiler ile olan takiplesme
+                Follow follow1= new Follow(); // eski kisiler icin yeni kisi ile olan takiplesme
                 follow.setUserId(userId);
-                follow.setFollowId(/*2L */  userService.findAll().get(i).getId());
+                follow.setFollowId(userService.findAll().get(i).getId());
                 follow.setFollowRequest(0);
-                follow.setCreateDate(System.currentTimeMillis() / 1000*60*15);
-                follow.setUpdateDate(System.currentTimeMillis() / 1000);
+                follow1.setFollowId(userId);
+                follow1.setUserId(userService.findAll().get(i).getId());
+                follow1.setFollowRequest(0);
                 save(follow);
+                save(follow1);
             }
             i++;
         }
@@ -72,30 +52,28 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
 
 
     public Integer followUser(FollowingUserRequestDto dto) {
+
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
-
         Optional<User> followUser = userService.findOptionalByUsername(dto.getUsername());
-
         Optional<Follow> follow = followRepository.findOptionalByUserIdAndFollowId(userId.get(), followUser.get().getId());
-        System.out.println("*/*/*/*/*/*/*/" + follow.get().getFollowRequest());
+        Optional<Follower> follower=followerService.findOptionalByUserIdAndFollowerId(follow.get().getFollowId(), follow.get().getUserId());
 
-        if (follow.get().getFollowRequest() == 0) {
+        if (follow.get().getFollowRequest() == 0) { // istek atma işlemi
             follow.get().setFollowRequest(1);
-            followRepository.save(follow.get());
-            followerService.save(Follower.builder()
-                    .followerId(userId.get())
-                    .userId(follow.get().getFollowId())
-                    .statee(1)
-                    .build());
+            follow.get().setUpdateDate(LocalDateTime.now().toString());
+            update(follow.get());
+            follower.get().setStatee(1); // bu ve bi altındaki islemi follower servis metodu cagirarak
+            followerService.save(follower.get());// yapmak daha iyi olacak gibi
             return 1;
-        } else if (follow.get().getFollowRequest() == 1) { //bu istek ve isteği geri çekme
-            //follower statee i 0 a çekilecek. (follower eklerken dikkatli eklenecek)
+        } else if (follow.get().getFollowRequest() == 1) { // isteği geri çekme
             follow.get().setFollowRequest(0);
-            followRepository.save(follow.get());
+            update(follow.get());
+            follower.get().setStatee(0);
+            followerService.save(follower.get());
             return 0;
-        } else if (follow.get().getFollowRequest() == 2) {
+        } else if (follow.get().getFollowRequest() == 2) { // diger kullanıcı atılan isteği kabul edince etkinleşiyor
             follow.get().setFollowRequest(2);
-            followRepository.save(follow.get());
+            update(follow.get());
             return 0;
         } else {
             return 3;
@@ -103,6 +81,7 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
     }
 
     public Optional<Follow> findOptionalByUserIdAndFollowId(Long id, Long aLong) {
-        return findOptionalByUserIdAndFollowId(id,aLong);
+
+        return followRepository.findOptionalByUserIdAndFollowId(id,aLong);
     }
 }
