@@ -1,5 +1,8 @@
 package com.pawer.service;
 
+//import com.google.cloud.storage.BlobId;
+//import com.google.cloud.storage.BlobInfo;
+//import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.*;
 import com.pawer.dto.response.FindByIdResponseDto;
 import com.pawer.exception.EErrorType;
@@ -14,12 +17,19 @@ import com.pawer.repository.IUserRepository;
 import com.pawer.repository.entity.User;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService extends ServiceManagerImpl<User, Long> {
@@ -30,7 +40,11 @@ public class UserService extends ServiceManagerImpl<User, Long> {
     private final FollowService followService;
     private final FollowerService followerService;
 
-
+//    @Value("${myproject.google.storage.bucketname}")
+//    private String bucketname;
+//    @Getter
+//    @Autowired
+//    Storage storage;
 
     public UserService(IUserRepository userRepository, ProducerDirectService producerDirectService
             , JwtTokenManager jwtTokenManager, @Lazy FollowService followService, @Lazy FollowerService followerService) {
@@ -72,6 +86,8 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         ModelCreatePost modelCreatePost = IPostMapper.INSTANCE.toCreatePost(user);
         modelCreatePost.setToken(dto.getToken());
         modelCreatePost.setContent(dto.getContent());
+        modelCreatePost.setImage(dto.getImage());
+        System.out.println(modelCreatePost.getImage());
         producerDirectService.sendCreatePost(modelCreatePost);
         return true;
     }
@@ -123,67 +139,51 @@ public class UserService extends ServiceManagerImpl<User, Long> {
     }
 
 
-//    public Integer followUser(FollowingUserRequestDto dto) {
-//        Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
+    /**storage
+     *  baslangic
+     */
 //
-//        Optional<User> followUser = userRepository.findOptionalByUsername(dto.getUsername());
-//// bu aç kapa olmasın diye kullanıcı oluşturulurkene çekilecek.
-//        followRepository.save(Follow.builder()
-//                .followId(followUser.get().getId())
-//                .userId(userId.get())
-//                .build());
-//
-//        Optional<Follow> follow = followRepository.findOptionalByUserIdAndFollowId(userId.get(), followUser.get().getId());
-//        System.out.println("*/*/*/*/*/*/*/" + follow.get().getFollowRequest());
-//
-//        if (follow.get().getFollowRequest() == 0) {
-//            follow.get().setFollowRequest(1);
-//            followRepository.save(follow.get());
-//            followerRepository.save(Follower.builder()
-//                    .followerId(userId.get())
-//                    .userId(follow.get().getFollowId())
-//                    .statee(1)
-//                    .build());
-//            return 1;
-//        } else if (follow.get().getFollowRequest() == 1) { //bu istek ve isteği geri çekme
-//            //follower statee i 0 a çekilecek. (follower eklerken dikkatli eklenecek)
-//            follow.get().setFollowRequest(0);
-//            followRepository.save(follow.get());
-//            return 0;
-//        } else if (follow.get().getFollowRequest() == 2) {
-//            follow.get().setFollowRequest(2);
-//            followRepository.save(follow.get());
-//            return 0;
-//        } else {
-//            return 3;
+//    public Optional<String> uploadFile(MultipartFile file){
+//        try {
+//            String mediaUrl;
+//            if(file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")){
+//                mediaUrl = UUID.randomUUID().toString()+".png";
+//            }else
+//                mediaUrl = UUID.randomUUID().toString()+".mp4";
+//            BlobInfo blobInfo = BlobInfo.newBuilder(bucketname, mediaUrl).build();
+//            storage.create(blobInfo, file.getBytes());
+//            return Optional.of(mediaUrl);
+//        }catch (Exception e){
+//            return Optional.empty();
 //        }
 //    }
+//
+//
+//
+//    private BlobId constructBlobId(String bucketname, String subdirectory,
+//                                   String filename) {
+//        return Optional.ofNullable(subdirectory)
+//                .map(s -> BlobId.of(bucketname, subdirectory + "/" + filename))
+//                .orElse(BlobId.of(bucketname, filename));
+//    }
+//
+//    public Optional<URL> getGoogleSignedMediaPath(String mediaName, int minutes) {
+//        BlobId blobId = constructBlobId(bucketname, null, mediaName);
+//        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+//        return createSignedPathStyleUrl(blobInfo, minutes, TimeUnit.MINUTES);
+//    }
+//
+//    private Optional<URL> createSignedPathStyleUrl(BlobInfo blobInfo,
+//                                                   int duration, TimeUnit unit) {
+//        return Optional.of(getStorage()
+//                .signUrl(blobInfo,duration,unit,Storage.SignUrlOption.withPathStyle()));
+//
+//    }
+//
 
-//    public Integer acceptFollower(AcceptFollowerRequestDto dto) {
-//        Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
-//
-//        Optional<User> followerUser = userRepository.findOptionalByUsername(dto.getUsername());
-//
-//        Optional<Follower> follower = followerRepository.findOptionalByUserIdAndFollowerId(userId.get(), followerUser.get().getId());
-//
-//        Optional<Follow> follow = followRepository.findOptionalByUserIdAndFollowId(followerUser.get().getId(), userId.get());
-//        if (follower.get().getStatee() == 0) {
-//            //followerRepository.save(follower.get()); //furkan dursun dedi ama buse silmek istedi
-//            return 0;
-//        } else if (follower.get().getStatee() == 1) {
-//            follower.get().setStatee(2);
-//            followerRepository.save(follower.get());
-//            follow.get().setFollowRequest(2);
-//            followRepository.save(follow.get());
-//            return 2;
-//        } else if (follower.get().getStatee() == 2) {
-//            follower.get().setStatee(0);
-//            followerRepository.save(follower.get());
-//            follow.get().setFollowRequest(0);
-//            followRepository.save(follow.get());
-//            return 0;
-//        } else {
-//            return 3;
-//        }
-//    }
+    /**storage
+     *  baslangic
+     */
+
+
 }

@@ -36,8 +36,8 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             if (userService.findAll().get(i).getId() == userId || userService.findAll().size() == 0) {
 
             } else {
-                Follower follower = new Follower();
-                Follower follower1 = new Follower();
+                Follower follower = new Follower(); // istek atan
+                Follower follower1 = new Follower(); //
                 follower.setUserId(userService.findAll().get(i).getId());
                 follower.setFollowerId(userId);
                 follower.setStatee(0);
@@ -48,7 +48,6 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             }
             i++;
         }
-
 
     }
 

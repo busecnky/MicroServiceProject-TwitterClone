@@ -34,6 +34,7 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
         while ( i <= userService.findAll().size()-1) {
 
             if ( userService.findAll().get(i).getId() == userId || userService.findAll().size()==0){
+
             }else  {
                 Follow follow = new Follow(); // yeni eklenen kişi icin eski kisiler ile olan takiplesme
                 Follow follow1= new Follow(); // eski kisiler icin yeni kisi ile olan takiplesme

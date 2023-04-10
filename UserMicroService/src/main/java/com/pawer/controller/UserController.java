@@ -32,7 +32,6 @@ public class UserController {
     @PostMapping("/update")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> userUpdate(@RequestBody UpdateUserProfileRequestDto updateUserProfileRequestDto){
-
         return ResponseEntity.ok(userService.updateUserProfile(updateUserProfileRequestDto));
     }
     @PostMapping("/findbyid")

@@ -14,6 +14,7 @@ public class UpdateUserProfileRequestDto {
     private String username;
     private String age;
     private String token;
+    private String avatar;
 
 
 
