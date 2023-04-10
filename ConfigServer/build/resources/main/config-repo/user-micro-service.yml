@@ -21,3 +21,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+#  cloud:
+#    gcp:
+#      project-id: regal-height-378801
+#      credentials:
+#        scopes: https://www.googleapis.com/auth/devstorage.read_write
+#
+#myproject:
+#  google:
+#    storage:
+#      bucketname: socialmediaavatar
+#
+
+

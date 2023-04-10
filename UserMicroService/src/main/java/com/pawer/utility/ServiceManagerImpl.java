@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,16 +17,15 @@ public class ServiceManagerImpl<T extends BaseEntity,ID> implements IServiceMana
 
     @Override
     public T save(T t) {
-        t.setCreateDate(System.currentTimeMillis());
-        t.setUpdateDate(System.currentTimeMillis());
+        t.setCreateDate(LocalDateTime.now().toString());
+        t.setUpdateDate(LocalDateTime.now().toString());
         t.setState(true);
         return repository.save(t);
     }
 
-
     @Override
     public T update(T t) {
-        t.setUpdateDate(System.currentTimeMillis());
+        t.setUpdateDate(LocalDateTime.now().toString());
         return repository.save(t);
     }
 

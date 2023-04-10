@@ -58,33 +58,7 @@
 
     <section class="main__section">
         <!-- pawerbox Starts-->
-        <section class="pawerbox">
-            <form>
-                <section class="pawerbox__input">
 
-                    <!-- ************************ baslangic
-                    dosya gönderme islemi
-                      ************-->
-
-                        <input type="file" name="image" id="file">
-
-                    <!-- ************************ bitis
-                    dosya gönderme islemi
-                      ************-->
-
-                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                         alt="">
-
-
-                    <textarea type="text" id="content" class="md-textarea"
-                              placeholder="What's happening?"></textarea>
-
-                </section>
-                <button class="pawbutton" onclick="pawPost()">Paw</button>
-
-                <hr class="bottom-line">
-            </form>
-        </section>
         <!-- pawerbox ends-->
         <div id="feed"></div>
     </section>
@@ -181,22 +155,17 @@
         const token = sessionStorage.getItem("token");
         const name = document.getElementById('name');
         const username = document.getElementById('username');
-        const content = document.getElementById('content');
-        const date = document.getElementById('date');
-        const time = document.getElementById('time');
         const id = document.getElementById('id');
 
 
         const data = JSON.stringify({
             "name": name,
             "username": username,
-            "content": content,
-            "date":date,
-            "time":time,
+
             "id": id
         });
 
-        fetch("http://localhost:6160/post/findallpage", {
+        fetch("http://localhost:6260/user/findalluser", {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -204,7 +173,7 @@
         })
             .then(response => response.json())
             .then(response => { console.log(response)
-                for (let index = 0; index < response.content.length; index++) {
+                for (let index = 0; index < response.length; index++) {
                     document.getElementById("feed").innerHTML += `
 
 <div class="post" >
@@ -216,42 +185,17 @@
                     <div class="post__body" >
                         <div class="post__header">
                             <div class="post__headerText">
-                                <h3>${response.content[index].username}
+                                <h3> <a>${response[index].username}</a>
+
                                     <span class="post__headerSpecial">
                                     </span>
                                 </h3>
                             </div>
                             <div class="post__headerDescription">
-                                <p>${response.content[index].content}</p>
+                                <p><a>${response[index].name}</a> </p>
                             </div>
                         </div>
-                        <div class="post__timer">
-                            <span class="postdate">${response.content[index].date}</span>
-                            <span class="post__time">${response.content[index].time}</span>
-                         </div>
-                        <div class="post__footer">
-                            <span class="material-symbols-outlined likecomment">chat</span>
-                            <span class="material-symbols-outlined likecomment">favorite</span>
-                        </div>
-                        <div class="commentwrite">
-                            <div class="commentwrite__input">
-                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                                    alt="">
-                                <textarea type="text" id="commentt" class="commentwrite-textarea"
-                                    placeholder="Write a comment"></textarea>
 
-                            </div>
-                            <span class="twitId" id="idpsan"> ${response.content[index].id} </span>
-
-                            <button class="commentbutton" onclick="commentbtn(document.getElementById('idpsan'),document.getElementById('commentt'))">Comment</button>
-
-                        </div>
-
-                        <div id="commentsss" onload="getComment(document.getElementById('idpsan'))">
-
-
-
-                        </div>
 
                     </div>
                 </div>`;

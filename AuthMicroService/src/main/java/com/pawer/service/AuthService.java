@@ -33,12 +33,12 @@ public class AuthService extends ServiceManagerImpl<Auth,Long> {
 
 
 
-    public  Boolean register(AuthRegisterRequestDto dto){
-        if (!dto.getPassword().equals(dto.getRepassword()))
-            throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR);
+    public  Boolean register(AuthRegisterRequestDto dto) throws InterruptedException {
+//        if (!dto.getPassword().equals(dto.getRepassword()))
+//            throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR);
         Auth auth= IAuthMapper.INSTANCE.toAuth(dto);
-        if (authRepository.findByUsername(auth.getUsername()).stream().count()!=0)
-            throw new AuthException(EErrorType.AUTH_USERNAME_ERROR);
+//        if (authRepository.findByUsername(auth.getUsername()).stream().count()!=0){
+//            throw new AuthException(EErrorType.AUTH_USERNAME_ERROR);}
         save(auth);
         producerDirectSave.sendMessageSaveUser(IAuthMapper.INSTANCE.ToModel(auth));
         return true;

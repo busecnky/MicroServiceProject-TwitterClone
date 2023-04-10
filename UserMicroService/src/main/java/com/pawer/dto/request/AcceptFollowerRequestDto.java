@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class AcceptFollowerRequestDto {
 
     String token;
-
+    private Boolean responseForFollowRequest; // takip isteğini kabul etmek veya reddetmek için cevap
     private String username;
 
 }

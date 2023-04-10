@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ModelSave implements Serializable {
+public class ModelUserSave implements Serializable {
     private String username;
     private String name;
     private String surname;

@@ -1,4 +1,4 @@
-package com.pawer.config;
+package com.pawer.config.rabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
