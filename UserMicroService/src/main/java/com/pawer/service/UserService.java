@@ -10,6 +10,7 @@ import com.pawer.exception.UserException;
 import com.pawer.mapper.IPostMapper;
 import com.pawer.mapper.IUserMapper;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
+import com.pawer.rabbitmq.messagemodel.ModelLikePost;
 import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
@@ -131,9 +132,29 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         return true;
     }
 
+    public Boolean likePost(LikePostRequestDto dto) {
+        if (dto.getToken() == null || dto.getToken() == "") {
+            throw new UserException(EErrorType.INVALID_TOKEN);
+        }
+
+        ModelLikePost model = new ModelLikePost();
+        model.setUserId(jwtTokenManager.validToken(dto.getToken()).get());
+        model.setPostId(dto.getPostId());
+        model.setStatement(dto.getStatement());
+        producerDirectService.sendLikePost(model);
+
+        if(dto.getStatement() == true){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     public Optional<User> findOptionalByUsername(String username){
         return userRepository.findOptionalByUsername(username);
     }
+
+
 
 
     /**storage
