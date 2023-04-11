@@ -57,10 +57,8 @@
     </aside>
 
     <section class="main__section">
-        <!-- pawerbox Starts-->
 
-        <!-- pawerbox ends-->
-        <div id="feed"></div>
+        <div id="follows"></div>
     </section>
 
 
@@ -147,10 +145,6 @@
 
 
 
-
-
-
-
     function getData() {
         const token = sessionStorage.getItem("token");
         const name = document.getElementById('name');
@@ -174,7 +168,7 @@
             .then(response => response.json())
             .then(response => { console.log(response)
                 for (let index = 0; index < response.length; index++) {
-                    document.getElementById("feed").innerHTML += `
+                    document.getElementById("follows").innerHTML += `
 
 <div class="post" >
                     <div class="post__avatar">

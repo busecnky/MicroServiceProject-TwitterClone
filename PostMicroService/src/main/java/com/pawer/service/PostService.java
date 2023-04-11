@@ -1,8 +1,8 @@
 package com.pawer.service;
 
-import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
+//import com.google.cloud.storage.BlobId;
+//import com.google.cloud.storage.BlobInfo;
+//import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.CommentToPostDto;
 import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
@@ -38,9 +38,9 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     @Value("${myproject.google.storage.bucketname}")
     private String bucketname;
 
-    @Getter
-    @Autowired
-    Storage storage;
+//    @Getter
+//    @Autowired
+//    Storage storage;
 
 
 
@@ -59,7 +59,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         Long id = jwtTokenManager.validToken(modelCreatePost.getToken()).get();
 
 
-        //---
+        /* MUHAMMETHOCA Storage denemeleri
         try{
             Optional<String> resimurl = uploadFile(modelCreatePost.getImage());
             if(resimurl.isPresent()){
@@ -76,6 +76,8 @@ public class PostService extends ServiceManagerImpl<Post,String> {
             //ekranaYildizBastirma(100);
             System.out.println("post kayit ederken hata oldu "+ex.getMessage());
         }
+        */
+
     }
 
 
@@ -132,7 +134,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     /**storage
      *  baslangic
-     */
+
 
     public Optional<String> uploadFile(MultipartFile file){
         try {
@@ -172,7 +174,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     }
 
 
-    /**
+
      * storage
      * baslangic
      */

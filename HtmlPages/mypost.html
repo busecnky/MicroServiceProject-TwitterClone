@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/mypost.css">
   <title>My Post </title>
 </head>
@@ -20,31 +18,51 @@
   </h1>
   <nav>
     <ul>
-      <li><img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt=""> <a href="#">Home</a></li>
       <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
       <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Contact</a></li>
-      <button onclick="logout()" class="logout">Log Out</button>
     </ul>
   </nav>
 </header>
 
 <main>
   <aside>
-    <section class="profile__section">
 
+
+    <section class="aside__home">
+      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+      <label>Home</label>
     </section>
 
-    <label >Home</label>
-    <hr class="mypostwithline" >
-    <h3 class="mypostwith" >MY POST </h3> <!--düzenlenecek -->
-    <label>Create Date</label>
-    <label>Update Date</label>
-    <label>A-Z</label>
-    <label>Z-A</label>
-    <hr class="mypostwithline" >
-    <label onclick="profile()">Profile</label>
-    <button onclick="logout()" class="logout">Log Out</button>
 
+    <section onclick="otherpeople()" class="aside__otherpeople">
+      <img src="../HtmlPages/images/earth.png" alt="">
+      <label>People</label>
+    </section>
+    <hr class="hr">
+    <section onclick="mypost()" class="aside__myposts">
+      <section class="aside__myposts_header">
+        <img src="../HtmlPages/images/social-media.png" alt="">
+        <label>My Posts</label>
+      </section>
+      <section class="aside__orderby">
+        <section class="aside__orderby__inside">
+          <img src="../HtmlPages/images/sort.png" alt="">
+          <p>Order By</p>
+        </section>
+        <section class="aside__orderby__inside2">
+          <label>Create Date</label>
+          <label>Update Date</label>
+        </section>
+
+      </section>
+    </section>
+    <hr class="hr">
+    <section onclick="profile()" class="aside__profile">
+      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+           alt="">
+      <label>Profile</label>
+    </section>
+    <button onclick="logout()" class="logout">Log Out</button>
 
   </aside>
 

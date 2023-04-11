@@ -16,7 +16,7 @@ spring:
   data:
     mongodb:
       host: localhost   #localhost
-      port: 27000    # buse:29000 , furkan:27000
+      port: 29000    # buse:29000 , furkan:27000
       username: ${MONGOPAWERPOSTUSERNAME}
       password: ${MONGOPAWERPOSTPASSWORD}
       database: PostDB

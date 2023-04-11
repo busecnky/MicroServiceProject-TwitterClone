@@ -1,3 +1,13 @@
+:root{
+  --color7: #312d2e;
+  --color6: #c7c7c7;
+  --color5: rgba(73, 45, 45, 0.72);
+  --color4: #D0B8A8;
+  --color3: #DFD3C3;
+  --color2: #F8EDE3;
+  --color1: #fff9f4;
+}
+
 *,
 *:before,
 *:after {
@@ -7,8 +17,8 @@
 }
 
 body {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  background: #48484d;
+  font-family: 'Poppins', sans-serif;
+  background: var(--color7);
 }
 
 input,
@@ -16,13 +26,8 @@ button {
   border: none;
   outline: none;
   background: none;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-.tip {
-  font-size: 20px;
-  margin: 40px auto 50px;
-  text-align: center;
+  background-color: var(--color3);
+  font-family: 'Poppins', sans-serif;
 }
 
 .cont {
@@ -30,9 +35,9 @@ button {
   overflow: hidden;
   position: relative;
   width: 900px;
-  height: 700px;
+  height: 600px;
   margin: 0 auto 100px;
-  background: #ffffff;
+  background: var(--color2);
   box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
   10px 10px 15px rgba(70, 70, 70, 0.15),
   inset -10px -10px 15px rgba(255, 255, 255, 0.3),
@@ -47,12 +52,13 @@ button {
 .logo1{
     display: flex;
     justify-content: right;
-    height: 80px;
+    height: 40px;
 }
 .logo2{
     display: flex;
     justify-content: right;
-    height: 80px;
+    height: 40px;
+  margin-bottom: 0;
 }
 
 .form {
@@ -76,7 +82,7 @@ button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: #ffffff;
+  background: var(--color2);
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;
@@ -94,7 +100,7 @@ button {
   width: 260px;
   height: 36px;
   border-radius: 30px;
-  color: #fff;
+  color: var(--color1);
   font-size: 15px;
   cursor: pointer;
 }
@@ -117,7 +123,6 @@ button {
   top: 0;
   width: 900px;
   height: 100%;
-  /*background-image: url("ext.jpg");*/
   opacity: 0.8;
   background-size: cover;
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
@@ -132,7 +137,7 @@ button {
   top: 0;
   width: 100%;
   height: 100%;
-  background: #013754;
+  background: var(--color5);
 }
 
 .cont.s--signup .img:before {
@@ -148,7 +153,7 @@ button {
   width: 100%;
   padding: 0 20px;
   text-align: center;
-  color: #fff;
+  color: var(--color1);
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;
@@ -188,7 +193,7 @@ button {
   height: 36px;
   margin: 0 auto;
   background: transparent;
-  color: #fff;
+  color: var(--color1);
   text-transform: uppercase;
   font-size: 15px;
   cursor: pointer;
@@ -202,7 +207,8 @@ button {
   top: 0;
   width: 100%;
   height: 100%;
-  border: 2px solid #fff;
+  border: 2px solid var(--color1);
+;
   border-radius: 30px;
 }
 
@@ -248,13 +254,13 @@ h2 {
 label {
   display: block;
   width: 260px;
-  margin: 25px auto 0;
+  margin: 5px auto 0;
   text-align: center;
 }
 
 label span {
-  font-size: 12px;
-  color: #cfcfcf;
+  font-size: 11px;
+  color: var(--color7);
   text-transform: uppercase;
 }
 
@@ -272,25 +278,25 @@ input {
   margin-top: 15px;
   text-align: center;
   font-size: 12px;
-  color: #cfcfcf;
+  color: var(--color2);
 }
 
 .submitbutton {
   margin-top: 40px;
   margin-bottom: 20px;
-  background:  #389b89;
+  background:  var(--color7);
   ;
   text-transform: uppercase;
 }
 
 .fb-btn {
-  border: 2px solid #d3dae9;
-  color: #8fa1c7;
+  border: 2px solid var(--color3);
+  color: var(--color4);
 }
 
 .fb-btn span {
   font-weight: bold;
-  color: #455a81;
+  color: var(--color4);
 }
 
 .sign-in {
@@ -311,6 +317,7 @@ input {
 .sign-up {
   -webkit-transform: translate3d(-900px, 0, 0);
   transform: translate3d(-900px, 0, 0);
+  margin-top: 0;
 }
 
 .cont.s--signup .sign-up {

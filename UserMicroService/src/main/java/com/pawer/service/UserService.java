@@ -55,9 +55,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         this.followService = followService;
         this.followerService = followerService;
     }
-    public Optional<List<User>> findOptionaldistById(Long a){
-        return userRepository.findByIdGreaterThan(a);
-    }
 
 
     public void createUser(ModelUserSave modelUserSave)  {

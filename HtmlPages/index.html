@@ -39,12 +39,12 @@
         </section>
 
         <hr class="hr">
-        <section onclick="otherpeople()" class="aside__myposts">
-            <span class="material-symbols-outlined listspan">public</span>
-            <label>Peoples</label>
+        <section onclick="otherpeople()" class="aside__otherpeople">
+            <img src="../HtmlPages/images/earth.png" alt="">
+            <label>People</label>
         </section>
         <section onclick="mypost()" class="aside__myposts">
-            <span class="material-symbols-outlined listspan">list</span>
+            <img src="../HtmlPages/images/social-media.png" alt="">
             <label>My Posts</label>
         </section>
 
@@ -61,24 +61,23 @@
         <section class="pawerbox">
             <form>
                 <section class="pawerbox__input">
+                    <section>
+                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                             alt="">
+                        <textarea type="text" id="content" class="md-textarea"
+                                  placeholder="What's happening?"></textarea>
+                    </section>
 
                     <!-- ************************ baslangic
                     dosya gönderme islemi
                       ************-->
-
+                    <section class="pawerbox__input__file">
                         <input type="file" name="image" id="file">
+                    </section>
 
                     <!-- ************************ bitis
                     dosya gönderme islemi
                       ************-->
-
-                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                         alt="">
-
-
-                    <textarea type="text" id="content" class="md-textarea"
-                              placeholder="What's happening?"></textarea>
-
                 </section>
                 <button class="pawbutton" onclick="pawPost()">Paw</button>
 
@@ -118,6 +117,7 @@
             </div>
             <div class="little-dot  little-dot--last"></div>
         </div>
+
 
         <svg class="btn btn--next" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
@@ -224,6 +224,10 @@
                             <div class="post__headerDescription">
                                 <p>${response.content[index].content}</p>
                             </div>
+                            <div class="post__image">
+                               <img src="">
+                            </div>
+
                         </div>
                         <div class="post__timer">
                             <span class="postdate">${response.content[index].date}</span>

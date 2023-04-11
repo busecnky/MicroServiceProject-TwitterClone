@@ -79,7 +79,7 @@ header nav ul li img{
 }
 header nav ul li{
     height: 20px;
-    margin-right: 20px;
+    margin-right: 30px;
 }
 header nav ul li a{
     text-decoration: none;
@@ -87,12 +87,9 @@ header nav ul li a{
 }
 
 
-
-
-
 aside{
     display: flex;
-    height: auto;
+    height: 450px;
     margin: 30px 100px 20px 100px;
     flex-direction: column;
     justify-content: space-around;
@@ -123,9 +120,25 @@ aside{
     border-radius: 50%;
 
 }
+
+.aside__otherpeople{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom-color: var(--color7) 3px solid;
+}
+.aside__otherpeople img{
+    height: 30px;
+    margin-right: 10px;
+}
+
 .aside__myposts{
     display: flex;
     align-items: center;
+}
+.aside__myposts img{
+   height: 20px;
+    margin-right: 10px;
 }
 .listspan{
     margin-right: 10px;
@@ -147,8 +160,8 @@ aside{
 }
 
 .logout{
-    width: 70px;
-    height: 30px;color: var(--color2);
+    width: 90px;
+    height: 40px;color: var(--color2);
     background-color: var(--color7);
     border-radius: 10px;
     border: none;
@@ -169,11 +182,7 @@ aside{
     margin: 20px;
 }
 
-/*tweet box*/
-.pawerbox__input img{
-    border-radius: 50%;
-    height: 40px;
-}
+/*pawer box*/
 
 .pawerbox{
     padding-bottom: 10px;
@@ -181,6 +190,25 @@ aside{
     width: 75%;
 
 }
+.pawerbox__input{
+    display: flex;
+    flex-direction: column;
+}
+
+.pawerbox__input img{
+    border-radius: 50%;
+    height: 40px;
+}
+.pawerbox__input__file{
+    border-radius: 10%;
+    margin-left: 10%;
+
+}
+.pawerbox__input__file input{
+    background-color: var(--color4);
+    width: 50%;
+}
+
 .bottom-line{
     background-color: var(--color7);
     height: 2px;
