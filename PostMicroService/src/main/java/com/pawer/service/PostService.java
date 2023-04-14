@@ -4,6 +4,7 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.CommentToPostDto;
+import com.pawer.dto.response.CommentToPostResponse;
 import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.repository.ICommentToPostRepository;
@@ -122,13 +123,17 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         commentToPost.setComment(model.getComment());
         commentToPost.setUserId(userId);
         commentToPost.setPostId(model.getPostId());
+        commentToPost.setState(true);
         commentToPostRepository.save(commentToPost);
     }
 
-    public List<CommentToPost> findAllComment(CommentToPostDto dto){
-        List<CommentToPost> comments= new ArrayList<>();
+    public List<CommentToPostResponse> findAllComment(CommentToPostDto dto){
+        List<CommentToPostResponse> comments= new ArrayList<>();
         for (CommentToPost comment: commentToPostRepository.findByPostId(dto.getPostId()).get()){
-            comments.add(comment);
+            CommentToPostResponse commentToPostResponse = new CommentToPostResponse();
+            commentToPostResponse.setComment(comment.getComment());
+            commentToPostResponse.setPostId(comment.getPostId());
+            comments.add(commentToPostResponse);
         }
 
         return comments;

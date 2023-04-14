@@ -3,6 +3,7 @@ package com.pawer.controller;
 
 import com.pawer.dto.request.CommentToPostDto;
 import com.pawer.dto.response.BaseResponseDto;
+import com.pawer.dto.response.CommentToPostResponse;
 import com.pawer.repository.entity.CommentToPost;
 import com.pawer.repository.entity.Post;
 import com.pawer.service.PostService;
@@ -70,7 +71,7 @@ public class PostController {
     @GetMapping("/findallcomment")
     @CrossOrigin("*")
     @ResponseBody
-    public ResponseEntity<List<CommentToPost>> getCommentList(CommentToPostDto dto){
+    public ResponseEntity<List<CommentToPostResponse>> getCommentList(CommentToPostDto dto){
         System.out.println("getall post post dto -->>> "+dto.getPostId());
         return ResponseEntity.ok(postService.findAllComment(dto));
     }

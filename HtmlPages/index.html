@@ -245,13 +245,13 @@
                                     placeholder="Write a comment"></textarea>
 
                             </div>
-                            <input hidden="hidden" value=${response.content[index].id} class="twitId" id=${index+'in'} >  </input>
+                            <input value=${response.content[index].id} class="twitId" id=${index+'in'}>  </input>
 
                             <button class="commentbutton" onclick="commentbtn(${index})">Comment</button>
 
                         </div>
 
-                        <div id="commentsss" onload="getComment(document.getElementById(${index+'in'}).innerText)">
+                        <div id="commentsss" >
 
 
 
@@ -259,6 +259,8 @@
 
                     </div>
                 </div>`;
+
+                    getComment(index)
                 }
 
             })
@@ -280,15 +282,15 @@
     //***************** her sey tamamdır sadece bu metod calismiyor alert harekete geçmiyor.
 
     function getComment(index) {
-        const token = sessionStorage.getItem("token");
-        const comment = document.getElementById('comment');
-        alert("------------a-a-a-a--aa-a--a-a")
-        let id = document.getElementById(index+'in').value;
+        window.addEventListener('load', getData);
 
+        const token = sessionStorage.getItem("token");
+        let id = document.getElementById(index+'in').value;
+/*
         const data = JSON.stringify({
             "comment": comment
         });
-
+*/
         fetch("http://localhost:6160/post/findallcomment"+"?postId="+id, {
             method: 'GET',
             headers: {
@@ -297,8 +299,10 @@
         })
             .then(response => response.json())
             .then(response => { console.log(response)
-                for (let index = 0; index < response.content.length; index++) {
-                    document.getElementById("commentsss").innerHTML += `
+                for (let i = 0; i < response.length; i++) {
+                    //if (id === response.postId) {
+                        alert("*/*/*/*/*/*/*/*/*")
+                        document.getElementById("commentsss").innerHTML += `
                         <div class="commentread">
                             <div class="commentread__avatar">
                                 <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
@@ -314,7 +318,7 @@
                                         </h3>
                                     </div>
                                     <div class="commentread__headerDescription">
-                                        <p>${response.content[index].content}</p>
+                                        <p>${response[i].comment}</p>
                                     </div>
                                     <div class="commentread__timer">
                                         <span class="commentread__date"></span>
@@ -324,8 +328,8 @@
                             </div>
                         </div>
                 `;
-                }
-
+                    }
+            //    }
             })
             .catch(error => console.log('error', error));
     }

@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,6 +29,8 @@ public class Post extends BaseEntity {
     private String content;
     private String url;
     private Integer likeCount;
+
+
     @Builder.Default
     private String date=LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     @Builder.Default
