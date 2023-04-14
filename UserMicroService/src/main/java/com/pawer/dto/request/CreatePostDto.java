@@ -12,5 +12,5 @@ public class CreatePostDto {
 
     private String content;
     private String token;
-    private MultipartFile image;
+    //private MultipartFile image;
 }

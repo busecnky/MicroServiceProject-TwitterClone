@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-10T22:54:30+0300",
+    date = "2023-04-14T17:55:04+0300",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -26,7 +26,6 @@ public class IPostMapperImpl implements IPostMapper {
 
         modelCreatePost.content( model.getContent() );
         modelCreatePost.token( model.getToken() );
-        modelCreatePost.image( model.getImage() );
 
         return modelCreatePost.build();
     }

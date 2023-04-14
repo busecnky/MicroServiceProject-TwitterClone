@@ -57,7 +57,13 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     public void savePost(ModelCreatePost modelCreatePost){
         String resim_id = UUID.randomUUID().toString();
         Long id = jwtTokenManager.validToken(modelCreatePost.getToken()).get();
-
+        Post post = Post.builder()
+                .userId(id)
+                .content(modelCreatePost.getContent())
+                .name(modelCreatePost.getName())
+                .username(modelCreatePost.getUsername())
+              .build();
+        save(post);
 
         /* MUHAMMETHOCA Storage denemeleri
         try{
