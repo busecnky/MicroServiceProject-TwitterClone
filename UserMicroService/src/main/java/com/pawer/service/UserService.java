@@ -137,6 +137,8 @@ public class UserService extends ServiceManagerImpl<User, Long> {
             throw new UserException(EErrorType.INVALID_TOKEN);
         }
 
+        System.out.println("Gelsin hadi bu merge ile");
+
         ModelLikePost model = new ModelLikePost();
         model.setUserId(jwtTokenManager.validToken(dto.getToken()).get());
         model.setPostId(dto.getPostId());
