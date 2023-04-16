@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 public class ModelCreatePost implements Serializable {
+
     private String username;
     private String name;
     private String surname;

@@ -117,22 +117,21 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return postrepository.findByUserId(userid,pageable);
     }
     public void createCommentToPost(ModelCreateCommentToPost model){
-        System.out.println("post servisi create comment");
         CommentToPost commentToPost= new CommentToPost();
         Long userId = jwtTokenManager.validToken(model.getToken()).get();
         commentToPost.setComment(model.getComment());
         commentToPost.setUserId(userId);
         commentToPost.setPostId(model.getPostId());
-        commentToPost.setState(true);
         commentToPostRepository.save(commentToPost);
     }
 
     public List<CommentToPostResponse> findAllComment(CommentToPostDto dto){
         List<CommentToPostResponse> comments= new ArrayList<>();
         for (CommentToPost comment: commentToPostRepository.findByPostId(dto.getPostId()).get()){
-            CommentToPostResponse commentToPostResponse = new CommentToPostResponse();
+            CommentToPostResponse commentToPostResponse=new CommentToPostResponse();
             commentToPostResponse.setComment(comment.getComment());
             commentToPostResponse.setPostId(comment.getPostId());
+            commentToPostResponse.setUserId(String.valueOf(comment.getUserId()));
             comments.add(commentToPostResponse);
         }
 

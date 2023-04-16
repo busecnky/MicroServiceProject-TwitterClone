@@ -77,8 +77,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
     public Boolean createPost(CreatePostDto dto) {
         Optional<Long> id = jwtTokenManager.validToken(dto.getToken());
-        System.out.println("----------------------------" + dto.getToken());
-        System.out.println("----------------------------" + id);
         if (id.isEmpty()) throw new UserException(EErrorType.INVALID_TOKEN);
         User user = findById(id.get()).get();
         ModelCreatePost modelCreatePost = IPostMapper.INSTANCE.toCreatePost(user);
@@ -128,6 +126,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         if (dto.getComment() == null || dto.getComment() == "" || dto.getToken() == null || dto.getToken() == "") {
             throw new UserException(EErrorType.BAD_REQUEST_ERROR, "create comment de hata eksik veya hatali bilgi");
         }
+
         producerDirectService.sendCreateCommentToPost(IPostMapper.INSTANCE.toCreateComment(dto));
         return true;
     }
@@ -136,8 +135,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         if (dto.getToken() == null || dto.getToken() == "") {
             throw new UserException(EErrorType.INVALID_TOKEN);
         }
-
-        System.out.println("Gelsin hadi bu merge ile");
 
         ModelLikePost model = new ModelLikePost();
         model.setUserId(jwtTokenManager.validToken(dto.getToken()).get());

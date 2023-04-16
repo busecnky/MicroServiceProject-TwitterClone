@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 @RequiredArgsConstructor
 public class ConsumerCreatePost {
@@ -14,7 +16,7 @@ public class ConsumerCreatePost {
     private final PostService postService;
 
     @RabbitListener(queues = "queue-create-post")
-    public void createPostConsumerListener(ModelCreatePost modelCreatePost){
+    public void createPostConsumerListener(ModelCreatePost modelCreatePost) throws IOException {
         postService.savePost(modelCreatePost);
     }
     @RabbitListener(queues = "queue-create-comment-to-post")

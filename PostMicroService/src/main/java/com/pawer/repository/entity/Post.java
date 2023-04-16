@@ -27,10 +27,9 @@ public class Post extends BaseEntity {
     private String name;
     private String surname;
     private String content;
+    //private List<CommentToPost> posts;
     private String url;
     private Integer likeCount;
-
-
     @Builder.Default
     private String date=LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     @Builder.Default

@@ -16,6 +16,6 @@ public class ModelCreatePost implements Serializable {
     private String surname;
     private String content;
     private String token;
-    //private MultipartFile image;
+   // private MultipartFile image;
 
 }

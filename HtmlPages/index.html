@@ -14,6 +14,7 @@
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/profilecart.css">
     <title>Home Page</title>
 </head>
 <body>
@@ -95,6 +96,14 @@
             <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
                 dark_mode
             </span>
+
+<!--        burada basladim profile cartlarına-->
+
+        <div id="profilecart">
+
+        </div>
+
+<!--        burada bitti profile cartları-->
     </section>
 
 </main>
@@ -170,6 +179,59 @@
 
 
     window.addEventListener('load', getData);
+    window.addEventListener('load', getProfileCart);
+
+
+
+
+    function getProfileCart() {
+        const token = sessionStorage.getItem("token");
+        const name = document.getElementById('name');
+        const username = document.getElementById('username');
+        const content = document.getElementById('content');
+        const id = document.getElementById('id');
+
+
+        const data = JSON.stringify({
+            "name": name,
+            "username": username,
+            "content": content,
+            "id": id
+        });
+
+        fetch("http://localhost:6260/user/findalluser", {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+                for (let index = 0; index < response.length; index++) {
+                    document.getElementById("profilecart").innerHTML += `<div class="profilecartcontainer">
+        <div class="profilecartphoto"> <img src="https://storage.cloud.google.com/pawerallphoto/unnamed.jpeg" alt=""></div>
+        <div class="profilecartalltext">
+        <div class="profilecarttitle"> ${response[index].name} </div>
+        <div class="profilecarttext"> ${response[index].username}</div>
+    </div>
+    </div>`;
+                    var myDiv = document.getElementById(`commentsss${index}`);
+
+
+                    setTimeout(() => {
+                        getComment(index);
+                    }, 0);
+                }
+
+            })
+            .catch(error => console.log('error', error));
+    }
+
+
+
+
+
+
 
 
 
@@ -223,6 +285,7 @@
                             </div>
                             <div class="post__headerDescription">
                                 <p>${response.content[index].content}</p>
+
                             </div>
                             <div class="post__image">
                                <img src="">
@@ -251,16 +314,17 @@
 
                         </div>
 
-                        <div id="commentsss" >
-
-
-
+                        <div id="commentsss${index}" >
                         </div>
 
                     </div>
                 </div>`;
+                    var myDiv = document.getElementById(`commentsss${index}`);
 
-                    getComment(index)
+
+                    setTimeout(() => {
+                        getComment(index);
+                    }, 0);
                 }
 
             })
@@ -276,21 +340,21 @@
 
 
 
-
-
-
     //***************** her sey tamamdır sadece bu metod calismiyor alert harekete geçmiyor.
 
     function getComment(index) {
         window.addEventListener('load', getData);
 
+        console.log(index)
         const token = sessionStorage.getItem("token");
         let id = document.getElementById(index+'in').value;
-/*
-        const data = JSON.stringify({
-            "comment": comment
-        });
-*/
+        let commentDiv = document.getElementById(`commentsss${index}`);
+
+        /*
+                const data = JSON.stringify({
+                    "comment": comment
+                });
+        */
         fetch("http://localhost:6160/post/findallcomment"+"?postId="+id, {
             method: 'GET',
             headers: {
@@ -301,8 +365,7 @@
             .then(response => { console.log(response)
                 for (let i = 0; i < response.length; i++) {
                     //if (id === response.postId) {
-                        alert("*/*/*/*/*/*/*/*/*")
-                        document.getElementById("commentsss").innerHTML += `
+                   commentDiv.innerHTML += `
                         <div class="commentread">
                             <div class="commentread__avatar">
                                 <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
@@ -312,7 +375,7 @@
                             <div class="commentread__body">
                                 <div class="commentread__header">
                                     <div class="commentread__headerText">
-                                        <h3>
+                                        <h3> ${response[i].userId}
                                             <span class="commentread__headerSpecial">
                                             </span>
                                         </h3>
@@ -328,10 +391,13 @@
                             </div>
                         </div>
                 `;
-                    }
-            //    }
+                }
+
+
+                //    }
             })
             .catch(error => console.log('error', error));
+
     }
 
 
@@ -354,9 +420,7 @@
         const fileInput = document.getElementById('file');
         const file = fileInput.files[0];
 
-        alert(token)
-        alert(content)
-        console.log(content)
+
 
         const data = {
             "content": content,
@@ -403,11 +467,7 @@
             "token": token
         }
 
-        alert("---> post id-->>> "+id)
-       // alert("tokenn :  "+token)
-        alert("commennttt:   "+comment)
 
-        alert("indexxxx :"+ index)
 
 
         fetch("http://localhost:6260/user/createcommenttopost",{

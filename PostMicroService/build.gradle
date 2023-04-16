@@ -7,4 +7,5 @@ dependencies {
     implementation libs.springBootRabbitMQ
     implementation libs.Mongodb
     implementation libs.gson
+    //implementation libs.springCloudGCloud
 }

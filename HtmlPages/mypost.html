@@ -28,8 +28,8 @@
   <aside>
 
 
-    <section class="aside__home">
-      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+    <section class="aside__home" onclick="homepage()">
+      <img class="nav__home"  src="../HtmlPages/images/home-dark.png" alt="">
       <label>Home</label>
     </section>
 
@@ -149,10 +149,16 @@
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
   }
 
+  function mypost(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+  }
+  function otherpeople(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
+  }
+
   function logout(){
     sessionStorage.setItem("token", null);
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
-
   }
 
 

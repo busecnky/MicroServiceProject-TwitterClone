@@ -46,7 +46,7 @@ allprojects{
         implementation libs.springCloudSleuth
         implementation libs.springCloudSleuthZipkin
         implementation libs.springCloudConfigClient
-       // implementation libs.springCloudGCloud
+      //  implementation libs.springCloudGCloud
 
 
     }

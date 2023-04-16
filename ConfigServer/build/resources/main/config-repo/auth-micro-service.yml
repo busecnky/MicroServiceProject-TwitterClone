@@ -11,13 +11,13 @@ spring:
     host: localhost
     port: 5672
     username: user
-    password: ${RB}
+    password: password
 
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/CrowerAuthDB
     username: postgres
-    password: ${PGPASSS}
+    password: asd123asd
   jpa:
     hibernate:
       ddl-auto: update

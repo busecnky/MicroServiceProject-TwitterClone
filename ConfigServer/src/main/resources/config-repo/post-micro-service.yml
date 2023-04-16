@@ -11,21 +11,23 @@ spring:
     host: localhost
     port: 5672
     username: user
-    password: ${RB}
+    password: password
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      file-size-threshold: 2KB
+
+
 
   data:
     mongodb:
       host: localhost   #localhost
-      port: 29000    # buse:29000 , furkan:27000
-      username: ${MONGOPAWERPOSTUSERNAME}
-      password: ${MONGOPAWERPOSTPASSWORD}
+      port: 27000    # buse:29000 , furkan:27000
+      username: croweruser #${MONGOPAWERPOSTUSERNAME}
+      password: asd123asd  # ${MONGOPAWERPOSTPASSWORD}
       database: PostDB
-  cloud:
-    gcp:
-      project-id: regal-height-378801
-      credentials:
-        scopes: https://www.googleapis.com/auth/devstorage.read_write
-
 myproject:
   google:
     storage:

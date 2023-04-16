@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Sofia");
+
+.profilecartcontainer{
+    font-family: "Sofia", sans-serif;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    border: solid;
+    border-radius: 20px;
+    width: fit-content;
+    max-width: 240px;
+    min-width: 200px;
+}
+
+
+.profilecartphoto img{
+    margin: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 200px;
+}
+
+.profilecartalltext .profilecarttitle {
+
+    margin-top: 5px;
+    text-align: center;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: black;
+}
+.profilecartalltext .profilecarttext{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+hr{
+    width: 100%;
+}

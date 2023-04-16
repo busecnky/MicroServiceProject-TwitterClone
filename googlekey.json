@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pawerproject",
+  "private_key_id": "b6dc9546f2c86e7f4aa3db3c3ed0321ac688290b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5ERqofwwt2+mJ\nOsy35rz/CMYbxwHOjrf01wxnblOE2X+1JeYnKlOcFdALLjjQrGlzoJI9JO61djMA\ng2mhg1oc3Uyo/jCXWHOzNUYHkDQzpUqOOplGO83fG8wV9pwhVlSJqpTXpyGlt0e6\nIGeMHBSNfuvVTQDIulyfMpHTbANpwBGq89QZy8Gbcn/MZWGVVthtGN02cchXwL5L\nrfqGFyEjVS1Fohp9EaleGuhActclT2jHhqEMtk+BRIisGGn3zY8gi6Je/NucKy21\nxgYkwQDY9NsqzVDKJmBbHvKVJOIy2d+UdkrUJtMuo0LQPgApqItujY6VgJ42Y5WL\nEYVZwi1jAgMBAAECggEAJkr4OaIkKn8E6Qy+HFVFiP3PRCMe6BcW0DYJDoPBC02X\nw6tGXpc++p520EFtpxvtq+uvJrC0Jd8BuZr3aeCMbkmKGbOS6VX3hr7AsULw0jji\n3uAYI/Su6fnN9kNzVeCPmHav2plt+GSellArLM4IoKiA8r8+qMoK7TPhAZ6pbCFk\nUu6cAcss/j3g/LE4vYB5e/hSeSJazwsKqWqUmYQDQQ4lk05icd/7DNtGvaPOTxKq\nIm5Q6ayAReMkS9n0oF6o9IUVTru/EVd83WdBctagH2qvYOqc5S1IpQg4wsJitHSV\nEwjzVbKmiuSsAJlc0mOLOIKLwCmnnETJ/F0UBPdEIQKBgQDaGHIYd9VvIA44PrkT\nQWLI41T08EdhPkaZEvZFTtaLCqq9KH/5zrKFYYkHrwAcqi61cADNcF6KUts6SIDk\nlucrtFiQX2MJcQcGjx8/GjLzS1A3hyAvziP0DyCMJIz93f13bTb5/Mgqivmi3VYl\njz5tNA2aHPWYtS4kTdVPVPWrAwKBgQDZOyOUCYGtRQPYMrQpH7jqQSJp2LZPs6QB\nGT4oxLl/Qv4wd19khAAlZWeWfbW/Ydc2bnEoYlmj5DO+rXoeTlPi242Cpinir3fR\nY36A2YbB10Djy6kq/nD/OJ4dcAPITNUNnEiDEuS83dxL2Z7j+yGChM84ZCpoBdwF\nKsoyhoG2IQKBgCMXhdw8A+KihMc2CG95uNxb/8J9mu6hp5hfvbJ/MfQjXj+bcaQP\nRxhBDlxnIxx5oZReFjL4Hq4hENc67UpaoY2dshZg0r2lKx06ECwGGiadeqXEn0Ax\n6gUOHg2OoAUFIBCESTFGJCr8O5iiBod6me/WTU371OSiWm9K+sSOBg1jAoGALVj0\nH2YwpOwgVlSXWXJe1sAMIA52WIMGvJf5audOVeu1RobU6hXINgZKLpdFhpM1Kw65\nHpYRYm40Ax0RvhvZ1STCEMEBQ2of2B0t/lXqlLKLwEH2qZv+GLlIAJsunvSzESlL\n1dju2SJzZ34hdjQplaaF357BX3/Bo26AUTXVBCECgYEAoFAeYSJUtmQgr34hV9lj\nd6zm+DBmvA/VzH84JgVsI1MH1EhXFvKVfF1ydCr8+yM8km7AOddjUj2XHC942+p2\nwLenjOvqdiitE1Lp0w1IKRHXSAgcEYCV6JA0kuygjtDE7ZTkLzvMtUanFhwwByDp\nSGYwgEzgRaWs751DhdVcWNs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "paweradmin123@pawerproject.iam.gserviceaccount.com",
+  "client_id": "109271960606675196778",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/paweradmin123%40pawerproject.iam.gserviceaccount.com"
+}

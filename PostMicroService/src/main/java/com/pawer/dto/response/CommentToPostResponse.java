@@ -1,16 +1,15 @@
 package com.pawer.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class CommentToPostResponse {
     private String comment;
     private String postId;
+    private String userId;
 
 }

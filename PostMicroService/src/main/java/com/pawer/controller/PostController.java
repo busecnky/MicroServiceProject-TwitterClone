@@ -72,7 +72,6 @@ public class PostController {
     @CrossOrigin("*")
     @ResponseBody
     public ResponseEntity<List<CommentToPostResponse>> getCommentList(CommentToPostDto dto){
-        System.out.println("getall post post dto -->>> "+dto.getPostId());
         return ResponseEntity.ok(postService.findAllComment(dto));
     }
 

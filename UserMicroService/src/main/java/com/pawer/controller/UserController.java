@@ -10,9 +10,13 @@ import com.pawer.service.FollowService;
 import com.pawer.service.FollowerService;
 import com.pawer.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,7 +30,6 @@ public class UserController {
     @PostMapping("/createpost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createPost(@RequestBody CreatePostDto dto) {
-        System.out.println("bahça duvarından aştım");
         return ResponseEntity.ok(userService.createPost(dto));
     }
     @PostMapping("/update")
@@ -43,15 +46,13 @@ public class UserController {
     @PostMapping("/createcommenttopost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createCommentToPost(@RequestBody CommentToPostDto dto){
-        System.out.println("user controller create comment");
-        System.out.println("dto nun post id'si"+dto.getPostId());
+
         return ResponseEntity.ok(userService.createCommentToPost(dto));
     }
 
     @PostMapping("/likepost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> likePost(@RequestBody LikePostRequestDto dto){
-        System.out.println("user controller like post");
         return ResponseEntity.ok(userService.likePost(dto));
     }
 
@@ -74,6 +75,25 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
 
+
+
+
+
+//    @CrossOrigin("*")
+//    @PostMapping("/resim")
+//    public void yukle(@RequestParam("resim") MultipartFile dosya) throws IOException {
+//        byte [] byteresim;
+//        try {
+//            byteresim= dosya.getBytes();
+//            userService.resimkaydet(byteresim);
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println("Dosya yüklendi: " + dosya.getOriginalFilename());
+//        System.out.println("direkt---> "+byteresim);
+//        System.out.println("tostrint ile --> "+byteresim.toString());
+//    }
 
 
 //    @PostMapping("/removefollower")
