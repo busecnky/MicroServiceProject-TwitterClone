@@ -17,7 +17,7 @@ public enum EErrorType {
     INVALID_TOKEN(4001,"Geçersiz token bilgisi",BAD_REQUEST),
     BAD_REQUEST_ERROR(1202,"Geçersiz Parametre Girişi Yaptınız",BAD_REQUEST),
 
-    KULLANICI_BULUNAMADI(2301,"Aradığınız id ye ait kullanıcı bulunamamıştır",INTERNAL_SERVER_ERROR);
+    POST_BULUNAMADI(2302,"Aradığınız id ye ait post bulunamamıştır",INTERNAL_SERVER_ERROR);
     private int code;
     private String message;
     private HttpStatus httpStatus;

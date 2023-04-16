@@ -2,9 +2,10 @@ package com.pawer.controller;
 
 
 import com.pawer.dto.request.CommentToPostDto;
+import com.pawer.dto.request.FindAllLikePostRequestDto;
+import com.pawer.dto.request.LikePostRequestDto;
 import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
-import com.pawer.repository.entity.CommentToPost;
 import com.pawer.repository.entity.Post;
 import com.pawer.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -75,6 +76,21 @@ public class PostController {
         return ResponseEntity.ok(postService.findAllComment(dto));
     }
 
+    @PostMapping("/likepost")
+    @CrossOrigin("*")
+    @ResponseBody
+    public ResponseEntity<Integer> getLikeCount(LikePostRequestDto dto){
+        System.out.println("likecount post post dto -->>> "+dto.getPostId());
+        return ResponseEntity.ok(postService.likePostCount(dto));
+    }
+
+
+    @GetMapping("/mylikes")
+    @CrossOrigin("*")
+    @ResponseBody
+    public ResponseEntity<List<Post>> findAllMyLikesList(FindAllLikePostRequestDto dto){
+        return ResponseEntity.ok(postService.findAllMyLikesList(dto));
+    }
 
 
 

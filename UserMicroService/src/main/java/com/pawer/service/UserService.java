@@ -131,22 +131,19 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         return true;
     }
 
-    public Boolean likePost(LikePostRequestDto dto) {
+    public Boolean createLikePost(LikePostRequestDto dto) {
         if (dto.getToken() == null || dto.getToken() == "") {
             throw new UserException(EErrorType.INVALID_TOKEN);
         }
 
         ModelLikePost model = new ModelLikePost();
-        model.setUserId(jwtTokenManager.validToken(dto.getToken()).get());
+        model.setToken(dto.getToken());
         model.setPostId(dto.getPostId());
         model.setStatement(dto.getStatement());
         producerDirectService.sendLikePost(model);
 
-        if(dto.getStatement() == true){
-            return false;
-        }else {
-            return true;
-        }
+        return dto.getStatement();
+
     }
 
     public Optional<User> findOptionalByUsername(String username){
