@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ModelLikePost implements Serializable {
 
-    private Long userId;
+    private String token;
     private String postId;
     private Boolean statement;
 

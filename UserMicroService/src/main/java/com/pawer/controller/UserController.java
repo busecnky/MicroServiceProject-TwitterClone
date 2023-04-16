@@ -48,11 +48,11 @@ public class UserController {
         return ResponseEntity.ok(userService.createCommentToPost(dto));
     }
 
-    @PostMapping("/likepost")
+    @PostMapping("/createlikepost")
     @CrossOrigin("*")
-    public ResponseEntity<Boolean> likePost(@RequestBody LikePostRequestDto dto){
+    public ResponseEntity<Boolean> createLikePost(@RequestBody LikePostRequestDto dto){
         System.out.println("user controller like post");
-        return ResponseEntity.ok(userService.likePost(dto));
+        return ResponseEntity.ok(userService.createLikePost(dto));
     }
 
     @PostMapping("/follow")

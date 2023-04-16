@@ -4,31 +4,33 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.CommentToPostDto;
+import com.pawer.dto.request.FindAllLikePostRequestDto;
+import com.pawer.dto.request.LikePostRequestDto;
 import com.pawer.dto.response.CommentToPostResponse;
+import com.pawer.exception.EErrorType;
+import com.pawer.exception.PostException;
 import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
+import com.pawer.rabbitmq.messagemodel.ModelLikePost;
 import com.pawer.repository.ICommentToPostRepository;
+import com.pawer.repository.ILikePostRepository;
 import com.pawer.repository.IPostRepository;
 import com.pawer.repository.entity.CommentToPost;
+import com.pawer.repository.entity.LikeToPost;
 import com.pawer.repository.entity.Post;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class PostService extends ServiceManagerImpl<Post,String> {
@@ -36,6 +38,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     private final IPostRepository postrepository;
     private final JwtTokenManager jwtTokenManager;
     private final ICommentToPostRepository commentToPostRepository;
+    private final ILikePostRepository likeToPostRepository;
     @Value("${myproject.google.storage.bucketname}")
     private String bucketname;
 
@@ -47,11 +50,12 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     int a=0;
 
-    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, ICommentToPostRepository commentToPostRepository) {
+    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, ICommentToPostRepository commentToPostRepository, ILikePostRepository likeToPostRepository) {
         super(postrepository);
         this.postrepository = postrepository;
         this.jwtTokenManager = jwtTokenManager;
         this.commentToPostRepository = commentToPostRepository;
+        this.likeToPostRepository = likeToPostRepository;
     }
 
 
@@ -140,6 +144,55 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     }
 
+    public void createLikePost(ModelLikePost model) {
+        Long modelUserId = jwtTokenManager.validToken(model.getToken()).get();
+        Optional<LikeToPost> likeToPost = likeToPostRepository.findOptionalByPostIdAndUserId(model.getPostId(), modelUserId);
+
+        Optional<Post> post = findById(model.getPostId());
+
+            if (likeToPost.isPresent()){
+                if(model.getStatement() == true){
+                    post.get().setLikeCount(post.get().getLikeCount()+1);
+                    save(post.get());
+
+                }else {
+                    post.get().setLikeCount(post.get().getLikeCount()-1);
+                    save(post.get());
+
+                }
+                likeToPost.get().setStatement(model.getStatement());
+                likeToPostRepository.save(likeToPost.get());
+
+            }else {
+                likeToPostRepository.save(LikeToPost.builder()
+                        .postId(model.getPostId())
+                        .userId(modelUserId)
+                        .statement(model.getStatement())
+                        .build());
+                post.get().setLikeCount(post.get().getLikeCount()+1);
+                save(post.get());
+
+            }
+
+
+    }
+
+    public Integer likePostCount(LikePostRequestDto dto) {
+        if (dto.getToken() == null || dto.getToken() == "") {
+            throw new PostException(EErrorType.INVALID_TOKEN);
+        }
+        Optional<Post> post = findById(dto.getPostId());
+        return post.get().getLikeCount();
+    }
+    public List<Post> findAllMyLikesList(FindAllLikePostRequestDto dto) {
+        Long userId =  jwtTokenManager.validToken(dto.getToken()).get();
+        List<Post> likePostList= new ArrayList<>();
+        for (LikeToPost like : likeToPostRepository.findOptionalByUserId(userId).get()) {
+            Post post = findById(like.getPostId()).get();
+            likePostList.add(post);
+        }
+        return likePostList;
+    }
 
 
 
@@ -201,6 +254,8 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         }
         return yildiz.toString();
     }
+
+
 
 
 //    public Page<Post>findAllByUserId(Integer pageSize, Integer currentPage,String direction,  String sortingParameter,String token){

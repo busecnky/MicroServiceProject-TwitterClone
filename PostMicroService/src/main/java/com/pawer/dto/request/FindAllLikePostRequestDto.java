@@ -1,20 +1,15 @@
-package com.pawer.rabbitmq.messagemodel;
+package com.pawer.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModelLikePost implements Serializable {
-
+public class FindAllLikePostRequestDto {
     private String token;
-    private String postId;
-    private Boolean statement;
 
 }

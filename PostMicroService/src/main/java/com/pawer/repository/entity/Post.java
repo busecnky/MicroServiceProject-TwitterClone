@@ -28,7 +28,8 @@ public class Post extends BaseEntity {
     private String surname;
     private String content;
     private String url;
-    private Integer likeCount;
+    @Builder.Default
+    private Integer likeCount = 0;
 
 
     @Builder.Default
