@@ -5,6 +5,7 @@ package com.pawer.service;
 //import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.*;
 import com.pawer.dto.response.FindByIdResponseDto;
+import com.pawer.dto.response.ProfileCartResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.UserException;
 import com.pawer.mapper.IPostMapper;
@@ -15,6 +16,7 @@ import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
 import com.pawer.repository.IUserRepository;
+import com.pawer.repository.entity.Follow;
 import com.pawer.repository.entity.User;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -135,15 +138,12 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         if (dto.getToken() == null || dto.getToken() == "") {
             throw new UserException(EErrorType.INVALID_TOKEN);
         }
-
         ModelLikePost model = new ModelLikePost();
         model.setToken(dto.getToken());
         model.setPostId(dto.getPostId());
         model.setStatement(dto.getStatement());
         producerDirectService.sendLikePost(model);
-
         return dto.getStatement();
-
     }
 
     public Optional<User> findOptionalByUsername(String username){
@@ -151,6 +151,25 @@ public class UserService extends ServiceManagerImpl<User, Long> {
     }
 
 
+    //ben karttaki kullanıcıyı takip ediyor muyum?
+    public List<ProfileCartResponse> isFollow(ProfileCartRequestDto dto){
+        Long userId= jwtTokenManager.validToken(dto.getToken()).get();
+        List<Follow> follows= followService.isFollow(userId);         // beni 0 takip etmiyor, 1 bana takip isteği atmış,2 beni takip ediyor
+        List<ProfileCartResponse>  profileCartResponses = new ArrayList<>();
+        for (Follow f: follows){
+            User user = findById(f.getFollowId()).get();
+            ProfileCartResponse profileCartResponse= new ProfileCartResponse();
+            profileCartResponse.setJob(user.getJob());
+            profileCartResponse.setAvatar(user.getAvatar());
+            profileCartResponse.setName(user.getName());
+            profileCartResponse.setSurname(user.getSurname());
+            profileCartResponse.setUsername(user.getUsername());
+            profileCartResponse.setPostCount(0);
+            profileCartResponse.setFollow(f.getFollowRequest()==0 ? "Takip Et" : (f.getFollowRequest()==1 ? "İstek Gönderildi" : "Takiptesin") );
+            profileCartResponses.add(profileCartResponse);
+        }
+        return profileCartResponses;
+    }
 
 
     /**storage

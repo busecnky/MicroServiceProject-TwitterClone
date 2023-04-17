@@ -44,6 +44,22 @@
             <img src="../HtmlPages/images/earth.png" alt="">
             <label>People</label>
         </section>
+
+
+        <section onclick="otherpeople2()" class="aside__otherpeople">
+            <img src="../HtmlPages/images/earth.png" alt="">
+            <label>People2</label>
+        </section>
+        <section onclick="otherpeople3()" class="aside__otherpeople">
+            <img src="../HtmlPages/images/earth.png" alt="">
+            <label>People3</label>
+        </section>
+
+        <section onclick="otherpeople4()" class="aside__otherpeople">
+            <img src="../HtmlPages/images/earth.png" alt="">
+            <label>People4</label>
+        </section>
+
         <section onclick="mypost()" class="aside__myposts">
             <img src="../HtmlPages/images/social-media.png" alt="">
             <label>My Posts</label>
@@ -99,9 +115,10 @@
 
 <!--        burada basladim profile cartlarına-->
 
-        <div id="profilecart">
 
-        </div>
+
+
+
 
 <!--        burada bitti profile cartları-->
     </section>
@@ -171,6 +188,19 @@
         window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
     }
 
+
+    function otherpeople2(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople2.html';
+    }
+
+    function otherpeople3(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople3.html';
+    }
+
+    function otherpeople4(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+    }
+
     function logout(){
         sessionStorage.setItem("token", null);
         window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
@@ -179,7 +209,6 @@
 
 
     window.addEventListener('load', getData);
-    window.addEventListener('load', getProfileCart);
 
 
 
@@ -208,13 +237,17 @@
             .then(response => response.json())
             .then(response => { console.log(response)
                 for (let index = 0; index < response.length; index++) {
-                    document.getElementById("profilecart").innerHTML += `<div class="profilecartcontainer">
+                    document.getElementById("profilecart").innerHTML += `
+    <div class="mySlides fade">
+
+<div class="profilecartcontainer">
         <div class="profilecartphoto"> <img src="https://storage.cloud.google.com/pawerallphoto/unnamed.jpeg" alt=""></div>
         <div class="profilecartalltext">
         <div class="profilecarttitle"> ${response[index].name} </div>
         <div class="profilecarttext"> ${response[index].username}</div>
     </div>
-    </div>`;
+    </div>
+</div>`;
                     var myDiv = document.getElementById(`commentsss${index}`);
 
 
@@ -226,7 +259,6 @@
             })
             .catch(error => console.log('error', error));
     }
-
 
 
 
@@ -456,6 +488,7 @@
 
 
     //*****************************comment Tuşu
+
     function commentbtn(index){
         let id = document.getElementById(index+'in').value;
         let token = sessionStorage.getItem("token");

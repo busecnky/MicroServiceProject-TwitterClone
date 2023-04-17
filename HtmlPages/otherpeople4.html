@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="css/otherpeople.css">
+
+</head>
+<body>
+
+
+<header>
+  <h1>
+    <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
+  </h1>
+  <nav>
+    <ul>
+      <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
+      <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Hire Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <aside>
+    <hr class="hr">
+    <section class="aside__home">
+      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+      <label>Home</label>
+    </section>
+
+    <hr class="hr">
+    <section onclick="otherpeople()" class="aside__otherpeople">
+      <img src="../HtmlPages/images/earth.png" alt="">
+      <label>People</label>
+    </section>
+
+
+    <section onclick="otherpeople2()" class="aside__otherpeople">
+      <img src="../HtmlPages/images/earth.png" alt="">
+      <label>People2</label>
+    </section>
+
+
+    <section onclick="mypost()" class="aside__myposts">
+      <img src="../HtmlPages/images/social-media.png" alt="">
+      <label>My Posts</label>
+    </section>
+
+    <section onclick="profile()" class="aside__profile">
+      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+           alt="">
+      <label>Profile</label>
+    </section>
+    <button onclick="logout()" class="logout">Log Out</button>
+  </aside>
+
+
+
+
+
+  <div id="profilecart">
+
+  </div>
+
+</main>
+<script>
+  window.addEventListener('load', getProfileCart);
+
+
+  function getProfileCart() {
+    const token = sessionStorage.getItem("token");
+    const name = document.getElementById('name');
+    const username = document.getElementById('username');
+    const surname = document.getElementById('surname');
+    const content = document.getElementById('content');
+    const email= document.getElementById('email')
+    const id = document.getElementById('id');
+    const follow = document.getElementById('follow');
+    const urluser= 'http://localhost:6260/user/findallcarts';
+    const urlpost= 'http://localhost:6160/post/findallpage';
+
+
+    const data = JSON.stringify({
+      "follow": follow,
+      "name": name,
+      "username": username,
+      "surname": surname,
+      "email": email,
+      "content": content,
+      "id": id
+    });
+    const data2 = {
+
+      "token": token
+    }
+
+    Promise.all([
+      fetch(urluser, {
+        method: 'Post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data2)
+        ,
+      }),
+      fetch(urlpost, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+    ])
+            .then(responses => Promise.all(responses.map(response => response.json())))
+            .then(data => { console.log(data[0]), console.log(data[1])
+              for (let index = 0; index < data[0].length; index++) {
+                document.getElementById("profilecart").innerHTML += ` <div class="containerrr">
+      <div class="photo__text">
+        <div>
+        <img
+          src="https://storage.cloud.google.com/pawerallphoto/ErSirm9W4AAwUnt.jpg"
+          alt=""/>
+
+        </div>
+
+        <div class="textt">
+          <h4>${data[0] [index].name} </h4>
+          <h5 >java web</h5>
+         <h5 >123235 posts</h5>
+
+        <button class="btn btn-pink" >beni takip ediyor mu</button>
+
+<input value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
+ <button id="followwbtn" class="btn ${data[0][index].follow === 'Takip Et' ? 'btn-blue' : (data[0][index].follow === 'İstek Gönderildi' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
+</div>
+      </div>
+    </div>`;
+
+
+
+              }
+
+            })
+            .catch(error => console.log('error', error));
+  }
+
+
+
+
+  function followbtn(index){
+    const token = sessionStorage.getItem("token");
+
+    let username = document.getElementById(index+'in').value;
+
+    const data = {
+      "username" : username,
+      "token": token
+    }
+
+    fetch("http://localhost:6260/user/follow",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+              }
+              else{
+                console.log(response.message)
+                alert(response.message)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+
+  }
+
+
+
+</script>
+</body>
+</html>

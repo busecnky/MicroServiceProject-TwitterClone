@@ -8,6 +8,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @SuperBuilder
@@ -29,8 +30,6 @@ public class User extends BaseEntity {
     private String gender;
     private String age;
     private String avatar;
-
-
-
+    private String job;
 
 }

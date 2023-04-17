@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,7 +55,9 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
 
 
     public Integer followUser(FollowingUserRequestDto dto) {
-
+        System.out.println("follow servis follosuser metoduna geldi");
+        System.out.println("dto ici username: "+ dto.getUsername());
+        System.out.println("dto ici token"+ dto.getToken());
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
         Optional<User> followUser = userService.findOptionalByUsername(dto.getUsername());
         Optional<Follow> follow = followRepository.findOptionalByUserIdAndFollowId(userId.get(), followUser.get().getId());
@@ -79,6 +83,20 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
         } else {
             return 3;
         }
+    }
+
+    //ben karttaki kullanıcıyı takip ediyor muyum?
+    public List<Follow> isFollow(Long userid){
+        List<User> users= userService.findAll();
+        List<Follow> follows= new ArrayList<>();
+        for(User user:users){
+            if (user.getId()!=userid){
+                Follow follow = followRepository.findOptionalByUserIdAndFollowId(userid,user.getId()).get();
+                follows.add(follow);
+            }
+
+        }
+        return follows;
     }
 
     public Optional<Follow> findOptionalByUserIdAndFollowId(Long id, Long aLong) {

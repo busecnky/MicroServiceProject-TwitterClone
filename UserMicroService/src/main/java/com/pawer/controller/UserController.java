@@ -3,8 +3,7 @@ package com.pawer.controller;
 
 import com.pawer.dto.request.*;
 import com.pawer.dto.response.FindByIdResponseDto;
-import com.pawer.exception.EErrorType;
-import com.pawer.exception.UserException;
+import com.pawer.dto.response.ProfileCartResponse;
 import com.pawer.repository.entity.User;
 import com.pawer.service.FollowService;
 import com.pawer.service.FollowerService;
@@ -58,6 +57,7 @@ public class UserController {
     @PostMapping("/follow")
     @CrossOrigin("*")
     public  ResponseEntity<Integer> followUser(@RequestBody FollowingUserRequestDto dto){
+        System.out.println("takip isteği atıldı");
         return  ResponseEntity.ok(followService.followUser(dto));
     }
 
@@ -74,7 +74,12 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
 
-
+    @PostMapping("/findallcarts")
+    @CrossOrigin("*")
+    public ResponseEntity<List<ProfileCartResponse>> findAllForUserCart(@RequestBody ProfileCartRequestDto dto){
+        System.out.println("sadasdasdasdasdasdasd ->>> "+dto.getToken());
+        return ResponseEntity.ok(userService.isFollow(dto));
+    }
 
 //    @PostMapping("/removefollower")
 //    @CrossOrigin("*")
