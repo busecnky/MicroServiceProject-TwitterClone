@@ -102,7 +102,7 @@
             </form>
         </section>
         <!-- pawerbox ends-->
-        <div id="feed"></div>
+        <div class="feed" id="feed"></div>
     </section>
 
 
@@ -302,14 +302,15 @@
                     document.getElementById("feed").innerHTML += `
 
 <div class="post" >
-                    <div class="post__avatar">
-                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                            alt="">
-                    </div>
+
 
                     <div class="post__body" >
+
                         <div class="post__header">
                             <div class="post__headerText">
+                                <div class="post__avatar">
+                                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"alt="">
+                                </div>
                                 <h3>${response.content[index].username}
                                     <span class="post__headerSpecial">
                                     </span>
@@ -399,13 +400,14 @@
                     //if (id === response.postId) {
                    commentDiv.innerHTML += `
                         <div class="commentread">
-                            <div class="commentread__avatar">
-                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                                    alt="">
-                            </div>
 
-                            <div class="commentread__body">
-                                <div class="commentread__header">
+
+                            <div class="commentread__header">
+
+                                   <div class="commentread__avatar">
+                                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                    alt="">
+                                    </div>
                                     <div class="commentread__headerText">
                                         <h3> ${response[i].userId}
                                             <span class="commentread__headerSpecial">
@@ -420,7 +422,6 @@
                                         <span class="commentread__time"></span>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                 `;
                 }

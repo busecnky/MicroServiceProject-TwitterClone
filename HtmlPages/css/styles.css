@@ -268,6 +268,7 @@ aside{
 }
 
 /*post*/
+
 .post__avatar img{
     border-radius: 50%;
     height: 40px;
@@ -279,6 +280,16 @@ aside{
     border-bottom: 1px solid var(--color7);
     padding-bottom: 10px;
     padding-top: 10px;
+
+}
+
+.post__body{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
+    10px 10px 15px rgba(70, 70, 70, 0.15),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
+    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
 }
 
 .post__footer{
@@ -298,17 +309,26 @@ aside{
     font-size: 16px;
     color: var(--color7);
 }
+.post__headerText {
+  display: flex;
+    align-items: center;
+}
 .post__headerText h3{
     font-size: 20px;
     margin-bottom: 5px;
+    margin-left: 20px;
 }
 .post__headerDescription{
     margin-bottom: 10px;
     font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
+    10px 10px 15px rgba(70, 70, 70, 0.15),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
+    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
 }
-.post__body{
-    padding: 20px;
-}
+
 
 .likecomment:hover{
     cursor: pointer;
@@ -320,6 +340,7 @@ aside{
     display: flex;
     flex-direction: row;
     font-size: 14px;
+    gap: 10px;
 
 }
 .post__date{
@@ -330,9 +351,9 @@ aside{
 }
 
 /*commentwrite*/
-commentwrite__input img{
+.commentwrite__input img{
     border-radius: 50%;
-    height: 40px;
+    height: 50px;
 }
 
 .commentwrite{
@@ -367,6 +388,11 @@ commentwrite__input img{
     border: none;
     outline: none;
     border-radius: 10px;
+    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
+    10px 10px 15px rgba(70, 70, 70, 0.15),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
+    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
+
 }
 
 .commentwrite-textarea::placeholder{
@@ -383,13 +409,20 @@ commentwrite__input img{
     width: 80px;
     height: 40px;
     margin-top: 40px;
-    margin-left: auto;
+    margin-left: 100px;
 }
 
 /*commentread*/
+.commentread__header{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
 .commentread__avatar img{
     border-radius: 50%;
-    height: 40px;
+    height: 20px;
 }
 
 .commentread{
@@ -418,16 +451,14 @@ commentwrite__input img{
     color: var(--color7);
 }
 .commentread__headerText h3{
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 5px;
 }
 .commentread__headerDescription{
     margin-bottom: 10px;
     font-size: 14px;
 }
-.commentread__body{
-    padding: 20px;
-}
+
 
 .commentread__timer{
     display: flex;

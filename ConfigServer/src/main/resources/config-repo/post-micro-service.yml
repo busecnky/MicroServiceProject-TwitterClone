@@ -11,7 +11,7 @@ spring:
     host: localhost
     port: 5672
     username: user
-    password: password
+    password: user
   servlet:
     multipart:
       enabled: true
@@ -24,9 +24,9 @@ spring:
   data:
     mongodb:
       host: localhost   #localhost
-      port: 27000    # buse:29000 , furkan:27000
-      username: croweruser #${MONGOPAWERPOSTUSERNAME}
-      password: asd123asd  # ${MONGOPAWERPOSTPASSWORD}
+      port: 29000    # buse:29000 , furkan:27000
+      username: ${MONGOPAWERPOSTUSERNAME}
+      password: ${MONGOPAWERPOSTPASSWORD}
       database: PostDB
 myproject:
   google:
