@@ -6,11 +6,14 @@ package com.pawer.service;
 import com.pawer.dto.request.CommentToPostDto;
 import com.pawer.dto.request.FindAllLikePostRequestDto;
 import com.pawer.dto.request.LikePostRequestDto;
+import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
+import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
 import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
+import com.pawer.rabbitmq.messagemodel.ModelFindLikePost;
 import com.pawer.rabbitmq.messagemodel.ModelLikePost;
 import com.pawer.repository.ICommentToPostRepository;
 import com.pawer.repository.ILikePostRepository;
@@ -21,10 +24,7 @@ import com.pawer.repository.entity.Post;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -92,10 +92,54 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     }
 
 
-    public Page<Post> findAll(Integer pageSize, int currentPage, Sort.Direction direction, String sortingParameter){
+    public Page<PostFindAllResponse> findAllPosts(String token,
+                                                  Integer pageSize,
+                                                  int currentPage, Sort.Direction direction,
+                                                  String sortingParameter){
+        System.out.println("geliyor mu token " + token);
+        if (token == null || token == "") {
+            throw new PostException(EErrorType.INVALID_TOKEN);
+        }
+        System.out.println("jwtye geliyor mu?");
+        Long userId = jwtTokenManager.validToken(token).get();
+        System.out.println("jwtye geliyorsa --->" + userId);
         Pageable pageable = PageRequest.of(currentPage,  pageSize ,Sort.by(direction, sortingParameter) );
-        return postrepository.findAll(pageable);
+        List<PostFindAllResponse> postFindAllResponses = new ArrayList<>();
+//FURKAN:  rabbitdekileri düzelterek bu metodu pageable haline getirerek kullanabiliriz.
+        //veya: daha yavaş bir alternatif için convertSentAndReceive ile tek fetch
+        //vayaa: iki fetch ile postta dinlemeli bir yöntem
+
+        //KAFKA İLE rabbitteki gecikme için
+
+        for(Post post: findAll()){
+            PostFindAllResponse postFindAllResponse = new PostFindAllResponse();
+            postFindAllResponse.setId(post.getId());
+            postFindAllResponse.setUserId(post.getUserId());
+            postFindAllResponse.setUsername(post.getUsername());
+            postFindAllResponse.setName(post.getName());
+            postFindAllResponse.setSurname(post.getSurname());
+            postFindAllResponse.setContent(post.getContent());
+            postFindAllResponse.setUrl(post.getUrl());
+            postFindAllResponse.setLikeCount(post.getLikeCount());
+            postFindAllResponse.setDate(post.getDate());
+            postFindAllResponse.setTime(post.getTime());
+            Optional<LikeToPost> likeToPost = likeToPostRepository.findOptionalByPostIdAndUserId(post.getId(), userId);
+
+            if(likeToPost.isPresent()){
+                if (likeToPost.get().getStatement()== true){
+                    postFindAllResponse.setIsLiked(true);
+                }else {
+                    postFindAllResponse.setIsLiked(false);
+                }
+            }else {
+                postFindAllResponse.setIsLiked(false);
+            }
+        }
+        Page<PostFindAllResponse> myPage = new PageImpl<>(postFindAllResponses, pageable, postFindAllResponses.size());
+
+        return myPage;
     }
+
 
     public Page<Post> findAllPlus(Integer pageSize, Integer currentPage, Sort.Direction direction, String sortingParameter){
         // for kontrolü ile sayfa sayısı kontrol edilecek.
@@ -192,9 +236,17 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         }
         return likePostList;
     }
+/*
+    public Boolean createFindLikePost(ModelFindLikePost model) {
+        Long userId =  jwtTokenManager.validToken(model.getToken()).get();
+        for (LikeToPost like : likeToPostRepository.findOptionalByUserId(userId).get()) {
+            Post post = findById(like.getPostId()).get();
+            likePostList.add(post);
+        }
+        return ;
+    }
 
-
-
+*/
     /**storage
      *  baslangic
 
@@ -253,7 +305,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         }
         return yildiz.toString();
     }
-
 
 
 

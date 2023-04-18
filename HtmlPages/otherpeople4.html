@@ -167,16 +167,17 @@
     })
             .then((response)=>response.json())
             .then((response)=>{
-              if (response===true){
-                console.log("Lets go")
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+              if (response){
+                  window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+
               }
               else{
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
                 console.log(response.message)
-                alert(response.message)
               }
             })
             .catch((err) => {
+
               console.log(err)
             });
 

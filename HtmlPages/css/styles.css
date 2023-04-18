@@ -104,7 +104,6 @@ aside{
     border: none;
     background-color: var(--color7);
     height: 3px;
-    width: 75%;
 }
 .aside__home{
     display: flex;
@@ -178,6 +177,7 @@ aside{
 .main__section{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 66%;
     margin: 20px;
 }
@@ -187,7 +187,7 @@ aside{
 .pawerbox{
     padding-bottom: 10px;
     justify-content: center;
-    width: 75%;
+    width: 100%;
 
 }
 .pawerbox__input{
@@ -209,6 +209,9 @@ aside{
     width: 50%;
 }
 
+.pawerbox__btn{
+    display: flex;
+}
 .bottom-line{
     background-color: var(--color7);
     height: 2px;
@@ -238,6 +241,7 @@ aside{
 
 .md-textarea{
     height: 100px;
+    width: 60%;
     resize: none;
     padding: 20px;
     background-color: var(--color4);
@@ -346,14 +350,19 @@ aside{
 .post__date{
     margin-right: 5px;
 }
-.post__time{
-
+.post__like{
+    display: flex;
+    gap: 2px;
+}
+.post__like_img{
+    height: 25px;
+    cursor: pointer;
 }
 
 /*commentwrite*/
 .commentwrite__input img{
     border-radius: 50%;
-    height: 50px;
+    height: 30px;
 }
 
 .commentwrite{
@@ -377,14 +386,14 @@ aside{
 }
 
 .commentwrite-textarea{
-    height: 100px;
+    height: 50px;
     resize: none;
-    padding: 20px;
+    padding: 10px;
     background-color: var(--color2);
     color: var(--color7);
     flex: 1;
     margin-left: 20px;
-    font-size: 16px;
+    font-size: 12px;
     border: none;
     outline: none;
     border-radius: 10px;
@@ -408,7 +417,7 @@ aside{
     border-radius: 10px;
     width: 80px;
     height: 40px;
-    margin-top: 40px;
+    margin-top: 5px;
     margin-left: 100px;
 }
 
@@ -675,4 +684,51 @@ aside{
 
 .btn--prev {
     right: calc(100% + 20px);
+}
+
+/*profil cart baslangici *****************/
+#profilecart{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.profilecartcontainer{
+    font-family: "Sofia", sans-serif;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    border: solid;
+    border-radius: 20px;
+    width: fit-content;
+    max-width: 240px;
+    min-width: 200px;
+}
+
+
+.profilecartphoto img{
+    margin: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 200px;
+}
+
+.profilecartalltext .profilecarttitle {
+
+    margin-top: 5px;
+    text-align: center;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: black;
+}
+.profilecartalltext .profilecarttext{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+hr{
+    width: 100%;
 }

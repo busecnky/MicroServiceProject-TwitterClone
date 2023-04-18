@@ -10,10 +10,7 @@ import com.pawer.exception.EErrorType;
 import com.pawer.exception.UserException;
 import com.pawer.mapper.IPostMapper;
 import com.pawer.mapper.IUserMapper;
-import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
-import com.pawer.rabbitmq.messagemodel.ModelLikePost;
-import com.pawer.rabbitmq.messagemodel.ModelUserSave;
-import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
+import com.pawer.rabbitmq.messagemodel.*;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
 import com.pawer.repository.IUserRepository;
 import com.pawer.repository.entity.Follow;
@@ -145,6 +142,18 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         producerDirectService.sendLikePost(model);
         return dto.getStatement();
     }
+    public void findLikePost(FindPostRequestDto dto) {
+        System.out.println("*/*/*/*/*/*/*" +dto.getToken());
+
+        if (dto.getToken() == null || dto.getToken() == "") {
+            throw new UserException(EErrorType.INVALID_TOKEN);
+        }
+
+        ModelFindLikePost model = new ModelFindLikePost();
+        model.setToken(dto.getToken());
+        producerDirectService.sendFindLikePost(model);
+
+    }
 
     public Optional<User> findOptionalByUsername(String username){
         return userRepository.findOptionalByUsername(username);
@@ -170,6 +179,8 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         }
         return profileCartResponses;
     }
+
+
 
 
     /**storage

@@ -8,6 +8,7 @@ import com.pawer.repository.entity.User;
 import com.pawer.service.FollowService;
 import com.pawer.service.FollowerService;
 import com.pawer.service.UserService;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,12 +54,19 @@ public class UserController {
         System.out.println("user controller like post");
         return ResponseEntity.ok(userService.createLikePost(dto));
     }
+    @PostMapping("/findlikepost")
+    @CrossOrigin("*")
+    public ResponseEntity<Void> findLikePost(@RequestBody  FindPostRequestDto dto){
+        System.out.println("user controller find like post");
+        userService.findLikePost(dto);
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping("/follow")
     @CrossOrigin("*")
     public  ResponseEntity<Integer> followUser(@RequestBody FollowingUserRequestDto dto){
         System.out.println("takip isteği atıldı");
-        return  ResponseEntity.ok(followService.followUser(dto));
+        return ResponseEntity.ok(followService.followUser(dto));
     }
 
     @PostMapping("/acceptfollower")

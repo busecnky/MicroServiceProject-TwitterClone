@@ -9,6 +9,7 @@ import com.pawer.exception.PostException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @ControllerAdvice
@@ -31,16 +32,23 @@ public class JwtTokenManager {
         }
     }
     public Optional<Long> validToken(String token){
-        try {
-            Algorithm algorithm= Algorithm.HMAC512(sifreAnahtari);
-            JWTVerifier verifier= JWT.require(algorithm).withIssuer("pawer").build();
-            DecodedJWT decodedJWT= verifier.verify(token);
-            if (decodedJWT==null) return Optional.empty();
-            return Optional.of(decodedJWT.getClaim("id").asLong());
-
-        }catch (Exception e){
-            throw new PostException(EErrorType.INVALID_TOKEN);
+        if(token.startsWith("\"token\":")) {
+           String[] newToken = token.split("\"");
+            token = newToken[3];
         }
+        System.out.println(token);
+
+            try {
+                Algorithm algorithm = Algorithm.HMAC512(sifreAnahtari);
+                JWTVerifier verifier = JWT.require(algorithm).withIssuer("pawer").build();
+                DecodedJWT decodedJWT = verifier.verify(token);
+                if (decodedJWT == null) return Optional.empty();
+                return Optional.of(decodedJWT.getClaim("id").asLong());
+
+
+            } catch (Exception e) {
+                throw new PostException(EErrorType.INVALID_TOKEN);
+            }
 
     }
 

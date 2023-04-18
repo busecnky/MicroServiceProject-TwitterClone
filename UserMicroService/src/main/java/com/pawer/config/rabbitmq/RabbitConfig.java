@@ -18,6 +18,7 @@ public class RabbitConfig {
     private String bindingKeyUpdateUser = "binding-key-update-user";
     private String bindingKeyCreateCommentToPost= "binding-key-create-comment-to-post";
     private String bindingKeyLikePost= "binding-key-like-post";
+    private String bindingKeyFindLikePost= "binding-key-find-like-post";
 
 
 
@@ -27,6 +28,7 @@ public class RabbitConfig {
     private String queueUpdateUser= "queue-update-user";
     private String queueCreateCommentToPost= "queue-create-comment-to-post";
     private String queueLikePost= "queue-like-post";
+    private String queueFindLikePost= "queue-find-like-post";
 
 
 
@@ -70,6 +72,10 @@ public class RabbitConfig {
     Queue queueLikePost(){
         return new Queue(queueLikePost);
     }
+    @Bean
+    Queue queueFindLikePost(){
+        return new Queue(queueFindLikePost);
+    }
 
 
     /**
@@ -95,6 +101,10 @@ public class RabbitConfig {
     @Bean
     public Binding bindingLikePost(final Queue queueLikePost, final DirectExchange directExchange){
         return BindingBuilder.bind(queueLikePost).to(directExchange).with(bindingKeyLikePost);
+    }
+    @Bean
+    public Binding bindingFindLikePost(final Queue queueFindLikePost, final DirectExchange directExchange){
+        return BindingBuilder.bind(queueFindLikePost).to(directExchange).with(bindingKeyFindLikePost);
     }
 
 

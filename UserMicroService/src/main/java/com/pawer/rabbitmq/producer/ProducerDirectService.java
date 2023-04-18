@@ -1,9 +1,6 @@
 package com.pawer.rabbitmq.producer;
 
-import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
-import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
-import com.pawer.rabbitmq.messagemodel.ModelLikePost;
-import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
+import com.pawer.rabbitmq.messagemodel.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -27,6 +24,10 @@ public class ProducerDirectService {
 
     public void sendLikePost(ModelLikePost model){
         rabbitTemplate.convertAndSend("exchange-direct","binding-key-like-post",model);
+    }
+
+    public void sendFindLikePost(ModelFindLikePost model){
+        rabbitTemplate.convertAndSend("exchange-direct","binding-key-find-like-post",model);
     }
 
 

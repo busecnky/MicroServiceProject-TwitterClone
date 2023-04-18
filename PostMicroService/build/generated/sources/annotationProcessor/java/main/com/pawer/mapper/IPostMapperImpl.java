@@ -2,13 +2,12 @@ package com.pawer.mapper;
 
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.repository.entity.Post;
-import java.time.LocalDate;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-17T18:28:28+0300",
+    date = "2023-04-18T15:19:59+0300",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.1.jar, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -22,14 +21,16 @@ public class IPostMapperImpl implements IPostMapper {
 
         PostFindAllResponse.PostFindAllResponseBuilder postFindAllResponse = PostFindAllResponse.builder();
 
+        postFindAllResponse.id( post.getId() );
         postFindAllResponse.userId( post.getUserId() );
         postFindAllResponse.username( post.getUsername() );
         postFindAllResponse.name( post.getName() );
         postFindAllResponse.surname( post.getSurname() );
         postFindAllResponse.content( post.getContent() );
-        if ( post.getDate() != null ) {
-            postFindAllResponse.date( LocalDate.parse( post.getDate() ) );
-        }
+        postFindAllResponse.url( post.getUrl() );
+        postFindAllResponse.likeCount( post.getLikeCount() );
+        postFindAllResponse.date( post.getDate() );
+        postFindAllResponse.time( post.getTime() );
 
         return postFindAllResponse.build();
     }

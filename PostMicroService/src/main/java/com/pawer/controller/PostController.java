@@ -6,6 +6,8 @@ import com.pawer.dto.request.FindAllLikePostRequestDto;
 import com.pawer.dto.request.LikePostRequestDto;
 import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
+import com.pawer.dto.response.PostFindAllResponse;
+import com.pawer.rabbitmq.messagemodel.ModelFindLikePost;
 import com.pawer.repository.entity.Post;
 import com.pawer.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,19 @@ public class PostController {
 
 
 
+    @PostMapping("/findallpage")
+    @CrossOrigin("*")
+    public ResponseEntity<Page<PostFindAllResponse>> findallPage(@RequestBody BaseResponseDto dto,
+                                                                 @RequestParam(defaultValue = "10")Integer pageSize,
+                                                                 @RequestParam(defaultValue = "0") int pageNumber,
+                                                                 @RequestParam(defaultValue = "DESC") Sort.Direction direction,
+                                                                 @RequestParam(defaultValue = "createDate") String sortParameter){
+        System.out.println("Bura mı patlıyor?");
+        System.out.println("******************buse" + dto.getToken());
+
+        return ResponseEntity.ok(postService.findAllPosts(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
+    }
+    /*
     @GetMapping("/findallpage")
     @CrossOrigin("*")
     public ResponseEntity<Page<Post>> findallPage(@RequestParam(defaultValue = "10")Integer pageSize,
@@ -36,8 +51,7 @@ public class PostController {
         return ResponseEntity.ok(postService.findAll(pageSize,pageNumber,direction,sortParameter));
     }
 
-
-
+*/
     @PostMapping("/findallpageplus")
     @CrossOrigin("*")
     public ResponseEntity<Page<Post>> findallPagePlus(@RequestParam(defaultValue = "10")Integer pageSize,
