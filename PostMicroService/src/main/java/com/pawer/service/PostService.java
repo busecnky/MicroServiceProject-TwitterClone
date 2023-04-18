@@ -96,7 +96,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
                                                   Integer pageSize,
                                                   int currentPage, Sort.Direction direction,
                                                   String sortingParameter){
-        System.out.println("geliyor mu token " + token);
+        System.out.println("furkan burası geldi mi sana" + token);
         if (token == null || token == "") {
             throw new PostException(EErrorType.INVALID_TOKEN);
         }
