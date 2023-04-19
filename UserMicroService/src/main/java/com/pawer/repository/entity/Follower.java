@@ -23,6 +23,7 @@ public class Follower extends BaseEntity{
     private Long userId; // benim ıd'm
     private Long followerId; //bana takip isteği atan insanlar
     private int statee; // 0_ bana istek atmamış 1_ bana istek atmış 2_ bana attığı isteği onaylamışım ->
+    private int requestCheck; // 0_ reddet 1_ kabul et ->
 
 
 

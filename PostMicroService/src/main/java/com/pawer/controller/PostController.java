@@ -2,12 +2,12 @@ package com.pawer.controller;
 
 
 import com.pawer.dto.request.CommentToPostDto;
-import com.pawer.dto.request.FawPostRequestDto;
+import com.pawer.dto.request.FavPostRequestDto;
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.LikePostRequestDto;
 import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
-import com.pawer.dto.response.MyFawPostListResponseDto;
+import com.pawer.dto.response.MyFavPostListResponseDto;
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.repository.entity.Post;
 import com.pawer.service.PostService;
@@ -104,16 +104,16 @@ public class PostController {
         return ResponseEntity.ok(postService.findAllMyLikesList(dto));
     }
 
-    @PostMapping("/cratefawpost")
+    @PostMapping("/createfavpost")
     @CrossOrigin("*")
-    public ResponseEntity<Boolean> createLikePost(@RequestBody FawPostRequestDto dto){
-        return ResponseEntity.ok(postService.createFawPost(dto));
+    public ResponseEntity<Boolean> createLikePost(@RequestBody FavPostRequestDto dto){
+        return ResponseEntity.ok(postService.createFavPost(dto));
     }
 
-    @PostMapping("/myfawtopowlist")
+    @PostMapping("/myfavtopostlist")
     @CrossOrigin("*")
-    public ResponseEntity<List<MyFawPostListResponseDto>> myFawPostList(@RequestBody BaseRequestDto dto){
-        return ResponseEntity.ok(postService.myFawPostList(dto));
+    public ResponseEntity<List<MyFavPostListResponseDto>> myFavPostList(@RequestBody BaseRequestDto dto){
+        return ResponseEntity.ok(postService.myFavPostList(dto));
     }
 
     // public PageRequest next() {

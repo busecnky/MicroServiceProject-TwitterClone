@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MyFawPostListResponseDto {
+public class MyFavPostListResponseDto {
     @Id
     private String id;
     private Long userId;
@@ -23,7 +23,7 @@ public class MyFawPostListResponseDto {
     //private List<CommentToPost> posts;
     private String url;
     private Boolean isLiked;
-    private Boolean isFaw;
+    private Boolean isFav;
     private Integer likeCount;
     @Builder.Default
     private String date= LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

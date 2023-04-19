@@ -14,6 +14,7 @@
 ## yapilacaklar.
 * postmicro 'da servisler düzenlenecek.
 * usermicro 'da servisler düzenlenecek.
+* pagination a bi bakılacak (front düzenlenirken)
 * rabbit istekleri düzenlenecek.
   * usermicro'dan postmicroya'a atılan istekler de postmicro'ya geçirilecek.
 * dto'lar düzenlenecek.
@@ -21,6 +22,7 @@
 * ana sayfada takip ettiklerimin postları görüntülenecek.
 * keşfet eklenecek.
 * posta yorum yapanın username'i eklenecek su an id'si görünüyor.
+* gizli profil gizli olmayan profillerin postları keşfette gözükecek(en son)
 
 
 #

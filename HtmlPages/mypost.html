@@ -17,9 +17,8 @@
     <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
   </h1>
   <nav>
-    <ul>
-      <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
-      <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Contact</a></li>
+    <ul class="nav__aboutus" onclick="aboutus()">
+      <li><img  src="../HtmlPages/images/high-five.png"><a >About Us</a></li>
     </ul>
   </nav>
 </header>
@@ -30,37 +29,38 @@
 
     <section class="aside__home" onclick="homepage()">
       <img class="nav__home"  src="../HtmlPages/images/home-dark.png" alt="">
-      <label>Home</label>
+      <p>Home</p>
     </section>
 
 
     <section onclick="otherpeople()" class="aside__otherpeople">
       <img src="../HtmlPages/images/earth.png" alt="">
-      <label>People</label>
+      <p>People</p>
     </section>
-    <hr class="hr">
+
     <section onclick="mypost()" class="aside__myposts">
       <section class="aside__myposts_header">
         <img src="../HtmlPages/images/social-media.png" alt="">
-        <label>My Posts</label>
+        <p>My Posts</p>
       </section>
+
       <section class="aside__orderby">
         <section class="aside__orderby__inside">
           <img src="../HtmlPages/images/sort.png" alt="">
           <p>Order By</p>
         </section>
+
         <section class="aside__orderby__inside2">
-          <label>Create Date</label>
-          <label>Update Date</label>
+          <p>Create Date</p>
+          <p>Update Date</p>
         </section>
 
       </section>
     </section>
-    <hr class="hr">
     <section onclick="profile()" class="aside__profile">
       <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
            alt="">
-      <label>Profile</label>
+      <p>Profile</p>
     </section>
     <button onclick="logout()" class="logout">Log Out</button>
 
@@ -73,7 +73,7 @@
         <img class="mypostavatar"
              src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
              alt="">
-        <label>10 paws</label>
+        <p>10 paws</p>
       </section>
       <br>
       <hr class="bottom-line">

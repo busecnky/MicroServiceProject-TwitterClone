@@ -178,7 +178,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
         for (ProfileCartResponse responses : profileCartResponses){
             if (i<followerService.isFollower(userId).size()){
-                responses.setFollower(followerService.isFollower(userId).get(i).getStatee()==0 ? "Takip Etmiyor":(followerService.isFollower(userId).get(i).getStatee()==1 ? "Kabul Et" : "Cikart"));
+                responses.setFollower(followerService.isFollower(userId).get(i).getStatee()==0 ? "Takip Etmiyor":(followerService.isFollower(userId).get(i).getStatee()==1 ? "Cevap Bekleniyor" : "Cikart"));
             i++;
             }
         }
@@ -196,8 +196,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         findByIdResponseDto.setUsername(user.getUsername());
         return findByIdResponseDto;
     }
-
-
 
 
     /**storage

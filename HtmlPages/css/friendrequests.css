@@ -136,6 +136,8 @@ aside{
     justify-content: space-between;
     border-bottom-color: var(--color7) 3px solid;
 }
+
+
 .aside__otherpeople img{
     height: 30px;
     margin-right: 10px;
@@ -150,7 +152,6 @@ aside{
     height: 30px;
     margin-right: 10px;
 }
-
 .aside__myposts{
     display: flex;
     align-items: center;

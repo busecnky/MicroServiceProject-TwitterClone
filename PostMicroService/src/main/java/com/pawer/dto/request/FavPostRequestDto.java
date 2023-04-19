@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class FawPostRequestDto {
+public class FavPostRequestDto {
     private String token;
     private String postId;
     private Boolean statement;

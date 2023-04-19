@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @SuperBuilder
 @Document
-public class FawToPost extends BaseEntity{
+public class FavToPost extends BaseEntity{
     @Id
     private String id;
     private String postId;

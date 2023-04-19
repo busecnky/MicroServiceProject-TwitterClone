@@ -1,6 +1,8 @@
 package com.pawer.service;
 
 import com.pawer.dto.request.AcceptFollowerRequestDto;
+import com.pawer.dto.request.FindAllRequestsRequestDto;
+import com.pawer.dto.response.FindAllRequestsResponse;
 import com.pawer.repository.IFollowerRepository;
 import com.pawer.repository.entity.Follow;
 import com.pawer.repository.entity.Follower;
@@ -61,14 +63,12 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
         Optional<Follow> follow = followService.findOptionalByUserIdAndFollowId(followerUser.get().getId(), userId.get());
 
         dto.setResponseForFollowRequest(true);
-        System.out.println("----sasdas-------");
-        System.out.println(dto.getResponseForFollowRequest());
         if (follower.get().getStatee() == 0) {
             //followerRepository.save(follower.get()); //furkan dursun dedi ama buse silmek istedi
             return 0;
         } else if (follower.get().getStatee() == 1) { // gelen isteği kabul etmek & reddetmek
 
-            if (dto.getResponseForFollowRequest()) {
+            /*if (dto.getResponseForFollowRequest()) {*/
 
                 follower.get().setStatee(2);
                 update(follower.get());
@@ -76,13 +76,13 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
                 followService.update(follow.get());
                 return 2;
 
-            } else {
+           /* } else {
                 follower.get().setStatee(0);
                 update(follower.get());
                 follow.get().setFollowRequest(0);
                 followService.update(follow.get());
                 return 0;
-            }
+            }*/
 
         } else if (follower.get().getStatee() == 2) { // beni takip edeni çıkartmak
 
@@ -99,7 +99,50 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             return 3;
         }
     }
+    public Integer rejectFollower(AcceptFollowerRequestDto dto) {
 
+        Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
+        Optional<User> followerUser = userService.findOptionalByUsername(dto.getUsername());
+        Optional<Follower> follower = followerRepository.findOptionalByUserIdAndFollowerId(userId.get(), followerUser.get().getId());
+        Optional<Follow> follow = followService.findOptionalByUserIdAndFollowId(followerUser.get().getId(), userId.get());
+
+        dto.setResponseForFollowRequest(false);
+        if (follower.get().getStatee() == 0) {
+            //followerRepository.save(follower.get()); //furkan dursun dedi ama buse silmek istedi
+            return 0;
+        } else if (follower.get().getStatee() == 1) { // gelen isteği kabul etmek & reddetmek
+
+            /*if (dto.getResponseForFollowRequest()) {*/
+
+            /*  follower.get().setStatee(2);
+            update(follower.get());
+            follow.get().setFollowRequest(2);
+            followService.update(follow.get());
+            return 2;
+
+          } else {}*/
+                follower.get().setStatee(0);
+                update(follower.get());
+                follow.get().setFollowRequest(0);
+                followService.update(follow.get());
+                return 0;
+
+
+        } else if (follower.get().getStatee() == 2) { // beni takip edeni çıkartmak
+
+            follower.get().setStatee(0);
+            follower.get().setUpdateDate(LocalDateTime.now().toString());
+            followerRepository.save(follower.get());
+
+            follow.get().setFollowRequest(0);
+            follow.get().setUpdateDate(LocalDateTime.now().toString());
+            followService.save(follow.get());
+            return 0;
+
+        } else {
+            return 3;
+        }
+    }
     public Optional<Follower> findOptionalByUserIdAndFollowerId(Long userId, Long followerId) {
         return followerRepository.findOptionalByUserIdAndFollowerId(userId, followerId);
     }
@@ -115,5 +158,13 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
         }
         return Followers;
     }
+/*
+    public List<FindAllRequestsResponse> findAllRequests(FindAllRequestsRequestDto dto) {
+
+    }
+
+    public Integer findAllRequestsCount(FindAllRequestsRequestDto dto) {
+
+    }*/
 }
 

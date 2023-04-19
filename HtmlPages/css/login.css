@@ -4,7 +4,7 @@
   --color5: rgba(73, 45, 45, 0.72);
   --color4: #D0B8A8;
   --color3: #DFD3C3;
-  --color2: #c0c5d0;
+  --color2: #d0c8c0;
   --color1: #fff9f4;
 }
 
@@ -21,14 +21,32 @@ body {
   background: var(--color7);
 }
 
-input,
-button {
+input{
   border: none;
   outline: none;
   background: none;
   background-color: var(--color3);
   font-family: 'Poppins', sans-serif;
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+  border-radius: 30px;
+
 }
+button {
+  display: block;
+  margin: 0 auto;
+  width: 260px;
+  height: 30px;
+  border-radius: 30px;
+  color: var(--color1);
+  font-size: 15px;
+  cursor: pointer;
+}
+
 
 .cont {
   border-radius: 20px;
@@ -94,16 +112,7 @@ button {
   transform: translate3d(-640px, 0, 0);
 }
 
-button {
-  display: block;
-  margin: 0 auto;
-  width: 260px;
-  height: 36px;
-  border-radius: 30px;
-  color: var(--color1);
-  font-size: 15px;
-  cursor: pointer;
-}
+
 
 .img {
   overflow: hidden;
@@ -264,15 +273,6 @@ label span {
   text-transform: uppercase;
 }
 
-input {
-  display: block;
-  width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
 
 .forgot-pass {
   margin-top: 15px;
@@ -318,6 +318,7 @@ input {
   -webkit-transform: translate3d(-900px, 0, 0);
   transform: translate3d(-900px, 0, 0);
   margin-top: 0;
+  padding-top: 25px;
 }
 
 .cont.s--signup .sign-up {

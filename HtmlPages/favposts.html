@@ -201,9 +201,9 @@
     const time = document.getElementById('time');
     const id = document.getElementById('id');
     const isLiked= document.getElementById('isLiked');
-    const isFaw= document.getElementById('isFaw');
+    const isFav= document.getElementById('isFav');
 
-    const page= 'http://localhost:6160/post/myfawtopowlist';
+    const page= 'http://localhost:6160/post/myfavtopostlist';
 
     // bu metod fetch isteği ile atılacak. on click ile aktifleştirilececk
 
@@ -260,7 +260,7 @@
                                     </span>
                                 </h3>
 </div>
-                                <img id="fawicon"  onclick="fawpost(${index},${data[0][index].isFaw})" src="${data[0][index].isFaw === true ? '../HtmlPages/images/fawfill.png' :  '../HtmlPages/images/fawempty.png'}" alt="">
+                                <img id="favicon"  onclick="favpost(${index},${data[0][index].isFav})" src="${data[0][index].isFav === true ? '../HtmlPages/images/favfill.png' :  '../HtmlPages/images/favempty.png'}" alt="">
 
                             </div>
                             <div class="post__headerDescription">
@@ -366,13 +366,13 @@
             });
   }
 
-  function fawpost(index,isfaw){
-    const createfawtopost = 'http://localhost:6160/post/cratefawpost';
+  function favpost(index,isfav){
+    const createfavtopost = 'http://localhost:6160/post/createfavpost';
 
     let id = document.getElementById(index+'in').value;
     let token = sessionStorage.getItem("token");
     let statement=true;
-    if (isfaw===true){
+    if (isfav===true){
       statement= false;
     }else{
       statement=true;
@@ -384,7 +384,7 @@
       "token": token
     }
 
-    fetch(createfawtopost,{
+    fetch(createfavtopost,{
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -395,10 +395,10 @@
             .then((response)=>{
               if (response===true){
                 console.log("Lets go")
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
               }
               else{
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
 
 
               }

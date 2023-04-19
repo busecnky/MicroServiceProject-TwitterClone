@@ -4,11 +4,11 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.CommentToPostDto;
-import com.pawer.dto.request.FawPostRequestDto;
+import com.pawer.dto.request.FavPostRequestDto;
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.LikePostRequestDto;
 import com.pawer.dto.response.CommentToPostResponse;
-import com.pawer.dto.response.MyFawPostListResponseDto;
+import com.pawer.dto.response.MyFavPostListResponseDto;
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
@@ -18,7 +18,7 @@ import com.pawer.rabbitmq.messagemodel.ModelLikePost;
 import com.pawer.repository.ICommentToPostRepository;
 import com.pawer.repository.IPostRepository;
 import com.pawer.repository.entity.CommentToPost;
-import com.pawer.repository.entity.FawToPost;
+import com.pawer.repository.entity.FavToPost;
 import com.pawer.repository.entity.LikeToPost;
 import com.pawer.repository.entity.Post;
 import com.pawer.utility.JwtTokenManager;
@@ -37,7 +37,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     private final IPostRepository postrepository;
     private final JwtTokenManager jwtTokenManager;
     private final ICommentToPostRepository commentToPostRepository;
-    private final FawToPostService fawToPostService;
+    private final FavToPostService favToPostService;
     private final LikeToPostService likeToPostService;
 
     //    @Value("${myproject.google.storage.bucketname}")
@@ -50,12 +50,12 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     int a=0;
 
-    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, ICommentToPostRepository commentToPostRepository, FawToPostService fawToPostService, LikeToPostService likeToPostService) {
+    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, ICommentToPostRepository commentToPostRepository, FavToPostService favToPostService, LikeToPostService likeToPostService) {
         super(postrepository);
         this.postrepository = postrepository;
         this.jwtTokenManager = jwtTokenManager;
         this.commentToPostRepository = commentToPostRepository;
-        this.fawToPostService = fawToPostService;
+        this.favToPostService = favToPostService;
         this.likeToPostService = likeToPostService;
     }
 
@@ -117,7 +117,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
             postFindAllResponse.setLikeCount(post.getLikeCount());
             postFindAllResponse.setDate(post.getDate());
             postFindAllResponse.setTime(post.getTime());
-            postFindAllResponse.setIsFaw(fawToPostService.findFawToPostBoolean(post.getId(),userId));
+            postFindAllResponse.setIsFav(favToPostService.findFavToPostBoolean(post.getId(),userId));
             postFindAllResponse.setIsLiked(likeToPostService.findByPostIdAndUserIdBoolean(post.getId(), userId));
             postFindAllResponses.add(postFindAllResponse);
         }
@@ -172,15 +172,15 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return comments;
 
     }
-    public Boolean createFawPost(FawPostRequestDto dto) {
+    public Boolean createFavPost(FavPostRequestDto dto) {
         Long userId= jwtTokenManager.validToken(dto.getToken()).get();
-        Optional<FawToPost> fawToPost= fawToPostService.findFawToPost(dto.getPostId(), userId);
-        if (fawToPost.isPresent()){
-                fawToPost.get().setStatement(dto.getStatement());
-                fawToPostService.save(fawToPost.get());
+        Optional<FavToPost> favToPost= favToPostService.findFavToPost(dto.getPostId(), userId);
+        if (favToPost.isPresent()){
+                favToPost.get().setStatement(dto.getStatement());
+                favToPostService.save(favToPost.get());
                 return dto.getStatement();
         }else {
-            fawToPostService.save(FawToPost.builder()
+            favToPostService.save(FavToPost.builder()
                             .userId(userId)
                             .postId(dto.getPostId())
                             .statement(dto.getStatement())
@@ -231,48 +231,41 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return likePostList;
     }
 
-    public List<MyFawPostListResponseDto> myFawPostList(BaseRequestDto dto){
+    public List<MyFavPostListResponseDto> myFavPostList(BaseRequestDto dto){
         Long userId=jwtTokenManager.validToken(dto.getToken()).get();
 
-        Optional<List<FawToPost>>  fawToPosts= fawToPostService.findAllFawToPost(userId);
-        List<MyFawPostListResponseDto> myFawPostListResponseDtos =new ArrayList<>();
-        System.out.println("userıd **** "+userId);
+        Optional<List<FavToPost>>  favToPosts= favToPostService.findAllFavToPost(userId);
+        List<MyFavPostListResponseDto> myFavPostListResponseDtos =new ArrayList<>();
 
-        System.out.println("list ******"+fawToPosts.get().toString());
-        if (fawToPosts.get()!=null){
+        if (favToPosts.get()!=null){
             System.out.println("\n\n\nvar ise girilen yer 243");
-            for (FawToPost fawToPost: fawToPosts.get()){
-                if (fawToPost.getStatement()==true){
+            for (FavToPost favToPost : favToPosts.get()){
+                if (favToPost.getStatement()==true){
 
-                System.out.println("for ici hemen 245");
-                MyFawPostListResponseDto myFawPostListResponseDto= new MyFawPostListResponseDto();
-                System.out.println("new sonrası");
-                System.out.println(fawToPost.getId());
-                System.out.println(fawToPost.getPostId());
-                Post postt = findById(fawToPost.getPostId()).get();
-                System.out.println("246");
-                myFawPostListResponseDto.setContent(postt.getContent());
-                myFawPostListResponseDto.setIsFaw(fawToPost.getStatement());
-                myFawPostListResponseDto.setName(postt.getName());
-                myFawPostListResponseDto.setDate(postt.getDate());
-                System.out.println("250");
-                myFawPostListResponseDto.setTime(postt.getTime());
-                myFawPostListResponseDto.setUrl(postt.getUrl());
-                myFawPostListResponseDto.setSurname(postt.getSurname());
-                myFawPostListResponseDto.setUsername(postt.getUsername());
-                myFawPostListResponseDto.setId(postt.getId());
-                myFawPostListResponseDto.setIsLiked(likeToPostService.findByPostIdAndUserIdBoolean(postt.getId(),userId));
-                myFawPostListResponseDto.setLikeCount(postt.getLikeCount());
-                myFawPostListResponseDto.setUserId(postt.getUserId());
-                myFawPostListResponseDtos.add(myFawPostListResponseDto);
+               
+                MyFavPostListResponseDto myFavPostListResponseDto= new MyFavPostListResponseDto();
+                Post postt = findById(favToPost.getPostId()).get();
+                myFavPostListResponseDto.setContent(postt.getContent());
+                myFavPostListResponseDto.setIsFav(favToPost.getStatement());
+                myFavPostListResponseDto.setName(postt.getName());
+                myFavPostListResponseDto.setDate(postt.getDate());
+                myFavPostListResponseDto.setTime(postt.getTime());
+                myFavPostListResponseDto.setUrl(postt.getUrl());
+                myFavPostListResponseDto.setSurname(postt.getSurname());
+                myFavPostListResponseDto.setUsername(postt.getUsername());
+                myFavPostListResponseDto.setId(postt.getId());
+                myFavPostListResponseDto.setIsLiked(likeToPostService.findByPostIdAndUserIdBoolean(postt.getId(),userId));
+                myFavPostListResponseDto.setLikeCount(postt.getLikeCount());
+                myFavPostListResponseDto.setUserId(postt.getUserId());
+                myFavPostListResponseDtos.add(myFavPostListResponseDto);
                 }
             }
             System.out.println("for cikisi");
-            System.out.println(myFawPostListResponseDtos.toString());
-            return myFawPostListResponseDtos;
+            System.out.println(myFavPostListResponseDtos.toString());
+            return myFavPostListResponseDtos;
         }
         System.out.println("en alt return oncesi");
-        return myFawPostListResponseDtos;
+        return myFavPostListResponseDtos;
     }
 /*
     public Boolean createFindLikePost(ModelFindLikePost model) {

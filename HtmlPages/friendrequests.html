@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="css/otherpeople.css">
+  <link rel="stylesheet" href="css/friendrequests.css">
 
 </head>
 <body>
@@ -24,7 +24,6 @@
 <main>
 
   <aside>
-    <hr class="hr">
     <section class="aside__home">
       <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
       <label>Home</label>
@@ -32,22 +31,23 @@
 
 
     <section onclick="otherpeople4()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/pet-care.png" alt="">
+      <img src="../HtmlPages/images/earth.png" alt="">
       <label>People4</label>
     </section>
 
     <section onclick="friendRequest()" class="aside__friendrequest">
-      <img src="../HtmlPages/images/earth.png" alt="">
+      <img src="../HtmlPages/images/pet-care.png" alt="">
       <p>Friend Requests</p>
     </section>
+
     <section onclick="mypost()" class="aside__myposts">
       <img src="../HtmlPages/images/social-media.png" alt="">
       <label>My Posts</label>
     </section>
 
-    <section onclick="favpostpage()" class="aside__myposts">
+    <section onclick="fawpostpage()" class="aside__myposts">
       <img src="../HtmlPages/images/social-media.png" alt="">
-      <label>Fav Posts </label>
+      <label>Faw Posts </label>
     </section>
 
 
@@ -84,9 +84,11 @@
   function mypost(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
   }
-
-  function favpostpage(){
-    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
+  function otherpeople(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
+  }
+  function fawpostpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/fawposts.html';
   }
 
   function friendRequest(){
