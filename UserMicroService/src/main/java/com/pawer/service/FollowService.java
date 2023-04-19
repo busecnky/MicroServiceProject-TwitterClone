@@ -33,10 +33,9 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
 
     public void createFollowForNewUser(Long userId )  {
         int i = 0;
+        System.out.println("follow service threadler kafasına göre calismadi sout ekleyince calisti o yüzden eklendi");
         while ( i <= userService.findAll().size()-1) {
-
             if ( userService.findAll().get(i).getId() == userId || userService.findAll().size()==0){
-
             }else  {
                 Follow follow = new Follow(); // yeni eklenen kişi icin eski kisiler ile olan takiplesme
                 Follow follow1= new Follow(); // eski kisiler icin yeni kisi ile olan takiplesme
@@ -55,9 +54,7 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
 
 
     public Integer followUser(FollowingUserRequestDto dto) {
-        System.out.println("follow servis follosuser metoduna geldi");
-        System.out.println("dto ici username: "+ dto.getUsername());
-        System.out.println("dto ici token"+ dto.getToken());
+
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
         Optional<User> followUser = userService.findOptionalByUsername(dto.getUsername());
         Optional<Follow> follow = followRepository.findOptionalByUserIdAndFollowId(userId.get(), followUser.get().getId());
@@ -86,13 +83,13 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
     }
 
     //ben karttaki kullanıcıyı takip ediyor muyum?
-    public List<Follow> isFollow(Long userid){
+    public Optional<List<Follow>> isFollow(Long userid){
         List<User> users= userService.findAll();
-        List<Follow> follows= new ArrayList<>();
+        Optional<List<Follow>> follows= Optional.of(new ArrayList<>());
         for(User user:users){
             if (user.getId()!=userid){
                 Follow follow = followRepository.findOptionalByUserIdAndFollowId(userid,user.getId()).get();
-                follows.add(follow);
+                follows.get().add(follow);
             }
 
         }

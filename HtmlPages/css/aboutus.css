@@ -4,12 +4,12 @@
     --color5: #85586F;
     --color4: #D0B8A8;
     --color3: #DFD3C3;
-    --color2: #F8EDE3;
+    --color2: #f3bf02;
     --color1: #fff9f4;
 }
 .dark-theme{
     --color1: #f30505; /*yok */
-    --color2: #232323; /*body tamami */
+    --color2: #cecac4; /*body tamami */
     --color3: rgba(185, 164, 142, 0.65); /*header */
     --color4: #646464; /*post arka plani */
     --color5: #ea0808; /*yok */

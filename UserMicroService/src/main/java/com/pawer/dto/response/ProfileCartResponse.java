@@ -15,6 +15,7 @@ public class ProfileCartResponse {
     private Integer postCount;
     private String avatar;
     private String follow;
+    private String follower;
 
 
 }

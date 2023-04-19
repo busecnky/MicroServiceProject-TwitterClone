@@ -1,15 +1,16 @@
 :root{
     --color7: #312d2e;
-    --color6: #f5f5f5;
+    --color6: #c7c7c7;
     --color5: #85586F;
     --color4: #D0B8A8;
     --color3: #DFD3C3;
     --color2: #F8EDE3;
     --color1: #fff9f4;
 }
+
 .dark-theme{
     --color1: #f30505; /*yok */
-    --color2: #232323; /*body tamami */
+    --color2: #e38e8e; /*body tamami */
     --color3: rgba(185, 164, 142, 0.65); /*header */
     --color4: #646464; /*post arka plani */
     --color5: #ea0808; /*yok */
@@ -20,13 +21,14 @@
     color: var(--color6);
 }
 
+
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
 }
-
 
 
 body{
@@ -285,6 +287,7 @@ aside{
     padding-bottom: 10px;
     padding-top: 10px;
 
+
 }
 
 .post__body{
@@ -294,6 +297,7 @@ aside{
     10px 10px 15px rgba(70, 70, 70, 0.15),
     inset -10px -10px 15px rgba(255, 255, 255, 0.3),
     inset 10px 10px 15px rgba(70, 70, 70, 0.15);
+    width: 500px;
 }
 
 .post__footer{
@@ -316,6 +320,15 @@ aside{
 .post__headerText {
   display: flex;
     align-items: center;
+}
+#fawicon{
+ width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+}
+.divforh3{
+    width: 80%;
 }
 .post__headerText h3{
     font-size: 20px;
@@ -384,6 +397,16 @@ aside{
     font-size: 16px;
 
 }
+.commenttext_avatar p{
+    flex-wrap: wrap;
+    font-weight: bold;
+    color: #020259;
+    width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+}
 
 .commentwrite-textarea{
     height: 50px;
@@ -397,9 +420,9 @@ aside{
     border: none;
     outline: none;
     border-radius: 10px;
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
+    box-shadow: -10px -10px 15px rgba(37, 43, 87, 0.39),
     10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
+    inset -10px -10px 15px rgba(89, 86, 35, 0.3),
     inset 10px 10px 15px rgba(70, 70, 70, 0.15);
 
 }

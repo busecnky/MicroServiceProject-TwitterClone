@@ -36,7 +36,6 @@ public class JwtTokenManager {
            String[] newToken = token.split("\"");
             token = newToken[3];
         }
-        System.out.println(token);
 
             try {
                 Algorithm algorithm = Algorithm.HMAC512(sifreAnahtari);

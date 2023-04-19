@@ -40,32 +40,33 @@ public class UserController {
         return ResponseEntity.ok(userService.findByIdFromToken(dto));
     }
 
+    @PostMapping("/findme")
+    @CrossOrigin("*")
+    public ResponseEntity<FindByIdResponseDto> findMe(@RequestBody FindByIdRequestDto dto){
+        return ResponseEntity.ok(userService.findMe(dto));
+    }
     @PostMapping("/createcommenttopost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createCommentToPost(@RequestBody CommentToPostDto dto){
-        System.out.println("user controller create comment");
-        System.out.println("dto nun post id'si"+dto.getPostId());
+
         return ResponseEntity.ok(userService.createCommentToPost(dto));
     }
 
     @PostMapping("/createlikepost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createLikePost(@RequestBody LikePostRequestDto dto){
-        System.out.println("user controller like post");
         return ResponseEntity.ok(userService.createLikePost(dto));
     }
     @PostMapping("/findlikepost")
     @CrossOrigin("*")
     public ResponseEntity<Void> findLikePost(@RequestBody  FindPostRequestDto dto){
-        System.out.println("user controller find like post");
-        userService.findLikePost(dto);
+       // userService.findLikePost(dto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/follow")
     @CrossOrigin("*")
     public  ResponseEntity<Integer> followUser(@RequestBody FollowingUserRequestDto dto){
-        System.out.println("takip isteği atıldı");
         return ResponseEntity.ok(followService.followUser(dto));
     }
 
@@ -85,7 +86,7 @@ public class UserController {
     @PostMapping("/findallcarts")
     @CrossOrigin("*")
     public ResponseEntity<List<ProfileCartResponse>> findAllForUserCart(@RequestBody ProfileCartRequestDto dto){
-        System.out.println("sadasdasdasdasdasdasd ->>> "+dto.getToken());
+        System.out.println(dto.getToken());
         return ResponseEntity.ok(userService.isFollow(dto));
     }
 

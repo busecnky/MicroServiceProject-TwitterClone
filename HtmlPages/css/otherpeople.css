@@ -6,7 +6,7 @@
     --color5: #85586F;
     --color4: #D0B8A8;
     --color3: #DFD3C3;
-    --color2: #F8EDE3;
+    --color2: #d3cfcc;
     --color1: #fff9f4;
 }
 .dark-theme{
@@ -103,7 +103,7 @@ aside{
     align-items: center;
     position: static;
     gap: 25px;
-    width: 900px;
+    width: 17%;
     border-radius: 10px;
     box-shadow: -10px -10px 15px rgba(152, 150, 150, 0.282),
     10px 10px 15px rgba(70, 70, 70, 0.15);
@@ -207,7 +207,7 @@ aside{
     font-family: "Sofia", sans-serif;
     background-color: rgb(245, 245, 245);
     border-radius: 20px;
-    width: 650px;
+    width: 430px;
     height: 160px;
     margin-left: 0px;
     margin-right: 10px;
@@ -250,8 +250,9 @@ aside{
 
 .btn {
     border: none;
-    padding: 0.8em 1.9em;
-    border-radius: 0.35rem;
+    margin-top: 12px;
+    padding: 11px 18px;
+    border-radius: 7px;
     cursor: pointer;
     font-weight: 600;
 }
@@ -265,8 +266,8 @@ aside{
     color: white;
 }
 .btn-green {
-    background: #2cb41e;
-    color: #fdfbfb;
+    background: rgba(18, 140, 8, 0.78);
+    color: #ffffff;
 }
 .btn-gray{
     background: rgba(206, 203, 203, 0.6);

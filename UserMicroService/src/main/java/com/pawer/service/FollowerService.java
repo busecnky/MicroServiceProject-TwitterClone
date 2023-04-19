@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,6 +60,9 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
         Optional<Follower> follower = followerRepository.findOptionalByUserIdAndFollowerId(userId.get(), followerUser.get().getId());
         Optional<Follow> follow = followService.findOptionalByUserIdAndFollowId(followerUser.get().getId(), userId.get());
 
+        dto.setResponseForFollowRequest(true);
+        System.out.println("----sasdas-------");
+        System.out.println(dto.getResponseForFollowRequest());
         if (follower.get().getStatee() == 0) {
             //followerRepository.save(follower.get()); //furkan dursun dedi ama buse silmek istedi
             return 0;
@@ -98,6 +103,17 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
     public Optional<Follower> findOptionalByUserIdAndFollowerId(Long userId, Long followerId) {
         return followerRepository.findOptionalByUserIdAndFollowerId(userId, followerId);
     }
+    public List<Follower> isFollower(Long userid){
+        List<User> users= userService.findAll();
+        List<Follower> Followers= new ArrayList<>();
+        for(User user:users){
+            if (user.getId()!=userid){
+                Follower Follower = followerRepository.findOptionalByUserIdAndFollowerId(userid,user.getId()).get();
+                Followers.add(Follower);
+            }
 
+        }
+        return Followers;
+    }
 }
 

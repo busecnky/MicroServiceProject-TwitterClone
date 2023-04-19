@@ -25,6 +25,7 @@ public class PostFindAllResponse {
     //private List<CommentToPost> posts;
     private String url;
     private Boolean isLiked;
+    private Boolean isFaw;
     private Integer likeCount;
     @Builder.Default
     private String date=LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ConsumerPostLikePost {
     private final PostService postService;
-/*
-    @RabbitListener(queues= "queue-find-like-post")
-    public void createFindlikePost(ModelFindLikePost model){
-         postService.findAll(model);
-    }
-*/
+
+//    @RabbitListener(queues= "queue-find-like-post")
+//    public void createFindlikePost(ModelFindLikePost model){
+//         postService.findAll(model);
+//    }
+
 
 }

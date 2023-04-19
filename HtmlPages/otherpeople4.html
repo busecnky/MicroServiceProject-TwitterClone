@@ -41,12 +41,27 @@
       <img src="../HtmlPages/images/earth.png" alt="">
       <label>People2</label>
     </section>
+    <section onclick="otherpeople3()" class="aside__otherpeople">
+      <img src="../HtmlPages/images/earth.png" alt="">
+      <label>People3</label>
+    </section>
 
+    <section onclick="otherpeople4()" class="aside__otherpeople">
+      <img src="../HtmlPages/images/earth.png" alt="">
+      <label>People4</label>
+    </section>
 
     <section onclick="mypost()" class="aside__myposts">
       <img src="../HtmlPages/images/social-media.png" alt="">
       <label>My Posts</label>
     </section>
+
+    <section onclick="fawpostpage()" class="aside__myposts">
+      <img src="../HtmlPages/images/social-media.png" alt="">
+      <label>Faw Posts </label>
+    </section>
+
+
 
     <section onclick="profile()" class="aside__profile">
       <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
@@ -67,6 +82,49 @@
 </main>
 <script>
   window.addEventListener('load', getProfileCart);
+
+
+  function profile(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/profile.html';
+  }
+
+  function homepage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+  }
+
+  function mypost(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+  }
+  function otherpeople(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
+  }
+  function fawpostpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/fawposts.html';
+  }
+
+
+  function otherpeople2(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople2.html';
+  }
+
+  function otherpeople3(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople3.html';
+  }
+
+  function otherpeople4(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+  }
+
+  function aboutus(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/aboutus.html';
+  }
+
+  function logout(){
+    sessionStorage.setItem("token", null);
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
+  }
+
+
 
 
   function getProfileCart() {
@@ -104,13 +162,8 @@
         },
         body: JSON.stringify(data2)
         ,
-      }),
-      fetch(urlpost, {
-        method: 'GET',
-        headers: {
-          "Content-Type": "application/json",
-        },
       })
+
     ])
             .then(responses => Promise.all(responses.map(response => response.json())))
             .then(data => { console.log(data[0]), console.log(data[1])
@@ -129,9 +182,9 @@
           <h5 >java web</h5>
          <h5 >123235 posts</h5>
 
-        <button class="btn btn-pink" >beni takip ediyor mu</button>
+        <button class="btn btn-pink"  onclick="acceptfollowrequest(${index})" >${data[0][index].follower}</button>
 
-<input value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
+<input hidden="hidden" value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
  <button id="followwbtn" class="btn ${data[0][index].follow === 'Takip Et' ? 'btn-blue' : (data[0][index].follow === 'İstek Gönderildi' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
 </div>
       </div>
@@ -150,9 +203,7 @@
 
   function followbtn(index){
     const token = sessionStorage.getItem("token");
-
     let username = document.getElementById(index+'in').value;
-
     const data = {
       "username" : username,
       "token": token
@@ -180,9 +231,39 @@
 
               console.log(err)
             });
-
   }
 
+  function acceptfollowrequest(index){
+    const token = sessionStorage.getItem("token");
+    let username = document.getElementById(index+'in').value;
+    const data = {
+      "username" : username,
+      "token": token
+    }
+
+    fetch("http://localhost:6260/user/acceptfollower",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response){
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+
+              }
+              else{
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+                console.log(response.message)
+              }
+            })
+            .catch((err) => {
+
+              console.log(err)
+            });
+  }
 
 
 </script>

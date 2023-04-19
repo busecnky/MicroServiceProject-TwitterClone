@@ -14,6 +14,7 @@ import com.pawer.rabbitmq.messagemodel.*;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
 import com.pawer.repository.IUserRepository;
 import com.pawer.repository.entity.Follow;
+import com.pawer.repository.entity.Follower;
 import com.pawer.repository.entity.User;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
@@ -139,45 +140,61 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         model.setToken(dto.getToken());
         model.setPostId(dto.getPostId());
         model.setStatement(dto.getStatement());
+
         producerDirectService.sendLikePost(model);
         return dto.getStatement();
     }
-    public void findLikePost(FindPostRequestDto dto) {
-        System.out.println("*/*/*/*/*/*/*" +dto.getToken());
 
-        if (dto.getToken() == null || dto.getToken() == "") {
-            throw new UserException(EErrorType.INVALID_TOKEN);
-        }
-
-        ModelFindLikePost model = new ModelFindLikePost();
-        model.setToken(dto.getToken());
-        producerDirectService.sendFindLikePost(model);
-
-    }
 
     public Optional<User> findOptionalByUsername(String username){
         return userRepository.findOptionalByUsername(username);
     }
 
 
-    //ben karttaki kullanıcıyı takip ediyor muyum?
+
     public List<ProfileCartResponse> isFollow(ProfileCartRequestDto dto){
         Long userId= jwtTokenManager.validToken(dto.getToken()).get();
-        List<Follow> follows= followService.isFollow(userId);         // beni 0 takip etmiyor, 1 bana takip isteği atmış,2 beni takip ediyor
+        Optional<List<Follow>> follows= followService.isFollow(userId);         // beni 0 takip etmiyor, 1 bana takip isteği atmış,2 beni takip ediyor
         List<ProfileCartResponse>  profileCartResponses = new ArrayList<>();
-        for (Follow f: follows){
+        ProfileCartResponse profileCartResponse = new ProfileCartResponse();
+        int i=0;
+        if (follows.isPresent()){
+        for (Follow f: follows.get()){
+            profileCartResponse= new ProfileCartResponse();
             User user = findById(f.getFollowId()).get();
-            ProfileCartResponse profileCartResponse= new ProfileCartResponse();
             profileCartResponse.setJob(user.getJob());
             profileCartResponse.setAvatar(user.getAvatar());
             profileCartResponse.setName(user.getName());
             profileCartResponse.setSurname(user.getSurname());
             profileCartResponse.setUsername(user.getUsername());
             profileCartResponse.setPostCount(0);
+            //ben karttaki kullanıcıyı takip ediyor muyum?
             profileCartResponse.setFollow(f.getFollowRequest()==0 ? "Takip Et" : (f.getFollowRequest()==1 ? "İstek Gönderildi" : "Takiptesin") );
             profileCartResponses.add(profileCartResponse);
+
+        }
+
+          //  profileCartResponse.setFollower(follower.getStatee()==0 ? "Takip Etmiyor":(follower.getStatee()==1 ? "Kabul Et" : "Cikart"));
+
+        for (ProfileCartResponse responses : profileCartResponses){
+            if (i<followerService.isFollower(userId).size()){
+                responses.setFollower(followerService.isFollower(userId).get(i).getStatee()==0 ? "Takip Etmiyor":(followerService.isFollower(userId).get(i).getStatee()==1 ? "Kabul Et" : "Cikart"));
+            i++;
+            }
+        }
+
         }
         return profileCartResponses;
+    }
+    public FindByIdResponseDto findMe(FindByIdRequestDto dto){
+        Optional<Long> userId= jwtTokenManager.validToken(dto.getToken());
+        User user=findById(userId.get()).get();
+        FindByIdResponseDto findByIdResponseDto= new FindByIdResponseDto();
+        findByIdResponseDto.setName(user.getName());
+        findByIdResponseDto.setSurname(user.getSurname());
+        findByIdResponseDto.setAge(user.getAge());
+        findByIdResponseDto.setUsername(user.getUsername());
+        return findByIdResponseDto;
     }
 
 

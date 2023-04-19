@@ -4,26 +4,25 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
 import com.pawer.dto.request.CommentToPostDto;
-import com.pawer.dto.request.FindAllLikePostRequestDto;
+import com.pawer.dto.request.FawPostRequestDto;
+import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.LikePostRequestDto;
-import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
+import com.pawer.dto.response.MyFawPostListResponseDto;
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
 import com.pawer.rabbitmq.messagemodel.ModelCreateCommentToPost;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
-import com.pawer.rabbitmq.messagemodel.ModelFindLikePost;
 import com.pawer.rabbitmq.messagemodel.ModelLikePost;
 import com.pawer.repository.ICommentToPostRepository;
-import com.pawer.repository.ILikePostRepository;
 import com.pawer.repository.IPostRepository;
 import com.pawer.repository.entity.CommentToPost;
+import com.pawer.repository.entity.FawToPost;
 import com.pawer.repository.entity.LikeToPost;
 import com.pawer.repository.entity.Post;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -38,10 +37,11 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     private final IPostRepository postrepository;
     private final JwtTokenManager jwtTokenManager;
     private final ICommentToPostRepository commentToPostRepository;
-    private final ILikePostRepository likeToPostRepository;
-    @Value("${myproject.google.storage.bucketname}")
-    private String bucketname;
+    private final FawToPostService fawToPostService;
+    private final LikeToPostService likeToPostService;
 
+    //    @Value("${myproject.google.storage.bucketname}")
+//    private String bucketname;
 //    @Getter
 //    @Autowired
 //    Storage storage;
@@ -50,12 +50,13 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     int a=0;
 
-    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, ICommentToPostRepository commentToPostRepository, ILikePostRepository likeToPostRepository) {
+    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, ICommentToPostRepository commentToPostRepository, FawToPostService fawToPostService, LikeToPostService likeToPostService) {
         super(postrepository);
         this.postrepository = postrepository;
         this.jwtTokenManager = jwtTokenManager;
         this.commentToPostRepository = commentToPostRepository;
-        this.likeToPostRepository = likeToPostRepository;
+        this.fawToPostService = fawToPostService;
+        this.likeToPostService = likeToPostService;
     }
 
 
@@ -67,6 +68,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
                 .content(modelCreatePost.getContent())
                 .name(modelCreatePost.getName())
                 .username(modelCreatePost.getUsername())
+                .likeCount(0)
               .build();
         save(post);
 
@@ -96,20 +98,12 @@ public class PostService extends ServiceManagerImpl<Post,String> {
                                                   Integer pageSize,
                                                   int currentPage, Sort.Direction direction,
                                                   String sortingParameter){
-        System.out.println("furkan burası geldi mi sana" + token);
         if (token == null || token == "") {
             throw new PostException(EErrorType.INVALID_TOKEN);
         }
-        System.out.println("jwtye geliyor mu?");
         Long userId = jwtTokenManager.validToken(token).get();
-        System.out.println("jwtye geliyorsa --->" + userId);
         Pageable pageable = PageRequest.of(currentPage,  pageSize ,Sort.by(direction, sortingParameter) );
         List<PostFindAllResponse> postFindAllResponses = new ArrayList<>();
-//FURKAN:  rabbitdekileri düzelterek bu metodu pageable haline getirerek kullanabiliriz.
-        //veya: daha yavaş bir alternatif için convertSentAndReceive ile tek fetch
-        //vayaa: iki fetch ile postta dinlemeli bir yöntem
-
-        //KAFKA İLE rabbitteki gecikme için
 
         for(Post post: findAll()){
             PostFindAllResponse postFindAllResponse = new PostFindAllResponse();
@@ -123,17 +117,9 @@ public class PostService extends ServiceManagerImpl<Post,String> {
             postFindAllResponse.setLikeCount(post.getLikeCount());
             postFindAllResponse.setDate(post.getDate());
             postFindAllResponse.setTime(post.getTime());
-            Optional<LikeToPost> likeToPost = likeToPostRepository.findOptionalByPostIdAndUserId(post.getId(), userId);
-
-            if(likeToPost.isPresent()){
-                if (likeToPost.get().getStatement()== true){
-                    postFindAllResponse.setIsLiked(true);
-                }else {
-                    postFindAllResponse.setIsLiked(false);
-                }
-            }else {
-                postFindAllResponse.setIsLiked(false);
-            }
+            postFindAllResponse.setIsFaw(fawToPostService.findFawToPostBoolean(post.getId(),userId));
+            postFindAllResponse.setIsLiked(likeToPostService.findByPostIdAndUserIdBoolean(post.getId(), userId));
+            postFindAllResponses.add(postFindAllResponse);
         }
         Page<PostFindAllResponse> myPage = new PageImpl<>(postFindAllResponses, pageable, postFindAllResponses.size());
 
@@ -156,10 +142,10 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return postrepository.findAll(pageable);
     }
 
-    public  Page<Post> findByToken(String token,
-                                             Integer pageSize,
-                                             int currentPage, Sort.Direction direction,
-                                             String sortingParameter){
+    public  Page<Post> myPost(String token,
+                              Integer pageSize,
+                              int currentPage, Sort.Direction direction,
+                              String sortingParameter){
         Long userid = jwtTokenManager.validToken(token).get();
         Pageable pageable = PageRequest.of(currentPage,  pageSize ,Sort.by(direction, sortingParameter) );
         return postrepository.findByUserId(userid,pageable);
@@ -186,38 +172,46 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return comments;
 
     }
-
+    public Boolean createFawPost(FawPostRequestDto dto) {
+        Long userId= jwtTokenManager.validToken(dto.getToken()).get();
+        Optional<FawToPost> fawToPost= fawToPostService.findFawToPost(dto.getPostId(), userId);
+        if (fawToPost.isPresent()){
+                fawToPost.get().setStatement(dto.getStatement());
+                fawToPostService.save(fawToPost.get());
+                return dto.getStatement();
+        }else {
+            fawToPostService.save(FawToPost.builder()
+                            .userId(userId)
+                            .postId(dto.getPostId())
+                            .statement(dto.getStatement())
+                    .build());
+            return dto.getStatement();
+        }
+    }
     public void createLikePost(ModelLikePost model) {
         Long modelUserId = jwtTokenManager.validToken(model.getToken()).get();
-        Optional<LikeToPost> likeToPost = likeToPostRepository.findOptionalByPostIdAndUserId(model.getPostId(), modelUserId);
-
+        Optional<LikeToPost> likeToPost = likeToPostService.findByPostIdAndUserId(model.getPostId(), modelUserId);
         Optional<Post> post = findById(model.getPostId());
 
             if (likeToPost.isPresent()){
                 if(model.getStatement() == true){
-                    post.get().setLikeCount(post.get().getLikeCount()+1);
-                    save(post.get());
-
+                        post.get().setLikeCount(post.get().getLikeCount()+1);
+                        save(post.get());
                 }else {
                     post.get().setLikeCount(post.get().getLikeCount()-1);
                     save(post.get());
-
                 }
-                likeToPost.get().setStatement(model.getStatement());
-                likeToPostRepository.save(likeToPost.get());
-
+                    likeToPost.get().setStatement(model.getStatement());
+                    likeToPostService.save(likeToPost.get());
             }else {
-                likeToPostRepository.save(LikeToPost.builder()
+                likeToPostService.save(LikeToPost.builder()
                         .postId(model.getPostId())
                         .userId(modelUserId)
                         .statement(model.getStatement())
                         .build());
                 post.get().setLikeCount(post.get().getLikeCount()+1);
                 save(post.get());
-
             }
-
-
     }
 
     public Integer likePostCount(LikePostRequestDto dto) {
@@ -227,14 +221,58 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         Optional<Post> post = findById(dto.getPostId());
         return post.get().getLikeCount();
     }
-    public List<Post> findAllMyLikesList(FindAllLikePostRequestDto dto) {
+    public List<Post> findAllMyLikesList(BaseRequestDto dto) {
         Long userId =  jwtTokenManager.validToken(dto.getToken()).get();
         List<Post> likePostList= new ArrayList<>();
-        for (LikeToPost like : likeToPostRepository.findOptionalByUserId(userId).get()) {
+        for (LikeToPost like : likeToPostService.findByUserIdList(userId).get()) {
             Post post = findById(like.getPostId()).get();
             likePostList.add(post);
         }
         return likePostList;
+    }
+
+    public List<MyFawPostListResponseDto> myFawPostList(BaseRequestDto dto){
+        Long userId=jwtTokenManager.validToken(dto.getToken()).get();
+
+        Optional<List<FawToPost>>  fawToPosts= fawToPostService.findAllFawToPost(userId);
+        List<MyFawPostListResponseDto> myFawPostListResponseDtos =new ArrayList<>();
+        System.out.println("userıd **** "+userId);
+
+        System.out.println("list ******"+fawToPosts.get().toString());
+        if (fawToPosts.get()!=null){
+            System.out.println("\n\n\nvar ise girilen yer 243");
+            for (FawToPost fawToPost: fawToPosts.get()){
+                if (fawToPost.getStatement()==true){
+
+                System.out.println("for ici hemen 245");
+                MyFawPostListResponseDto myFawPostListResponseDto= new MyFawPostListResponseDto();
+                System.out.println("new sonrası");
+                System.out.println(fawToPost.getId());
+                System.out.println(fawToPost.getPostId());
+                Post postt = findById(fawToPost.getPostId()).get();
+                System.out.println("246");
+                myFawPostListResponseDto.setContent(postt.getContent());
+                myFawPostListResponseDto.setIsFaw(fawToPost.getStatement());
+                myFawPostListResponseDto.setName(postt.getName());
+                myFawPostListResponseDto.setDate(postt.getDate());
+                System.out.println("250");
+                myFawPostListResponseDto.setTime(postt.getTime());
+                myFawPostListResponseDto.setUrl(postt.getUrl());
+                myFawPostListResponseDto.setSurname(postt.getSurname());
+                myFawPostListResponseDto.setUsername(postt.getUsername());
+                myFawPostListResponseDto.setId(postt.getId());
+                myFawPostListResponseDto.setIsLiked(likeToPostService.findByPostIdAndUserIdBoolean(postt.getId(),userId));
+                myFawPostListResponseDto.setLikeCount(postt.getLikeCount());
+                myFawPostListResponseDto.setUserId(postt.getUserId());
+                myFawPostListResponseDtos.add(myFawPostListResponseDto);
+                }
+            }
+            System.out.println("for cikisi");
+            System.out.println(myFawPostListResponseDtos.toString());
+            return myFawPostListResponseDtos;
+        }
+        System.out.println("en alt return oncesi");
+        return myFawPostListResponseDtos;
     }
 /*
     public Boolean createFindLikePost(ModelFindLikePost model) {
@@ -305,6 +343,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         }
         return yildiz.toString();
     }
+
 
 
 

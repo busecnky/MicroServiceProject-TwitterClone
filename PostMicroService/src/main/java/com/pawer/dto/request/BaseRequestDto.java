@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FindAllLikePostRequestDto {
+public class BaseRequestDto {
     private String token;
 
 }

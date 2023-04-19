@@ -13,6 +13,9 @@ public class ConsumerLikePost {
 
     @RabbitListener(queues= "queue-like-post")
     public void createlikePost(ModelLikePost model){
+        System.out.println("******* createlikePost "+ model.getPostId());
+        System.out.println("******* createlikePost "+ model.getToken());
+        System.out.println("******* createlikePost "+ model.getStatement());
         postService.createLikePost(model);
     }
 
