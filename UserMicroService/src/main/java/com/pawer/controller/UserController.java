@@ -94,21 +94,21 @@ public class UserController {
         System.out.println(dto.getToken());
         return ResponseEntity.ok(userService.isFollow(dto));
     }
-/*
-    @GetMapping("/findallrequests")
+
+    @PostMapping("/findallrequests")
     @ResponseBody
     @CrossOrigin("*")
     public ResponseEntity<List<FindAllRequestsResponse>> findAllRequests(@RequestBody FindAllRequestsRequestDto dto){
         return ResponseEntity.ok(followerService.findAllRequests(dto));
     }
 
-    @GetMapping("/findallrequestscount")
+    @PostMapping("/findallrequestscount")
     @ResponseBody
     @CrossOrigin("*")
     public ResponseEntity<Integer> findAllRequestsCount(@RequestBody FindAllRequestsRequestDto dto){
         return ResponseEntity.ok(followerService.findAllRequestsCount(dto));
     }
-*/
+
 //    @PostMapping("/removefollower")
 //    @CrossOrigin("*")
 //    public  ResponseEntity<Integer> removeFollower(@RequestBody AcceptFollowerRequestDto dto){

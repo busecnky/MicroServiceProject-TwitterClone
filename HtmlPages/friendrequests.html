@@ -38,6 +38,7 @@
     <section onclick="friendRequest()" class="aside__friendrequest">
       <img src="../HtmlPages/images/pet-care.png" alt="">
       <p>Friend Requests</p>
+      <p id="friendrequestcount"></p>
     </section>
 
     <section onclick="mypost()" class="aside__myposts">
@@ -71,6 +72,8 @@
 </main>
 <script>
   window.addEventListener('load', getProfileCart);
+  window.addEventListener('load', getfriendrequestcount);
+
 
 
   function profile(){
@@ -120,7 +123,7 @@
     const email= document.getElementById('email')
     const id = document.getElementById('id');
     const follow = document.getElementById('follow');
-    const urluser= 'http://localhost:6260/user/findallcarts';
+    const urluser= 'http://localhost:6260/user/findallrequests';
     const urlpost= 'http://localhost:6160/post/findallpage';
 
 
@@ -166,10 +169,11 @@
           <h5 >java web</h5>
          <h5 >123235 posts</h5>
 
-        <button class="btn btn-pink"  onclick="acceptfollowrequest(${index})" >${data[0][index].follower}</button>
+        <button class="btn btn-pink"  onclick="acceptfollowrequest(${index})" >Accept</button>
+        <button class="btn btn-pink"  onclick="rejectfollowrequest(${index})" >Reject</button>
 
 <input hidden="hidden" value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
- <button id="followwbtn" class="btn ${data[0][index].follow === 'Takip Et' ? 'btn-blue' : (data[0][index].follow === 'İstek Gönderildi' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
+
 </div>
       </div>
     </div>`;
@@ -271,6 +275,35 @@
               }
               else{
                 window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+                console.log(response.message)
+              }
+            })
+            .catch((err) => {
+
+              console.log(err)
+            });
+  }
+
+  function getfriendrequestcount(){
+    const token = sessionStorage.getItem("token");
+    const data = {
+      "token": token
+    }
+
+    fetch("http://localhost:6260/user/findallrequestscount",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response !== 0){
+                document.getElementById('friendrequestcount').innerHTML = response
+
+              }
+              else{
                 console.log(response.message)
               }
             })

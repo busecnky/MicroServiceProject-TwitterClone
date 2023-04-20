@@ -68,21 +68,12 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             return 0;
         } else if (follower.get().getStatee() == 1) { // gelen isteği kabul etmek & reddetmek
 
-            /*if (dto.getResponseForFollowRequest()) {*/
-
                 follower.get().setStatee(2);
                 update(follower.get());
                 follow.get().setFollowRequest(2);
                 followService.update(follow.get());
                 return 2;
 
-           /* } else {
-                follower.get().setStatee(0);
-                update(follower.get());
-                follow.get().setFollowRequest(0);
-                followService.update(follow.get());
-                return 0;
-            }*/
 
         } else if (follower.get().getStatee() == 2) { // beni takip edeni çıkartmak
 
@@ -112,15 +103,6 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             return 0;
         } else if (follower.get().getStatee() == 1) { // gelen isteği kabul etmek & reddetmek
 
-            /*if (dto.getResponseForFollowRequest()) {*/
-
-            /*  follower.get().setStatee(2);
-            update(follower.get());
-            follow.get().setFollowRequest(2);
-            followService.update(follow.get());
-            return 2;
-
-          } else {}*/
                 follower.get().setStatee(0);
                 update(follower.get());
                 follow.get().setFollowRequest(0);
@@ -158,13 +140,32 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
         }
         return Followers;
     }
-/*
-    public List<FindAllRequestsResponse> findAllRequests(FindAllRequestsRequestDto dto) {
 
+    public List<FindAllRequestsResponse> findAllRequests(FindAllRequestsRequestDto dto) {
+        Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
+        List<Follower> followers= isFollower(userId.get());
+        FindAllRequestsResponse findAllRequestsResponse;
+        List<FindAllRequestsResponse> followersRequest= new ArrayList<>();
+
+        for(Follower f:followers){
+            if (f.getStatee()==1){
+                User user = userService.findById((f.getFollowerId())).get();
+                findAllRequestsResponse = new FindAllRequestsResponse();
+                findAllRequestsResponse.setJob(user.getJob());
+                findAllRequestsResponse.setAvatar(user.getAvatar());
+                findAllRequestsResponse.setName(user.getName());
+                findAllRequestsResponse.setSurname(user.getSurname());
+                findAllRequestsResponse.setUsername(user.getUsername());
+                findAllRequestsResponse.setFollowerId(f.getFollowerId());
+                followersRequest.add(findAllRequestsResponse);
+            }
+        }
+        return followersRequest;
     }
 
     public Integer findAllRequestsCount(FindAllRequestsRequestDto dto) {
+        return findAllRequests(dto).size();
 
-    }*/
+    }
 }
 

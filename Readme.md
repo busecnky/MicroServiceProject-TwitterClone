@@ -1,15 +1,15 @@
 # !!!! dikkat!!! -> thread'e sout atıldı silince calismiyor(followservice)
 ## yapilanlar:
-* post'a faw tuşu eklendi. kontrol edildi tam calisiyor.
-* my faw sayfası eklendi. kontrol edildi tam calisiyor.
-* like atma düzeltildi. kontrol edildi tam calisiyor.
+* post'a faw tuşu eklendi. kontrol edildi tam calisiyor.(furkan)
+* my faw sayfası eklendi. kontrol edildi tam calisiyor.(furkan)
+* like atma düzeltildi. kontrol edildi tam calisiyor.(furkan)
+* isteklerin olduğu sayfa eklendi o sayfaya istek sayısı eklendi(buse)
+* takip isteği cevaplama eklendi (buse)
 
 
 ## yarim kalanlar:
 * postmicro'da servisler  düzenlendi. hala eksikler olabilir bakilacak.
-* takip isteği cevaplama eklendi ama eksik.
-    * sadece kabul et tuşu var kabul et tuşunun yanına bir de reddet tuşu eklenmeli.
-
+* istek sayısı bütün sayfalara eklencek frontlar düzenlendikten sonra her sayfaya fetch yollancak 
 
 ## yapilacaklar.
 * postmicro 'da servisler düzenlenecek.

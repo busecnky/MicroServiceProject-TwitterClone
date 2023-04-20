@@ -13,5 +13,6 @@ public interface IFollowerRepository extends JpaRepository<Follower,Long> {
 
     Optional<Follower> findOptionalByUserIdAndFollowerId(Long userId, Long followerId);
 
+    Long findByFollowerId(Long followerId);
 
 }
