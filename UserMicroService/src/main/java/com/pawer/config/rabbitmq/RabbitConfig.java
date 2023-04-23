@@ -14,21 +14,23 @@ public class RabbitConfig {
 
     // Key
     private String bindingKeyCreateUser = "binding-key-create-user";
-    private String bindingKeyCreatePost = "binding-key-create-post";
     private String bindingKeyUpdateUser = "binding-key-update-user";
-    private String bindingKeyCreateCommentToPost= "binding-key-create-comment-to-post";
-    private String bindingKeyLikePost= "binding-key-like-post";
-    private String bindingKeyFindLikePost= "binding-key-find-like-post";
+    private String bindingKeyCreatePostTopic ="binding-key-create-post-topic";
+    private String bindingKeyCreatePostTopicElastic ="binding-key-create-post-topic-elastic";
+    private String bindingKeyFollowPosts = "binding-key-follow-posts";
+
 
 
 
     // Queu
     private String queueCreateUser = "queue-create-user";
-    private String queueCreatePost = "queue-create-post";
     private String queueUpdateUser= "queue-update-user";
-    private String queueCreateCommentToPost= "queue-create-comment-to-post";
-    private String queueLikePost= "queue-like-post";
-    private String queueFindLikePost= "queue-find-like-post";
+    private String queueCreatePostTopic="queue-create-post-topic";
+    private String queueCreatePostTopicElastic="queue-create-post-topic-elastic";
+    private String queueFollowPosts ="queue-follow-posts";
+
+
+
 
 
 
@@ -53,7 +55,6 @@ public class RabbitConfig {
 
 
 
-
     /**
      * ---- Queu ----
      */
@@ -61,22 +62,20 @@ public class RabbitConfig {
     Queue queueSaveUser() {
         return new Queue(queueCreateUser);
     }
-    @Bean
-    Queue queueCreatePost(){return new Queue(queueCreatePost);}
+
     @Bean
     Queue queueUpdateUser(){return new Queue(queueUpdateUser);}
     @Bean
-    Queue queueCreateCommentToPost(){return new Queue(queueCreateCommentToPost);}
-
-    @Bean
-    Queue queueLikePost(){
-        return new Queue(queueLikePost);
+    Queue queueCreatePostTopic(){
+        return new Queue(queueCreatePostTopic);
     }
     @Bean
-    Queue queueFindLikePost(){
-        return new Queue(queueFindLikePost);
+    Queue queueCreatePostTopicElastic(){
+        return new Queue(queueCreatePostTopicElastic);
     }
 
+    @Bean
+    Queue queueFollowPosts(){return new Queue(queueFollowPosts);};
 
     /**
      * ---- Binding ----
@@ -85,27 +84,26 @@ public class RabbitConfig {
     public Binding bindingCreateUser(final Queue queueSaveUser, final DirectExchange directExchange) {
         return BindingBuilder.bind(queueSaveUser).to(directExchange).with(bindingKeyCreateUser);
     }
-    @Bean
-    public Binding bindingCreatePost(final Queue queueCreatePost, final DirectExchange directExchange) {
-        return BindingBuilder.bind(queueCreatePost).to(directExchange).with(bindingKeyCreatePost);
-    }
+
     @Bean
     public Binding bindingUpdateUser(final Queue queueUpdateUser, final DirectExchange directExchange) {
         return BindingBuilder.bind(queueUpdateUser).to(directExchange).with(bindingKeyUpdateUser);
     }
+
     @Bean
-    public Binding bindingCreateCommentToPost(final Queue queueCreateCommentToPost, final DirectExchange directExchange){
-        return BindingBuilder.bind(queueCreateCommentToPost).to(directExchange).with(bindingKeyCreateCommentToPost);
+    public Binding bindingCreatePostTopic(final Queue queueCreatePostTopic, final TopicExchange topicExchange){
+        return BindingBuilder.bind(queueCreatePostTopic).to(topicExchange).with(bindingKeyCreatePostTopic);
+    }
+    @Bean
+    public Binding bindingCreatePostTopicElastic(final Queue queueCreatePostTopicElastic, final TopicExchange topicExchange){
+        return BindingBuilder.bind(queueCreatePostTopicElastic).to(topicExchange).with(bindingKeyCreatePostTopicElastic);
     }
 
     @Bean
-    public Binding bindingLikePost(final Queue queueLikePost, final DirectExchange directExchange){
-        return BindingBuilder.bind(queueLikePost).to(directExchange).with(bindingKeyLikePost);
+    public Binding bindingFollowPosts(final Queue queueFollowPosts,final DirectExchange directExchange){
+        return BindingBuilder.bind(queueFollowPosts).to(directExchange).with(bindingKeyFollowPosts);
     }
-    @Bean
-    public Binding bindingFindLikePost(final Queue queueFindLikePost, final DirectExchange directExchange){
-        return BindingBuilder.bind(queueFindLikePost).to(directExchange).with(bindingKeyFindLikePost);
-    }
+
 
 
 }

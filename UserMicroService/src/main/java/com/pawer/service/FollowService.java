@@ -1,6 +1,6 @@
 package com.pawer.service;
 
-import com.pawer.dto.request.FollowingUserRequestDto;
+import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.repository.IFollowRepository;
 import com.pawer.repository.entity.Follow;
 import com.pawer.repository.entity.Follower;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +52,7 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
     }
 
 
-    public Integer followUser(FollowingUserRequestDto dto) {
+    public Integer followUser(BaseRequestDto dto) {
 
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
         Optional<User> followUser = userService.findOptionalByUsername(dto.getUsername());
@@ -100,4 +99,11 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
 
         return followRepository.findOptionalByUserIdAndFollowId(id,aLong);
     }
+
+    public Optional<List<Follow>> findOptionalFollowList(Long userId){
+        Optional<List<Follow>> follows= followRepository.findOptionalByUserId(userId);
+        return follows;
+    }
+
+
 }

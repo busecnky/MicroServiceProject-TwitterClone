@@ -3,6 +3,7 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobId;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
+
 import com.pawer.dto.request.*;
 import com.pawer.dto.response.FindByIdResponseDto;
 import com.pawer.dto.response.ProfileCartResponse;
@@ -10,28 +11,22 @@ import com.pawer.exception.EErrorType;
 import com.pawer.exception.UserException;
 import com.pawer.mapper.IPostMapper;
 import com.pawer.mapper.IUserMapper;
-import com.pawer.rabbitmq.messagemodel.*;
+import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
+import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
+import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
 import com.pawer.repository.IUserRepository;
 import com.pawer.repository.entity.Follow;
-import com.pawer.repository.entity.Follower;
 import com.pawer.repository.entity.User;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService extends ServiceManagerImpl<User, Long> {
@@ -113,7 +108,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         return true;
     }
 
-    public FindByIdResponseDto findByIdFromToken(FindByIdRequestDto dto) {
+    public FindByIdResponseDto findByIdFromToken(BaseRequestDto dto) {
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
         if (userId.isEmpty()) {
             throw new UserException(EErrorType.INVALID_TOKEN);
@@ -123,27 +118,8 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         return IUserMapper.INSTANCE.toFindByIdResponseDto(user.get());
     }
 
-    public boolean createCommentToPost(CommentToPostDto dto) {
-        if (dto.getComment() == null || dto.getComment() == "" || dto.getToken() == null || dto.getToken() == "") {
-            throw new UserException(EErrorType.BAD_REQUEST_ERROR, "create comment de hata eksik veya hatali bilgi");
-        }
 
-        producerDirectService.sendCreateCommentToPost(IPostMapper.INSTANCE.toCreateComment(dto));
-        return true;
-    }
 
-    public Boolean createLikePost(LikePostRequestDto dto) {
-        if (dto.getToken() == null || dto.getToken() == "") {
-            throw new UserException(EErrorType.INVALID_TOKEN);
-        }
-        ModelLikePost model = new ModelLikePost();
-        model.setToken(dto.getToken());
-        model.setPostId(dto.getPostId());
-        model.setStatement(dto.getStatement());
-
-        producerDirectService.sendLikePost(model);
-        return dto.getStatement();
-    }
 
 
     public Optional<User> findOptionalByUsername(String username){
@@ -152,7 +128,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
 
 
-    public List<ProfileCartResponse> isFollow(ProfileCartRequestDto dto){
+    public List<ProfileCartResponse> isFollow(BaseRequestDto dto){
         Long userId= jwtTokenManager.validToken(dto.getToken()).get();
         Optional<List<Follow>> follows= followService.isFollow(userId);         // beni 0 takip etmiyor, 1 bana takip isteği atmış,2 beni takip ediyor
         List<ProfileCartResponse>  profileCartResponses = new ArrayList<>();
@@ -186,16 +162,16 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         }
         return profileCartResponses;
     }
-    public FindByIdResponseDto findMe(FindByIdRequestDto dto){
+    public FindByIdResponseDto findMe(BaseRequestDto dto){
         Optional<Long> userId= jwtTokenManager.validToken(dto.getToken());
         User user=findById(userId.get()).get();
         FindByIdResponseDto findByIdResponseDto= new FindByIdResponseDto();
         findByIdResponseDto.setName(user.getName());
         findByIdResponseDto.setSurname(user.getSurname());
-        findByIdResponseDto.setAge(user.getAge());
         findByIdResponseDto.setUsername(user.getUsername());
         return findByIdResponseDto;
     }
+
 
 
     /**storage

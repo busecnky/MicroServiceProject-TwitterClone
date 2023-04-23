@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/ApiGateway" />
             <option value="$PROJECT_DIR$/AuthMicroService" />
             <option value="$PROJECT_DIR$/ConfigServer" />
+            <option value="$PROJECT_DIR$/ElasticServicePosts" />
             <option value="$PROJECT_DIR$/PostMicroService" />
             <option value="$PROJECT_DIR$/UserMicroService" />
           </set>

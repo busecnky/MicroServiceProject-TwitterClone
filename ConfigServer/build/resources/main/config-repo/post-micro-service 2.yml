@@ -1,6 +1,15 @@
 server:
   port: 6160
 
+#logging:
+#  level:
+#    org.springframework: DEBUG
+#  file:
+#    name: post-service-config.log
+#  logback:
+#    rollingpolicy:
+#      max-file-size: 20MB
+
 spring:
   zipkin:
     enabled: true
@@ -11,7 +20,7 @@ spring:
     host: localhost
     port: 5672
     username: user
-    password: password
+    password: password # buse:user , furkan:password
   servlet:
     multipart:
       enabled: true
@@ -25,8 +34,8 @@ spring:
     mongodb:
       host: localhost   #localhost
       port: 27000    # buse:29000 , furkan:27000
-      username: croweruser #${MONGOPAWERPOSTUSERNAME}
-      password: asd123asd  # ${MONGOPAWERPOSTPASSWORD}
+      username: "croweruser" # buse:pawer , furkan:croweruser
+      password: asd123asd  # buse:pawer , furkan:asd123asd
       database: PostDB
 myproject:
   google:

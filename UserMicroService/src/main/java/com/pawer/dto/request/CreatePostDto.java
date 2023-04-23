@@ -1,7 +1,6 @@
 package com.pawer.dto.request;
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Builder
@@ -9,9 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @ToString
 public class CreatePostDto {
-
-    private String content;
     private String token;
+    private String content;
     //private MultipartFile image;
 
 }

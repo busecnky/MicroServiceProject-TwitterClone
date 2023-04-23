@@ -1,7 +1,7 @@
 package com.pawer.service;
 
 import com.pawer.dto.request.AcceptFollowerRequestDto;
-import com.pawer.dto.request.FindAllRequestsRequestDto;
+import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.response.FindAllRequestsResponse;
 import com.pawer.repository.IFollowerRepository;
 import com.pawer.repository.entity.Follow;
@@ -141,7 +141,7 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
         return Followers;
     }
 
-    public List<FindAllRequestsResponse> findAllRequests(FindAllRequestsRequestDto dto) {
+    public List<FindAllRequestsResponse> findAllRequests(BaseRequestDto dto) {
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
         List<Follower> followers= isFollower(userId.get());
         FindAllRequestsResponse findAllRequestsResponse;
@@ -163,9 +163,26 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
         return followersRequest;
     }
 
-    public Integer findAllRequestsCount(FindAllRequestsRequestDto dto) {
+    public Integer findAllRequestsCount(BaseRequestDto dto) {
         return findAllRequests(dto).size();
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

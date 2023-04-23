@@ -6,3 +6,4 @@ spring:
     import: "configserver:"
   application:
     name: post-micro-service
+
