@@ -12,6 +12,7 @@ import com.pawer.exception.UserException;
 import com.pawer.mapper.IPostMapper;
 import com.pawer.mapper.IUserMapper;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
+import com.pawer.rabbitmq.messagemodel.ModelFollowId;
 import com.pawer.rabbitmq.messagemodel.ModelUpdateUser;
 import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
@@ -36,6 +37,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
     private final JwtTokenManager jwtTokenManager;
     private final FollowService followService;
     private final FollowerService followerService;
+
 
 //    @Value("${myproject.google.storage.bucketname}")
 //    private String bucketname;
@@ -169,6 +171,11 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         findByIdResponseDto.setName(user.getName());
         findByIdResponseDto.setSurname(user.getSurname());
         findByIdResponseDto.setUsername(user.getUsername());
+        Optional<List<Long>> follows = followService.findOptionalFollowList(userId.get());
+        ModelFollowId model = new ModelFollowId();
+        model.setFollodId(follows.get());
+        System.out.println("follow ıd'leri getir... "+model.toString());
+        producerDirectService.sendFollodId(model);
         return findByIdResponseDto;
     }
 

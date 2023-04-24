@@ -43,6 +43,17 @@ public class PostController {
 
         return ResponseEntity.ok(postService.findAllPosts(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
+    @PostMapping("/discoverpage")
+    @CrossOrigin("*")
+    public ResponseEntity<Page<PostFindAllResponse>> discover(@RequestBody BaseResponseDto dto,
+                                                                 @RequestParam(defaultValue = "10")Integer pageSize,
+                                                                 @RequestParam(defaultValue = "0") int pageNumber,
+                                                                 @RequestParam(defaultValue = "DESC") Sort.Direction direction,
+                                                                 @RequestParam(defaultValue = "createDate") String sortParameter){
+
+
+        return ResponseEntity.ok(postService.discoverPage(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
+    }
     /*
     @GetMapping("/findallpage")
     @CrossOrigin("*")

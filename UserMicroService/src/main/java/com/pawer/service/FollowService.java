@@ -100,9 +100,15 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
         return followRepository.findOptionalByUserIdAndFollowId(id,aLong);
     }
 
-    public Optional<List<Follow>> findOptionalFollowList(Long userId){
-        Optional<List<Follow>> follows= followRepository.findOptionalByUserId(userId);
-        return follows;
+    public Optional<List<Long>> findOptionalFollowList(Long userId){
+        Optional<List<Long>> followIdList= Optional.of(new ArrayList<>());
+
+        for (Follow follow:followRepository.findOptionalByUserId(userId).get()){
+            if (follow.getFollowRequest()==2){
+                followIdList.get().add(follow.getFollowId());
+            }
+        }
+        return followIdList;
     }
 
 

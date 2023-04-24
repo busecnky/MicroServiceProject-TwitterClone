@@ -23,14 +23,5 @@ public class TestAndRun {
     }
     public void getData(){
 
-
-            System.out.println("mesaj gönderme yerine geldi");
-            for (Post post: producer.sendGetData()){
-                System.out.println("**********----------");
-                System.out.println("post.. " + post.toString());
-            }
-
-
-
     }
 }

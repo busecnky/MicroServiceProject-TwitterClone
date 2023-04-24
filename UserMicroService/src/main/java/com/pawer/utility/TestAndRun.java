@@ -1,14 +1,10 @@
 package com.pawer.utility;
 
-import com.pawer.rabbitmq.messagemodel.ModelFollowPosts;
+import com.pawer.rabbitmq.messagemodel.ModelFollowId;
 import com.pawer.rabbitmq.producer.ProducerDirectService;
 import com.pawer.service.FollowService;
-import com.pawer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -23,7 +19,7 @@ public class TestAndRun {
         }).start();
     }
     public void sendFollowPostsMessage(){
-        ModelFollowPosts followId= new ModelFollowPosts();
+        ModelFollowId followId= new ModelFollowId();
         //List <Long> followIdList = followService.findOptionalFollowList();
     }
 

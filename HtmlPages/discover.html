@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>Home Page</title>
+</head>
+<body>
+
+<header>
+  <h1 onclick="homepage()">
+    <img class="header__logo"  src="../HtmlPages/images/foot-print.png" alt="">Pawer
+  </h1>
+  <nav>
+    <ul class="nav__aboutus" onclick="aboutus()">
+      <li><img  src="../HtmlPages/images/high-five.png"><a >About Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <aside>
+    <section class="aside__home">
+      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+      <p>Home</p>
+    </section>
+
+    <section onclick="otherpeople4()" class="aside__otherpeople">
+      <img src="../HtmlPages/images/earth.png" alt="">
+      <p>People</p>
+    </section>
+
+    <section onclick="friendRequest()" class="aside__friendrequest">
+      <img src="../HtmlPages/images/pet-care.png" alt="">
+      <p>Friend Requests</p>
+    </section>
+
+    <section onclick="mypost()" class="aside__myposts">
+      <img src="../HtmlPages/images/social-media.png" alt="">
+      <p>My Posts</p>
+    </section>
+
+    <section onclick="favpostpage()" class="aside__myposts">
+      <img src="../HtmlPages/images/social-media.png" alt="">
+      <p>Fav Posts </p>
+    </section>
+
+
+
+    <section onclick="profile()" class="aside__profile">
+      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+           alt="">
+      <p>Profile</p>
+    </section>
+    <button onclick="logout()" class="logout">Log Out</button>
+  </aside>
+
+  <section class="main__section">
+    <!-- pawerbox Starts-->
+    <section class="pawerbox">
+      <form>
+        <section class="pawerbox__input">
+          <section>
+            <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                 alt="">
+            <textarea type="text" id="content" class="md-textarea"
+                      placeholder="What's happening?"></textarea>
+          </section>
+
+          <!-- ************************ baslangic
+          dosya gönderme islemi
+            ************-->
+          <section class="pawerbox__input__file">
+            <input type="file" name="image" id="file">
+          </section>
+
+          <!-- ************************ bitis
+          dosya gönderme islemi
+            ************-->
+        </section>
+        <button class="pawbutton" onclick="pawPost()">Paw</button>
+
+        <hr class="bottom-line">
+      </form>
+    </section>
+    <!-- pawerbox ends-->
+    <div class="feed" id="feed"></div>
+  </section>
+
+  <!--        burada basladim profile cartlarına-->
+
+
+
+  <!--   <div id="profilecart"></div>  -->
+
+
+
+  <!--        burada bitti profile cartları-->
+
+
+  <section class="section__darklight">
+            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode
+            </span>
+
+
+  </section>
+
+</main>
+
+
+<!-- posts ends-->
+<div class="container">
+  <div class="pagination-wrapper">
+    <svg class="btn btn--prev" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+      <path d="M0-.5h24v24H0z" fill="none"/>
+    </svg>
+
+    <div class="pagination-container">
+      <div class="little-dot  little-dot--first"></div>
+      <div class="little-dot">
+        <div class="big-dot-container">
+          <div class="big-dot"></div>
+        </div>
+      </div>
+      <div class="little-dot  little-dot--last"></div>
+    </div>
+
+
+    <svg class="btn btn--next" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+      <path d="M0-.25h24v24H0z" fill="none"/>
+    </svg>
+  </div>
+</div>
+<!-- Feed Ends-->
+
+
+<script src="../HtmlPages/js/pagination.js"></script>
+<script>
+
+  let mode = document.getElementById('dark_mode');
+  console.log(mode.textContent)
+
+  function lightdarkmode() {
+    document.body.classList.toggle("dark-theme");
+    if (document.body.classList.contains("dark-theme")) {
+      mode.textContent = 'light_mode';
+      mode.id = 'light_mode';
+      console.log(mode.textContent)
+      console.log(mode.id)
+    } else {
+      mode.textContent = "dark_mode";
+      mode.id = 'dark_mode';
+    }
+
+  }
+  function profile(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/profile.html';
+  }
+
+  function homepage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+  }
+
+  function mypost(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+  }
+  function favpostpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
+  }
+
+  function otherpeople4(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+  }
+  function friendRequest(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
+  }
+
+  function aboutus(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/aboutus.html';
+  }
+
+  function logout(){
+    sessionStorage.setItem("token", null);
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
+  }
+
+
+
+  window.addEventListener('load', getData);
+
+
+
+
+  function getProfileCart() {
+    const token = sessionStorage.getItem("token");
+    const name = document.getElementById('name');
+    const username = document.getElementById('username');
+    const content = document.getElementById('content');
+    const id = document.getElementById('id');
+
+
+    const data = JSON.stringify({
+      "name": name,
+      "username": username,
+      "content": content,
+      "id": id
+    });
+
+    fetch("http://localhost:6260/user/findalluser", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+              for (let index = 0; index < response.length; index++) {
+                document.getElementById("profilecart").innerHTML += `
+    <div class="mySlides fade">
+
+<div class="profilecartcontainer">
+        <div class="profilecartphoto"> <img src="https://storage.cloud.google.com/pawerallphoto/unnamed.jpeg" alt=""></div>
+        <div class="profilecartalltext">
+        <div class="profilecarttitle"> ${response[index].name} </div>
+        <div class="profilecarttext"> ${response[index].username}</div>
+    </div>
+    </div>
+</div>`;
+                var myDiv = document.getElementById(`commentsss${index}`);
+
+
+                setTimeout(() => {
+                  getComment(index);
+                }, 0);
+              }
+
+            })
+            .catch(error => console.log('error', error));
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  function getData() {
+    const token = sessionStorage.getItem("token");
+    const name = document.getElementById('name');
+    const username = document.getElementById('username');
+    const content = document.getElementById('content');
+    const date = document.getElementById('date');
+    const time = document.getElementById('time');
+    const id = document.getElementById('id');
+    const isLiked= document.getElementById('isLiked');
+    const isFav= document.getElementById('isFav');
+
+    const page= 'http://localhost:6160/post/discoverpage';
+
+    // bu metod fetch isteği ile atılacak. on click ile aktifleştirilececk
+
+
+
+    const findme = 'http://localhost:6260/user/findme';
+
+    const data2 = {
+
+      "token": token
+    }
+
+
+    Promise.all([
+      fetch(page, {
+        method: 'Post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data2)
+        ,
+      }),
+      fetch(findme, {
+        method: 'Post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data2)
+        ,
+
+      })
+
+
+    ])
+            .then(responses => Promise.all(responses.map(response => response.json())))
+            .then(data => { console.log(data[0].content), console.log(data[1].username)
+              for (let index = 0; index < data[0].content.length; index++) {
+                document.getElementById("feed").innerHTML += `
+
+<div class="post" >
+
+
+                    <div class="post__body" >
+
+                        <div class="post__header">
+                            <div class="post__headerText">
+                                <div class="post__avatar">
+                                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"alt="">
+                                </div>
+                                <div class="divforh3">
+                                <h3>${data[0].content[index].username}
+
+                                    <span class="post__headerSpecial">
+                                    </span>
+                                </h3>
+</div>
+                                <img id="favicon"  onclick="favpost(${index},${data[0].content[index].isFav})" src="${data[0].content[index].isFav === true ? '../HtmlPages/images/favfill.png' :  '../HtmlPages/images/favempty.png'}" alt="">
+
+                            </div>
+                            <div class="post__headerDescription">
+                                <p>${data[0].content[index].content}</p>
+
+                            </div>
+                            <div class="post__image">
+                               <img src="">
+                            </div>
+
+                        </div>
+                        <div class="post__timer">
+                            <span class="postdate">${data[0].content[index].date}</span>
+                            <span class="post__time">${data[0].content[index].time}</span>
+                         </div>
+                        <div class="post__footer">
+                            <span class="material-symbols-outlined likecomment">chat</span>
+                            <div class="post__like">
+                                 <img class="post__like_img" onclick="likepostheart(${index},${data[0].content[index].isLiked})" src="${data[0].content[index].isLiked === true ? '../HtmlPages/images/redheart.png' :  '../HtmlPages/images/whiteheart.png'}" alt="">
+                                <label>${data[0].content[index].likeCount}</label>
+                            </div>
+                        </div>
+                        <div class="commentwrite">
+                            <div class="commentwrite__input">
+                            <div class="commenttext_avatar">
+                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                    alt="">
+                                    <p><sub><i>@${data[1].username}</i> </sub></p>
+                                 </div>
+
+                                <textarea type="text" id=${index+'cm'} class="commentwrite-textarea"
+                                    placeholder="Write a comment"></textarea>
+
+                            </div>
+                            <input hidden="hidden" value=${data[0].content[index].id} class="twitId" id=${index+'in'}>  </input>
+
+                            <button class="commentbutton" onclick="commentbtn(${index})">Comment</button>
+
+                        </div>
+
+                        <div id="commentsss${index}" >
+                        </div>
+
+                    </div>
+                </div>`;
+                var myDiv = document.getElementById(`commentsss${index}`);
+
+
+                setTimeout(() => {
+                  getComment(index);
+                }, 0);
+              }
+
+            })
+            .catch(error => console.log('error', error));
+  }
+
+
+
+  function test(event) {
+    const value = event.target.getAttribute('value');
+    alert(value.value)
+  }
+
+  function likepostheart(index,isliked){
+    const postliked = 'http://localhost:6260/user/createlikepost';
+
+    let id = document.getElementById(index+'in').value;
+    let token = sessionStorage.getItem("token");
+    let statement=true;
+    if (isliked===true){
+      statement= false;
+    }else{
+      statement=true;
+    }
+
+    const data = {
+      "postId" : id,
+      "statement": statement,
+      "token": token
+    }
+
+    fetch(postliked,{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+              }
+              else{
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+  }
+
+  function favpost(index,isfav){
+    const createfavtopost = 'http://localhost:6160/post/createfavpost';
+
+    let id = document.getElementById(index+'in').value;
+    let token = sessionStorage.getItem("token");
+    let statement=true;
+    if (isfav===true){
+      statement= false;
+    }else{
+      statement=true;
+    }
+
+    const data = {
+      "postId" : id,
+      "statement": statement,
+      "token": token
+    }
+
+    fetch(createfavtopost,{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+              }
+              else{
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+
+
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+  }
+
+
+
+
+  //***************** her sey tamamdır sadece bu metod calismiyor alert harekete geçmiyor.
+
+  function getComment(index) {
+    window.addEventListener('load', getData);
+
+    console.log(index)
+    const token = sessionStorage.getItem("token");
+    let id = document.getElementById(index+'in').value;
+    let commentDiv = document.getElementById(`commentsss${index}`);
+
+    /*
+            const data = JSON.stringify({
+                "comment": comment
+            });
+    */
+    fetch("http://localhost:6160/post/findallcomment"+"?postId="+id, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+              for (let i = 0; i < response.length; i++) {
+                //if (id === response.postId) {
+                commentDiv.innerHTML += `
+                        <div class="commentread">
+
+
+                            <div class="commentread__header">
+
+                                   <div class="commentread__avatar">
+                                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                    alt="">
+                                    </div>
+                                    <div class="commentread__headerText">
+                                        <h3> ${response[i].userId}
+                                            <span class="commentread__headerSpecial">
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="commentread__headerDescription">
+                                        <p>${response[i].comment}</p>
+                                    </div>
+                                    <div class="commentread__timer">
+                                        <span class="commentread__date"></span>
+                                        <span class="commentread__time"></span>
+                                    </div>
+                                </div>
+                        </div>
+                `;
+              }
+
+
+              //    }
+            })
+            .catch(error => console.log('error', error));
+
+  }
+
+
+
+  //*****************
+  //--------------------------
+
+
+
+
+
+  //--------------------------
+
+
+
+  //*****************************Paw Tuşu
+  function pawPost(){
+    let token = sessionStorage.getItem("token");
+    const content = document.getElementById('content').value;
+    const fileInput = document.getElementById('file');
+    const file = fileInput.files[0];
+
+
+
+    const data = {
+      "content": content,
+      "token": token,
+      "image": file
+    }
+
+    fetch("http://localhost:6260/user/createpost",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+              }
+              else{
+                console.log(response.message)
+                alert(response.message)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+    console.log(content)
+
+  }
+
+
+
+  //*****************************comment Tuşu
+
+  function commentbtn(index){
+    let id = document.getElementById(index+'in').value;
+    let token = sessionStorage.getItem("token");
+    // const comment = document.getElementById('comment').value;
+    let comment= document.getElementById(index+'cm').value;
+    const data = {
+      "postId" : id,
+      "comment": comment,
+      "token": token
+    }
+
+
+
+
+    fetch("http://localhost:6260/user/createcommenttopost",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+              }
+              else{
+                console.log(response.message)
+                alert(response.message)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+
+  }
+  //------------------CARDS-------------------------
+  /*
+  window.addEventListener('load', getProfileCart);
+
+
+  function getProfileCart() {
+      const token = sessionStorage.getItem("token");
+      const name = document.getElementById('name');
+      const username = document.getElementById('username');
+      const content = document.getElementById('content');
+      const id = document.getElementById('id');
+
+
+      const data = JSON.stringify({
+          "name": name,
+          "username": username,
+          "content": content,
+          "id": id
+      });
+
+      fetch("http://localhost:6260/user/findalluser", {
+          method: 'GET',
+          headers: {
+              "Content-Type": "application/json",
+          },
+      })
+          .then(response => response.json())
+          .then(response => { console.log(response)
+              for (let index = 0; index < response.length; index++) {
+                  document.getElementById("profilecart").innerHTML += `
+  <div class="mySlides fade">
+
+<div class="profilecartcontainer">
+      <div class="profilecartphoto"> <img src="https://storage.cloud.google.com/pawerallphoto/unnamed.jpeg" alt=""></div>
+      <div class="profilecartalltext">
+      <div class="profilecarttitle"> ${response[index].name} </div>
+      <div class="profilecarttext"> ${response[index].username}</div>
+  </div>
+  </div>
+</div>`;
+                  var myDiv = document.getElementById(`commentsss${index}`);
+
+
+                  setTimeout(() => {
+                      getComment(index);
+                  }, 0);
+              }
+
+          })
+          .catch(error => console.log('error', error));
+  }
+
+*/
+</script>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.pawer.rabbitmq.messagemodel;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -9,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ModelFollowPosts {
+public class ModelFollowId implements Serializable {
     private List<Long> follodId;
 }

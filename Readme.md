@@ -9,23 +9,22 @@
 * usermicro servisleri düzenlendi.
 * rabbit istekleri postmicro'da controller'a tasindi.
 * dtolar düzenlendi.
+* ana sayfada takip ettiklerimin postlarını gösterme eklendi.
+* kesfet eklendi.
 
 
 ## yarim kalanlar:
 * elastic eklendi. db'den veri cekme islemi yarim kaldi digerleri tamam(kontrol edilmedi).
-* ana sayfada takip ettiklerimin postları görüntülenecek. 
-  * baslandi yarim kaldi. usermicroservisden testandrun sınıfından servis
-  ayaga kalkarken takip ettigim insanlarin Id si gönderilecek.
-  * bu yapıldıktan sonra ** ana sayfada takip ettiklerimin postları görüntülenecek.
-  buda bitmiş oluyor
-
-
+* servis düzenlemelerinden sonra fetch istekleri düzenlenecek.
 
 ## yapilacaklar.
 * redis eklenecek
 * posta yorum yapanın username'i eklenecek su an id'si görünüyor.
+
+
+---
 * gizli profil gizli olmayan profillerin postları keşfette gözükecek(en son)
 * takip istekleri sayısı için fetch istekleri atılacak.(front)
 * pagination a bi bakılacak (front)
-
+---
 
