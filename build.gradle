@@ -46,6 +46,8 @@ allprojects{
         implementation libs.springCloudSleuth
         implementation libs.springCloudSleuthZipkin
         implementation libs.springCloudConfigClient
+        implementation libs.springBootStarterDataRedis
+
       //  implementation libs.springCloudGCloud
 
 

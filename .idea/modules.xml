@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ApiGateway/com.crower.SocialMedia_Pawer.ApiGateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ApiGateway/com.crower.SocialMedia_Pawer.ApiGateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/com.crower.SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/com.crower.SocialMedia_Pawer.ConfigServer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.crower.SocialMedia_Pawer.ElasticServicePosts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.crower.SocialMedia_Pawer.ElasticServicePosts.main.iml" />
     </modules>
   </component>
 </project>

@@ -10,6 +10,6 @@ spring:
     host: localhost
     port: 5672
     username: user
-    password: password
+    password: user
   elasticsearch:
     uris: http://localhost:9200

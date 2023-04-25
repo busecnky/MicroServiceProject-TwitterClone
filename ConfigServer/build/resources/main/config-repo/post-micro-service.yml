@@ -20,7 +20,7 @@ spring:
     host: localhost
     port: 5672
     username: user
-    password: password # buse:user , furkan:password
+    password: user # buse:user , furkan:password
   servlet:
     multipart:
       enabled: true
@@ -33,9 +33,9 @@ spring:
   data:
     mongodb:
       host: localhost   #localhost
-      port: 27000    # buse:29000 , furkan:27000
-      username: "croweruser" # buse:pawer , furkan:croweruser
-      password: asd123asd  # buse:pawer , furkan:asd123asd
+      port: 29000    # buse:29000 , furkan:27000
+      username: "pawer" # buse:pawer , furkan:croweruser
+      password: pawer  # buse:pawer , furkan:asd123asd
       database: PostDB
 myproject:
   google:

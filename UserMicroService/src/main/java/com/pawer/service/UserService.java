@@ -21,6 +21,7 @@ import com.pawer.repository.entity.Follow;
 import com.pawer.repository.entity.User;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -164,6 +165,8 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         }
         return profileCartResponses;
     }
+
+    @Cacheable(value = "findMe")
     public FindByIdResponseDto findMe(BaseRequestDto dto){
         Optional<Long> userId= jwtTokenManager.validToken(dto.getToken());
         User user=findById(userId.get()).get();
@@ -178,7 +181,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         producerDirectService.sendFollodId(model);
         return findByIdResponseDto;
     }
-
 
 
     /**storage

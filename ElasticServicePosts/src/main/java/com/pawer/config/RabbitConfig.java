@@ -69,7 +69,7 @@ public class RabbitConfig {
     }
     @Bean
     public Binding bindingGetPost(final Queue queueGetPost, final DirectExchange directExchange) {
-        return BindingBuilder.bind(queueGetPost).to(directExchange).with(bindingKeyCreatePost);
+        return BindingBuilder.bind(queueGetPost).to(directExchange).with(bindingKeyGetPost);
     }
 
 

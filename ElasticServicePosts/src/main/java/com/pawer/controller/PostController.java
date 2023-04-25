@@ -3,6 +3,7 @@ package com.pawer.controller;
 
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.CommentToPostRequestDto;
+import com.pawer.dto.request.PostSaveRequestDto;
 import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
 import com.pawer.dto.response.PostFindAllResponse;
@@ -30,6 +31,12 @@ public class PostController {
     private final FavToPostService favToPostService;
 
 
+    @PostMapping("/getalldata")
+    private ResponseEntity<Void> getAllData(@RequestBody PostSaveRequestDto dto){
+        System.out.println("Furkan buraya sout at dedi");
+        postService.getAllDataFromPost(dto);
+        return ResponseEntity.ok().build();
+    }
 
 
     @PostMapping("/findallpage")

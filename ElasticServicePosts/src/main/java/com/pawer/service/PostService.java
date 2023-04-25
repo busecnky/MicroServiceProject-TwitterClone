@@ -4,9 +4,11 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
 
+import com.pawer.dto.request.PostSaveRequestDto;
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
+import com.pawer.mapper.IPostMapper;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.repository.ICommentToPostRepository;
 import com.pawer.repository.IPostRepository;
@@ -39,6 +41,9 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         this.likeToPostService = likeToPostService;
     }
 
+    public void getAllDataFromPost(PostSaveRequestDto dto) {
+        postrepository.save(IPostMapper.INSTANCE.toPost(dto));
+    }
 
     public void savePost(ModelCreatePost modelCreatePost){
         Long id = jwtTokenManager.validToken(modelCreatePost.getToken()).get();
