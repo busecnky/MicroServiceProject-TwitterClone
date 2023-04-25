@@ -19,7 +19,7 @@ public class ProducerDirectService {
         rabbitTemplate.convertAndSend("exchange-direct","binding-key-update-user",model);
     }
 
-    public void sendFollodId(ModelFollowId model){
+    public void sendFollowId(ModelFollowId model){
         rabbitTemplate.convertAndSend("exchange-direct","binding-key-follow-posts",model);
     }
 

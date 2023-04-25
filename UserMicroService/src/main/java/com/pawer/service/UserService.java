@@ -175,10 +175,11 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         findByIdResponseDto.setSurname(user.getSurname());
         findByIdResponseDto.setUsername(user.getUsername());
         Optional<List<Long>> follows = followService.findOptionalFollowList(userId.get());
+        follows.get().add(5L);
         ModelFollowId model = new ModelFollowId();
-        model.setFollodId(follows.get());
+        model.setFollowId(follows.get());
         System.out.println("follow ıd'leri getir... "+model.toString());
-        producerDirectService.sendFollodId(model);
+        producerDirectService.sendFollowId(model);
         return findByIdResponseDto;
     }
 

@@ -4,6 +4,7 @@ package com.pawer.service;
 //import com.google.cloud.storage.BlobInfo;
 //import com.google.cloud.storage.Storage;
 
+import com.pawer.StaticValue;
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
@@ -69,7 +70,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         Pageable pageable = PageRequest.of(currentPage,  pageSize ,Sort.by(direction, sortingParameter) );
         List<PostFindAllResponse> postFindAllResponses = new ArrayList<>();
 
-        for(Post post: homePagePosts(model)){
+        for(Post post: homePagePosts(StaticValue.modelFollowId)){
             PostFindAllResponse postFindAllResponse = new PostFindAllResponse();
             postFindAllResponse.setId(post.getId());
             postFindAllResponse.setUserId(post.getUserId());
@@ -103,25 +104,27 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
 
     public List<Post> homePagePosts(ModelFollowId model){
-        this.model=model;
-        System.out.println("model ici gelen mesaj:... "+model.toString());
-        List<Post> posts = new ArrayList<>();
-        for (Long folloId: model.getFollodId()){
-            Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
-            for (Post post : posts1.get()){
-                posts.add(post);
+            List<Post> posts = new ArrayList<>();
+            for (Long followId: model.getFollowId()){
+                System.out.println("postservice homepage forun içi");
+                Optional<List<Post>> posts1= postrepository.findOptionalByUserId(followId);
+                for (Post post : posts1.get()){
+                    System.out.println("postservice homepage ikinci forun içi");
+
+                    posts.add(post);
+                }
             }
-        }
-        System.out.println("postss " + posts.toString());
-        return posts;
+            System.out.println("postss " + posts.toString());
+            return posts;
+
     }
 
     public List<Post> discover(ModelFollowId model){
         this.model=model;
         System.out.println("model ici gelen mesaj:... "+model.toString());
         List<Post> posts = new ArrayList<>();
-        for (Long folloId: model.getFollodId()){
-            Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
+        for (Long followId: model.getFollowId()){
+            Optional<List<Post>> posts1= postrepository.findOptionalByUserId(followId);
             for (Post post : posts1.get()){
                 posts.add(post);
             }

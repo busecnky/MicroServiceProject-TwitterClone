@@ -20,89 +20,82 @@
 <body>
 
 <header>
-    <h1 onclick="homepage()">
-        <img class="header__logo"  src="../HtmlPages/images/foot-print.png" alt="">Pawer
-    </h1>
+    <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
     <nav>
-        <ul class="nav__aboutus" onclick="aboutus()">
-            <li><img  src="../HtmlPages/images/high-five.png"><a >About Us</a></li>
+        <ul>
+            <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+            <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+            </section>
         </ul>
     </nav>
 </header>
 
 <main>
-    <aside>
-        <section class="aside__home">
-            <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
-            <p>Home</p>
-        </section>
 
-        <section onclick="otherpeople4()" class="aside__otherpeople">
-            <img src="../HtmlPages/images/earth.png" alt="">
-            <p>People</p>
-        </section>
+        <aside>
+            <section class="aside__home">
+                <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+                <p>Home</p>
+            </section>
 
-        <section onclick="friendRequest()" class="aside__friendrequest">
-            <img src="../HtmlPages/images/pet-care.png" alt="">
-            <p>Friend Requests</p>
-        </section>
+            <section onclick="otherpeople4()" class="aside__otherpeople">
+                <p>People</p>
+            </section>
 
-        <section onclick="mypost()" class="aside__myposts">
-            <img src="../HtmlPages/images/social-media.png" alt="">
-            <p>My Posts</p>
-        </section>
+            <section onclick="friendRequest()" class="aside__friendrequest">
+                <p>Requests</p>
+            </section>
 
-        <section onclick="favpostpage()" class="aside__myposts">
-            <img src="../HtmlPages/images/social-media.png" alt="">
-            <p>Fav Posts </p>
-        </section>
+            <section onclick="mypost()" class="aside__myposts">
+                <p>My Posts</p>
+            </section>
 
-        <section onclick="discoverpage()" class="aside__friendrequest">
-            <img src="../HtmlPages/images/pet-care.png" alt="">
-            <p>discover</p>
-        </section>
+            <section onclick="favpostpage()" class="aside__myposts">
+                <p>Fav Posts </p>
+            </section>
+
+            <section onclick="discoverpage()" class="aside__friendrequest">
+                <p>Discover</p>
+            </section>
 
 
 
-        <section onclick="profile()" class="aside__profile">
-            <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                 alt="">
-            <p>Profile</p>
-        </section>
-        <button onclick="logout()" class="logout">Log Out</button>
-    </aside>
+            <section onclick="profile()" class="aside__profile">
+                <p>Profile</p>
+            </section>
+            <button onclick="logout()" class="logout">Log Out</button>
+        </aside>
 
-    <section class="main__section">
-        <!-- pawerbox Starts-->
-        <section class="pawerbox">
-            <form>
+        <section class="main__section">
+            <!-- pawerbox Starts-->
+            <form class="pawerbox">
                 <section class="pawerbox__input">
-                    <section>
-                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                             alt="">
-                        <textarea type="text" id="content" class="md-textarea"
-                                  placeholder="What's happening?"></textarea>
-                    </section>
+                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                         alt="">
+                    <textarea type="text" id="content" class="md-textarea"
+                              placeholder="What's happening?"></textarea>
+                    <button class="pawbutton" onclick="pawPost()">Paw</button>
+
 
                     <!-- ************************ baslangic
                     dosya gönderme islemi
-                      ************-->
+                      ************
                     <section class="pawerbox__input__file">
                         <input type="file" name="image" id="file">
                     </section>
 
-                    <!-- ************************ bitis
+                   ************************ bitis
                     dosya gönderme islemi
                       ************-->
                 </section>
-                <button class="pawbutton" onclick="pawPost()">Paw</button>
-
-                <hr class="bottom-line">
             </form>
+            <!-- pawerbox ends-->
+            <div class="feed" id="feed"></div>
         </section>
-        <!-- pawerbox ends-->
-        <div class="feed" id="feed"></div>
-    </section>
+
+
 
     <!--        burada basladim profile cartlarına-->
 
@@ -115,13 +108,7 @@
    <!--        burada bitti profile cartları-->
 
 
-    <section class="section__darklight">
-            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
-                dark_mode
-            </span>
 
-
-    </section>
 
 </main>
 

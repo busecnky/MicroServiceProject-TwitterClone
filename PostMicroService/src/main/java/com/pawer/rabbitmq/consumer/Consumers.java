@@ -1,5 +1,6 @@
 package com.pawer.rabbitmq.consumer;
 
+import com.pawer.StaticValue;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.rabbitmq.messagemodel.ModelFollowId;
 import com.pawer.repository.entity.Post;
@@ -24,8 +25,10 @@ public class Consumers {
 
 
     @RabbitListener(queues = "queue-follow-posts")
-    public void follodIdList (ModelFollowId model){
+    public void followIdList (ModelFollowId model){
         postService.homePagePosts(model);
+        StaticValue.modelFollowId = model;
+
     }
 
 

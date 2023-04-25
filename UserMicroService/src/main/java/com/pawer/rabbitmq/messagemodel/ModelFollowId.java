@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Builder
@@ -11,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class ModelFollowId implements Serializable {
-    private List<Long> follodId;
+    private List<Long> followId;
 }
