@@ -22,6 +22,8 @@ public class TestAndRun {
         }).start();
     }
     public void getData(){
+        if (postService.findAll()==null){
 
+        }
     }
 }
