@@ -181,6 +181,13 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         return findByIdResponseDto;
     }
 
+    public String findUsernameForComment(String token){
+        Long id= jwtTokenManager.validToken(token).get();
+        User user=findById(id).get();
+        System.out.println("user servis dönüsü"+user.getUsername());
+        return user.getUsername();
+    }
+
 
 
     /**storage
