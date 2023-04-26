@@ -15,6 +15,7 @@ import com.pawer.repository.IPostRepository;
 import com.pawer.repository.entity.Post;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
+import com.pawer.utility.StaticValues;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -28,17 +29,14 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     private final IPostRepository postrepository;
     private final JwtTokenManager jwtTokenManager;
-    private final ICommentToPostRepository commentToPostRepository;
     private final FavToPostService favToPostService;
     private final LikeToPostService likeToPostService;
-    private ModelFollowId model;
 
-    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager, @Lazy ICommentToPostRepository commentToPostRepository
+    public PostService(IPostRepository postrepository, JwtTokenManager jwtTokenManager
             , @Lazy FavToPostService favToPostService,@Lazy  LikeToPostService likeToPostService) {
         super(postrepository);
         this.postrepository = postrepository;
         this.jwtTokenManager = jwtTokenManager;
-        this.commentToPostRepository = commentToPostRepository;
         this.favToPostService = favToPostService;
         this.likeToPostService = likeToPostService;
     }
@@ -69,7 +67,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         Pageable pageable = PageRequest.of(currentPage,  pageSize ,Sort.by(direction, sortingParameter) );
         List<PostFindAllResponse> postFindAllResponses = new ArrayList<>();
 
-        for(Post post: homePagePosts(model)){
+        for(Post post: homePagePosts()){
             PostFindAllResponse postFindAllResponse = new PostFindAllResponse();
             postFindAllResponse.setId(post.getId());
             postFindAllResponse.setUserId(post.getUserId());
@@ -102,11 +100,10 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
 
 
-    public List<Post> homePagePosts(ModelFollowId model){
-        this.model=model;
-        System.out.println("model ici gelen mesaj:... "+model.toString());
+    public List<Post> homePagePosts(){
+        System.out.println("model ici gelen mesaj:... "+StaticValues.modelFollowId.toString());
         List<Post> posts = new ArrayList<>();
-        for (Long folloId: model.getFollodId()){
+        for (Long folloId: StaticValues.modelFollowId.getFollodId()){
             Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
             for (Post post : posts1.get()){
                 posts.add(post);
@@ -116,11 +113,9 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return posts;
     }
 
-    public List<Post> discover(ModelFollowId model){
-        this.model=model;
-        System.out.println("model ici gelen mesaj:... "+model.toString());
+    public List<Post> discover(){
         List<Post> posts = new ArrayList<>();
-        for (Long folloId: model.getFollodId()){
+        for (Long folloId: StaticValues.modelFollowId.getFollodId()){
             Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
             for (Post post : posts1.get()){
                 posts.add(post);
@@ -144,7 +139,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         Pageable pageable = PageRequest.of(currentPage,  pageSize ,Sort.by(direction, sortingParameter) );
         List<PostFindAllResponse> postFindAllResponses = new ArrayList<>();
 
-        for(Post post: discover(model)){
+        for(Post post: discover()){
             if (post.getUserId()!=userId){
 
 

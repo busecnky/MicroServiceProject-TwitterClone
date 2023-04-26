@@ -3,6 +3,7 @@ package com.pawer.service;
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
+import com.pawer.manager.IElasticServiceManager;
 import com.pawer.repository.ILikePostRepository;
 import com.pawer.repository.entity.LikeToPost;
 import com.pawer.repository.entity.Post;
@@ -18,12 +19,15 @@ public class LikeToPostService extends ServiceManagerImpl<LikeToPost, String> {
     private final ILikePostRepository likePostRepository;
     private final JwtTokenManager jwtTokenManager;
     private final PostService postService;
+    private final IElasticServiceManager elasticServiceManager;
 
-    public LikeToPostService(ILikePostRepository likePostRepository, JwtTokenManager jwtTokenManager, @Lazy PostService postService) {
+
+    public LikeToPostService(ILikePostRepository likePostRepository, JwtTokenManager jwtTokenManager, @Lazy PostService postService, IElasticServiceManager elasticServiceManager) {
         super(likePostRepository);
         this.likePostRepository = likePostRepository;
         this.jwtTokenManager = jwtTokenManager;
         this.postService = postService;
+        this.elasticServiceManager = elasticServiceManager;
     }
 
 
@@ -65,6 +69,7 @@ public class LikeToPostService extends ServiceManagerImpl<LikeToPost, String> {
             post.get().setLikeCount(post.get().getLikeCount()+1);
             postService.save(post.get());
         }
+        elasticServiceManager.createLikePost(model);
     }
 
 

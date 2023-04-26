@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.time.LocalDateTime;
-
 import java.util.Optional;
 
 @RequiredArgsConstructor

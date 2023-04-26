@@ -14,17 +14,10 @@ public class RabbitConfig {
 
     // Key
     private String bindingKeyCreatePost = "binding-key-create-post";
-    private String bindingKeyGetPost = "binding-key-get-post";
-
-
 
 
     // Queu
     private String queueCreatePost = "queue-create-post";
-    private String queueGetPost = "queue-get-post";
-
-
-
 
 
 
@@ -52,11 +45,8 @@ public class RabbitConfig {
     /**
      * ---- Queu ----
      */
-
     @Bean
     Queue queueCreatePost(){return new Queue(queueCreatePost);}
-    @Bean
-    Queue queueGetPost(){return new Queue(queueGetPost);}
 
 
     /**
@@ -67,10 +57,8 @@ public class RabbitConfig {
     public Binding bindingCreatePost(final Queue queueCreatePost, final DirectExchange directExchange) {
         return BindingBuilder.bind(queueCreatePost).to(directExchange).with(bindingKeyCreatePost);
     }
-    @Bean
-    public Binding bindingGetPost(final Queue queueGetPost, final DirectExchange directExchange) {
-        return BindingBuilder.bind(queueGetPost).to(directExchange).with(bindingKeyCreatePost);
-    }
+
+
 
 
 

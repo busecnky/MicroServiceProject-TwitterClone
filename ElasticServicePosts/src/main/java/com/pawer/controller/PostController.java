@@ -3,6 +3,7 @@ package com.pawer.controller;
 
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.CommentToPostRequestDto;
+import com.pawer.dto.request.PostSaveRequestDto;
 import com.pawer.dto.response.BaseResponseDto;
 import com.pawer.dto.response.CommentToPostResponse;
 import com.pawer.dto.response.PostFindAllResponse;
@@ -29,6 +30,12 @@ public class PostController {
     private final CommentToPostService commentToPostService;
     private final FavToPostService favToPostService;
 
+    @PostMapping("/getalldata")
+    private ResponseEntity<Void> getAllData(@RequestBody PostSaveRequestDto dto){
+        System.out.println("Furkan buraya sout at dedi");
+        postService.getAllDataFromPost(dto);
+        return ResponseEntity.ok().build();
+    }
 
 
 
@@ -43,18 +50,17 @@ public class PostController {
 
         return ResponseEntity.ok(postService.findAllPosts(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
-    /*
-    @GetMapping("/findallpage")
+    @PostMapping("/discoverpage")
     @CrossOrigin("*")
-    public ResponseEntity<Page<Post>> findallPage(@RequestParam(defaultValue = "10")Integer pageSize,
-                                                  @RequestParam(defaultValue = "0")   int pageNumber,
-                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
-                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
+    public ResponseEntity<Page<PostFindAllResponse>> discover(@RequestBody BaseResponseDto dto,
+                                                                 @RequestParam(defaultValue = "10")Integer pageSize,
+                                                                 @RequestParam(defaultValue = "0") int pageNumber,
+                                                                 @RequestParam(defaultValue = "DESC") Sort.Direction direction,
+                                                                 @RequestParam(defaultValue = "createDate") String sortParameter){
 
-        return ResponseEntity.ok(postService.findAll(pageSize,pageNumber,direction,sortParameter));
+
+        return ResponseEntity.ok(postService.discoverPage(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
-
-*/
 
     @PostMapping("/createlikepost")
     @CrossOrigin("*")

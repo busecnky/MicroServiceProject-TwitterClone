@@ -14,72 +14,85 @@
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/profilecart.css">
-  <title>Home Page</title>
+
+  <title>Fav Posts</title>
 </head>
 <body>
 
 <header>
-  <h1 onclick="homepage()">
-    <img class="header__logo"  src="../HtmlPages/images/foot-print.png" alt="">Pawer
-  </h1>
+  <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
   <nav>
     <ul>
-      <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a onclick="aboutus()">About Us</a></li>
+      <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+      <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+      </section>
     </ul>
   </nav>
 </header>
 
 <main>
+
   <aside>
-    <hr class="hr">
     <section class="aside__home">
       <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
-      <label>Home</label>
-    </section>
-
-    <hr class="hr">
-    <section onclick="otherpeople()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/earth.png" alt="">
-      <label>People</label>
-    </section>
-
-
-    <section onclick="otherpeople2()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/earth.png" alt="">
-      <label>People2</label>
-    </section>
-    <section onclick="otherpeople3()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/earth.png" alt="">
-      <label>People3</label>
+      <p>Home</p>
     </section>
 
     <section onclick="otherpeople4()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/earth.png" alt="">
-      <label>People4</label>
+      <p>People</p>
+    </section>
+
+    <section onclick="friendRequest()" class="aside__friendrequest">
+      <p>Requests</p>
     </section>
 
     <section onclick="mypost()" class="aside__myposts">
-      <img src="../HtmlPages/images/social-media.png" alt="">
-      <label>My Posts</label>
+      <p>My Posts</p>
     </section>
 
+    <section onclick="favpostpage()" class="aside__myposts">
+      <p>Fav Posts </p>
+    </section>
+
+    <section onclick="discoverpage()" class="aside__friendrequest">
+      <p>Discover</p>
+    </section>
+
+
+
     <section onclick="profile()" class="aside__profile">
-      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-           alt="">
-      <label>Profile</label>
+      <p>Profile</p>
     </section>
     <button onclick="logout()" class="logout">Log Out</button>
   </aside>
 
   <section class="main__section">
     <!-- pawerbox Starts-->
-    <section class="pawerbox">
+    <form class="pawerbox">
+      <section class="pawerbox__input">
 
-    </section>
+
+        <h2 style="color: black">Welcome Favorite Posts</h2>
+
+        <!-- ************************ baslangic
+        dosya gönderme islemi
+          ************
+        <section class="pawerbox__input__file">
+            <input type="file" name="image" id="file">
+        </section>
+
+       ************************ bitis
+        dosya gönderme islemi
+          ************-->
+      </section>
+    </form>
     <!-- pawerbox ends-->
     <div class="feed" id="feed"></div>
   </section>
+
+
 
   <!--        burada basladim profile cartlarına-->
 
@@ -92,13 +105,7 @@
   <!--        burada bitti profile cartları-->
 
 
-  <section class="section__darklight">
-            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
-                dark_mode
-            </span>
 
-
-  </section>
 
 </main>
 
@@ -131,6 +138,8 @@
 <!-- Feed Ends-->
 
 
+
+
 <script src="../HtmlPages/js/pagination.js"></script>
 <script>
 
@@ -161,21 +170,17 @@
   function mypost(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
   }
-  function otherpeople(){
-    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
+  function favpostpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
   }
-
-
-  function otherpeople2(){
-    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople2.html';
+  function discoverpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/discover.html';
   }
-
-  function otherpeople3(){
-    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople3.html';
-  }
-
   function otherpeople4(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+  }
+  function friendRequest(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
   }
 
   function aboutus(){

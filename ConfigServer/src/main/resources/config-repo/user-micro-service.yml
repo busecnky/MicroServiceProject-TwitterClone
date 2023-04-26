@@ -32,5 +32,7 @@ spring:
 #    storage:
 #      bucketname: socialmediaavatar
 #
-
+redis:
+  host: "localhost"
+  port: 6379
 

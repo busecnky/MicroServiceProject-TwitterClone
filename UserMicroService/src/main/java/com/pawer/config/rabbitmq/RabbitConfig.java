@@ -17,7 +17,9 @@ public class RabbitConfig {
     private String bindingKeyUpdateUser = "binding-key-update-user";
     private String bindingKeyCreatePostTopic ="binding-key-create-post-topic";
     private String bindingKeyCreatePostTopicElastic ="binding-key-create-post-topic-elastic";
-    private String bindingKeyFollowPosts = "binding-key-follow-posts";
+    private String bindingKeyFollowIdList= "binding-key-follow-id-list";
+    private String bindingKeyFollowIdListElastic= "binding-key-follow-id-list-elastic";
+
 
 
 
@@ -27,7 +29,9 @@ public class RabbitConfig {
     private String queueUpdateUser= "queue-update-user";
     private String queueCreatePostTopic="queue-create-post-topic";
     private String queueCreatePostTopicElastic="queue-create-post-topic-elastic";
-    private String queueFollowPosts ="queue-follow-posts";
+    private String queueFollowIdList ="queue-follow-id-list";
+    private String queueFollowIdListElastic ="queue-follow-id-list-elastic";
+
 
 
 
@@ -75,7 +79,10 @@ public class RabbitConfig {
     }
 
     @Bean
-    Queue queueFollowPosts(){return new Queue(queueFollowPosts);};
+    Queue queueFollowIdList(){return new Queue(queueFollowIdList);};
+
+    @Bean
+    Queue queueFollowIdListElastic(){return new Queue(queueFollowIdListElastic);};
 
     /**
      * ---- Binding ----
@@ -100,8 +107,12 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Binding bindingFollowPosts(final Queue queueFollowPosts,final DirectExchange directExchange){
-        return BindingBuilder.bind(queueFollowPosts).to(directExchange).with(bindingKeyFollowPosts);
+    public Binding bindingFollowPosts(final Queue queueFollowIdList,final DirectExchange directExchange){
+        return BindingBuilder.bind(queueFollowIdList).to(directExchange).with(bindingKeyFollowIdList);
+    }
+    @Bean
+    public Binding bindingFollowPostsElastic(final Queue queueFollowIdListElastic,final DirectExchange directExchange){
+        return BindingBuilder.bind(queueFollowIdListElastic).to(directExchange).with(bindingKeyFollowIdListElastic);
     }
 
 

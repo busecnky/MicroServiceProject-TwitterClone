@@ -6,101 +6,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/mypost.css">
-  <title>My Post </title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>Home Page</title>
 </head>
 <body>
 
 <header>
-  <h1>
-    <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
-  </h1>
+  <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
   <nav>
-    <ul class="nav__aboutus" onclick="aboutus()">
-      <li><img  src="../HtmlPages/images/high-five.png"><a >About Us</a></li>
+    <ul>
+      <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+      <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+      </section>
     </ul>
   </nav>
 </header>
 
 <main>
+
   <aside>
-
-
-    <section class="aside__home" onclick="homepage()">
-      <img class="nav__home"  src="../HtmlPages/images/home-dark.png" alt="">
+    <section class="aside__home">
+      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
       <p>Home</p>
     </section>
 
-
-    <section onclick="otherpeople()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/earth.png" alt="">
+    <section onclick="otherpeople4()" class="aside__otherpeople">
       <p>People</p>
     </section>
 
-    <section onclick="mypost()" class="aside__myposts">
-      <section class="aside__myposts_header">
-        <img src="../HtmlPages/images/social-media.png" alt="">
-        <p>My Posts</p>
-      </section>
-
-      <section class="aside__orderby">
-        <section class="aside__orderby__inside">
-          <img src="../HtmlPages/images/sort.png" alt="">
-          <p>Order By</p>
-        </section>
-
-        <section class="aside__orderby__inside2">
-          <p>Create Date</p>
-          <p>Update Date</p>
-        </section>
-
-      </section>
+    <section onclick="friendRequest()" class="aside__friendrequest">
+      <p>Requests</p>
     </section>
+
+    <section onclick="mypost()" class="aside__myposts">
+      <p>My Posts</p>
+    </section>
+
+    <section onclick="favpostpage()" class="aside__myposts">
+      <p>Fav Posts </p>
+    </section>
+
+    <section onclick="discoverpage()" class="aside__friendrequest">
+      <p>Discover</p>
+    </section>
+
+
+
     <section onclick="profile()" class="aside__profile">
-      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-           alt="">
       <p>Profile</p>
     </section>
     <button onclick="logout()" class="logout">Log Out</button>
-
   </aside>
 
   <section class="main__section">
     <!-- pawerbox Starts-->
-    <section class="pawerbox">
-      <section class="profile__section">
-        <img class="mypostavatar"
-             src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-             alt="">
-        <p>10 paws</p>
+    <form class="pawerbox">
+      <section class="pawerbox__input">
+
+
+        <h2 style="color: black">Welcome My Posts</h2>
+
+        <!-- ************************ baslangic
+        dosya gönderme islemi
+          ************
+        <section class="pawerbox__input__file">
+            <input type="file" name="image" id="file">
+        </section>
+
+       ************************ bitis
+        dosya gönderme islemi
+          ************-->
       </section>
-      <br>
-      <hr class="bottom-line">
-    </section>
+    </form>
     <!-- pawerbox ends-->
-    <div id="feed"> </div>
+    <div class="feed" id="feed"></div>
   </section>
 
 
 
-  <section class="section__darklight">
-            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
-                dark_mode
-            </span>
-  </section>
+  <!--        burada basladim profile cartlarına-->
+
+
+
+  <!--   <div id="profilecart"></div>  -->
+
+
+
+  <!--        burada bitti profile cartları-->
+
+
+
 
 </main>
-
-
 
 
 <!-- posts ends-->
 <div class="container">
   <div class="pagination-wrapper">
     <svg class="btn btn--prev" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
-      <path d="M0-.5h24v24H0z" fill="none" />
+      <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+      <path d="M0-.5h24v24H0z" fill="none"/>
     </svg>
 
     <div class="pagination-container">
@@ -113,13 +128,15 @@
       <div class="little-dot  little-dot--last"></div>
     </div>
 
+
     <svg class="btn btn--next" height="96" viewBox="0 0 24 24" width="96" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" />
-      <path d="M0-.25h24v24H0z" fill="none" />
+      <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+      <path d="M0-.25h24v24H0z" fill="none"/>
     </svg>
   </div>
 </div>
 <!-- Feed Ends-->
+
 
 
 <script src="../HtmlPages/js/pagination.js"></script>
@@ -152,15 +169,27 @@
   function mypost(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
   }
-  function otherpeople(){
-    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
+  function favpostpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
+  }
+  function discoverpage(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/discover.html';
+  }
+  function otherpeople4(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+  }
+  function friendRequest(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
+  }
+
+  function aboutus(){
+    window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/aboutus.html';
   }
 
   function logout(){
     sessionStorage.setItem("token", null);
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
   }
-
 
 
   window.addEventListener('load', getData);

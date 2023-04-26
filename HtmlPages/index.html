@@ -20,17 +20,20 @@
 <body>
 
 <header>
-    <h1 onclick="homepage()">
-        <img class="header__logo"  src="../HtmlPages/images/foot-print.png" alt="">Pawer
-    </h1>
+    <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
     <nav>
-        <ul class="nav__aboutus" onclick="aboutus()">
-            <li><img  src="../HtmlPages/images/high-five.png"><a >About Us</a></li>
+        <ul>
+            <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+            <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+            </section>
         </ul>
     </nav>
 </header>
 
 <main>
+
     <aside>
         <section class="aside__home">
             <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
@@ -38,35 +41,28 @@
         </section>
 
         <section onclick="otherpeople4()" class="aside__otherpeople">
-            <img src="../HtmlPages/images/earth.png" alt="">
             <p>People</p>
         </section>
 
         <section onclick="friendRequest()" class="aside__friendrequest">
-            <img src="../HtmlPages/images/pet-care.png" alt="">
-            <p>Friend Requests</p>
+            <p>Requests</p>
         </section>
 
         <section onclick="mypost()" class="aside__myposts">
-            <img src="../HtmlPages/images/social-media.png" alt="">
             <p>My Posts</p>
         </section>
 
         <section onclick="favpostpage()" class="aside__myposts">
-            <img src="../HtmlPages/images/social-media.png" alt="">
             <p>Fav Posts </p>
         </section>
 
         <section onclick="discoverpage()" class="aside__friendrequest">
-            <img src="../HtmlPages/images/pet-care.png" alt="">
-            <p>discover</p>
+            <p>Discover</p>
         </section>
 
 
 
         <section onclick="profile()" class="aside__profile">
-            <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                 alt="">
             <p>Profile</p>
         </section>
         <button onclick="logout()" class="logout">Log Out</button>
@@ -74,35 +70,32 @@
 
     <section class="main__section">
         <!-- pawerbox Starts-->
-        <section class="pawerbox">
-            <form>
-                <section class="pawerbox__input">
-                    <section>
-                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                             alt="">
-                        <textarea type="text" id="content" class="md-textarea"
-                                  placeholder="What's happening?"></textarea>
-                    </section>
-
-                    <!-- ************************ baslangic
-                    dosya gönderme islemi
-                      ************-->
-                    <section class="pawerbox__input__file">
-                        <input type="file" name="image" id="file">
-                    </section>
-
-                    <!-- ************************ bitis
-                    dosya gönderme islemi
-                      ************-->
-                </section>
+        <form class="pawerbox">
+            <section class="pawerbox__input">
+                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                     alt="">
+                <textarea type="text" id="content" class="md-textarea"
+                          placeholder="What's happening?"></textarea>
                 <button class="pawbutton" onclick="pawPost()">Paw</button>
 
-                <hr class="bottom-line">
-            </form>
-        </section>
+
+                <!-- ************************ baslangic
+                dosya gönderme islemi
+                  ************
+                <section class="pawerbox__input__file">
+                    <input type="file" name="image" id="file">
+                </section>
+
+               ************************ bitis
+                dosya gönderme islemi
+                  ************-->
+            </section>
+        </form>
         <!-- pawerbox ends-->
         <div class="feed" id="feed"></div>
     </section>
+
+
 
     <!--        burada basladim profile cartlarına-->
 
@@ -112,16 +105,10 @@
 
 
 
-   <!--        burada bitti profile cartları-->
+    <!--        burada bitti profile cartları-->
 
 
-    <section class="section__darklight">
-            <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
-                dark_mode
-            </span>
 
-
-    </section>
 
 </main>
 
@@ -152,6 +139,7 @@
     </div>
 </div>
 <!-- Feed Ends-->
+
 
 
 <script src="../HtmlPages/js/pagination.js"></script>
@@ -283,6 +271,7 @@
         const isFav= document.getElementById('isFav');
 
         const page= 'http://localhost:6160/post/findallpage';
+        const pageelastic= 'http://localhost:9999/post/findallpage';
 
         // bu metod fetch isteği ile atılacak. on click ile aktifleştirilececk
 
@@ -297,7 +286,7 @@
 
 
         Promise.all([
-            fetch(page, {
+            fetch(pageelastic, {
                 method: 'Post',
                 headers: {
                     "Content-Type": "application/json",
@@ -405,7 +394,7 @@
     }
 
     function likepostheart(index,isliked){
-        const postliked = 'http://localhost:6260/user/createlikepost';
+        const postliked = 'http://localhost:6160/post/createlikepost';
 
         let id = document.getElementById(index+'in').value;
         let token = sessionStorage.getItem("token");
@@ -621,7 +610,7 @@
 
 
 
-        fetch("http://localhost:6260/user/createcommenttopost",{
+        fetch("http://localhost:6160/post/createcommenttopost",{
             method : "POST",
             headers: {
                 "Content-Type": "application/json",

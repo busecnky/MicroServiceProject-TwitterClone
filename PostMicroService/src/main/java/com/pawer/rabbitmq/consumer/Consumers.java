@@ -4,6 +4,7 @@ import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.rabbitmq.messagemodel.ModelFollowId;
 import com.pawer.repository.entity.Post;
 import com.pawer.service.PostService;
+import com.pawer.utility.StaticValues;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
@@ -23,17 +24,11 @@ public class Consumers {
         postService.savePost(modelCreatePost);
     }
 
-    @RabbitListener(queues = "queue-get-post")
-    public Iterable<Post> getPostsForElastic () {
-        System.out.println("postmicro service consumer ici:... ");
-        Iterable<Post> posts= postService.findAll();
-        System.out.println(posts.toString());
-        return posts;
-    }
-
-    @RabbitListener(queues = "queue-follow-posts")
+    @RabbitListener(queues = "queue-follow-id-list")
     public void follodIdList (ModelFollowId model){
-        postService.homePagePosts(model);
+        System.out.println(model.getFollodId().toString());
+
+        StaticValues.modelFollowId=model;
     }
 
 

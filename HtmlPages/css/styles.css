@@ -1,26 +1,26 @@
 :root{
-    --color7: #312d2e;
-    --color6: #c7c7c7;
-    --color5: #85586F;
-    --color4: #D0B8A8;
-    --color3: #DFD3C3;
-    --color2: #F8EDE3;
-    --color1: #fff9f4;
+    --color5: #fff9f4;
+    --color4: #78c059;
+    --color3: #002254; /*header*/
+    --color2: #EFEFEF; /* background*/
+    --color1: #001634;
 }
 
 .dark-theme{
-    --color1: #f30505; /*yok */
-    --color2: #57514a; /*body tamami */
-    --color3: rgba(185, 164, 142, 0.65); /*header */
-    --color4: #646464; /*post arka plani */
-    --color5: #ea0808; /*yok */
-    --color6: #ff0000; /*yok */
-    --color7: rgb(255, 252, 252); /*yazi rengi */
+    --color1: rgb(66, 66, 66);
+    --color2: rgba(42,39,40);
+    --color3: rgba(32,31,30);
+    --color4: #78c059;
+    --color5: #fff9f4;
 }
-#lightmode{
-    color: var(--color6);
+#light_mode{
+    color: var(--color4);
+    cursor: pointer;
 }
-
+#dark_mode{
+    color: var(--color4);
+    cursor: pointer;
+}
 
 
 *{
@@ -30,29 +30,31 @@
 
 }
 
-
 body{
     background-color: var(--color2);
-    color: var(--color7);
+    color: var(--color5);
     font-family: 'Poppins', sans-serif;
-    width: 100%;
+    align-items: center;
+    font-size: 12px;
 }
 
 main{
     display: flex;
-
+    max-width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-
 .header__logo{
-    margin-left: 20px;
-    height: 40px;
+    margin-left: 10px;
+    height: 30px;
 }
 h1{
     font-size: 2em;
     margin: 0;
-    color: var(--color3);
-    -webkit-text-stroke:2px  var(--color7);
+    color: var(--color2);
+    -webkit-text-stroke:1px var(--color4);
     padding: 10px;
 }
 
@@ -70,37 +72,44 @@ header{
 header h1:hover{
     cursor: pointer;
 }
-
+header nav{
+    display: flex;
+    align-items: center;
+}
 header nav ul{
     display: flex;
+    align-items: center;
     list-style: none;
     gap: 20px;
 }
 header nav ul li img{
     height: 20px;
 }
-header nav ul li{
-    height: 20px;
-    margin-right: 30px;
+header nav ul span{
+    margin-right: 20px;
 }
 header nav ul li a{
     text-decoration: none;
-    color: var(--color7);
+    color: var(--color4);
 }
-.nav__aboutus{
+.aboutus{
+    font-size: 14px;
     cursor: pointer;
 }
 
 aside{
     display: flex;
     height: 450px;
-    margin: 0px 50px 20px 0;
     padding-top: 20px;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 22%;
     border-radius: 10px;
+    color: var(--color1);
+    background-color: var(--color5);
+    margin-right: 50px;
+    margin-top: 20px;
+    border-top:5px solid var(--color3);
     box-shadow: -10px -10px 15px rgba(152, 150, 150, 0.282),
     10px 10px 15px rgba(70, 70, 70, 0.15);
 }
@@ -109,11 +118,11 @@ aside{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 600;
     border-radius: 10px;
-    border: var(--color7) 2px solid;
-    border-inline: var(--color7);
+    border: var(--color1) 2px solid;
+    border-inline: var(--color5);
     padding: 20px;
 
 }
@@ -128,7 +137,7 @@ aside{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom-color: var(--color7) 3px solid;
+    border-bottom-color: var(--color5) 3px solid;
     cursor: pointer;
 }
 .aside__otherpeople img{
@@ -139,7 +148,7 @@ aside{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom-color: var(--color7) 3px solid;
+    border-bottom-color: var(--color5) 3px solid;
 }
 .aside__friendrequest img{
     height: 30px;
@@ -150,7 +159,7 @@ aside{
     align-items: center;
 }
 .aside__myposts img{
-   height: 20px;
+    height: 20px;
     margin-right: 10px;
 }
 .listspan{
@@ -174,39 +183,48 @@ aside{
 
 .logout{
     width: 90px;
-    height: 40px;color: var(--color2);
-    background-color: var(--color7);
-    border-radius: 10px;
+    height: 40px;
+    color: var(--color5);
+    background-color: var(--color3);
     border: none;
+    cursor: pointer;
+    font-weight: 600;
 }
 
-.logout:hover{
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
-    10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
-    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
-}
 
+.logout:hover,
+.logout:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
+    transform: translateY(-0.25em);
+}
 
 .main__section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 66%;
-    margin: 20px;
+    margin-top: 20px;
 }
 
 /*pawer box*/
 
 .pawerbox{
+    display: flex;
+    flex-direction: column;
     padding-bottom: 10px;
-    justify-content: center;
-    width: 100%;
+    background-color: var(--color5);
+    border-top:5px solid var(--color3);
 
 }
 .pawerbox__input{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    height: 100px;
+    font-size: 20px;
+    border: solid;
+
+
 }
 
 .pawerbox__input img{
@@ -223,68 +241,50 @@ aside{
     width: 50%;
 }
 
-.pawerbox__btn{
-    display: flex;
-}
-.bottom-line{
-    background-color: var(--color7);
-    height: 2px;
-    border: none;
-    margin-top: 20px;
-}
 .mypostavatar{
     border-radius: 50%;
     height: 40px;
     width: 150px;
-    height: 150px;
-
-}
-
-.pawerbox form{
-    display: flex;
-    flex-direction: column;
-}
-.pawerbox__input{
-    color: var(--color7);
-    display: flex;
-    padding: 20px;
-    height: 100px;
-    font-size: 20px;
 
 }
 
 .md-textarea{
     height: 100px;
-    width: 60%;
     resize: none;
     padding: 20px;
-    background-color: var(--color4);
-    color: var(--color7);
-    flex: 1;
-    margin-left: 20px;
-    font-size: 20px;
-    border: none;
-    outline: none;
+    /*background-color: var(--color5);*/
+    /*color: var(--color1);*/
+    margin: 20px;
+    font-size: 14px;
     border-radius: 10px;
+    color: white;
+    background-color: #002254;
+    outline: none;
 }
 
 .md-textarea::placeholder{
-    color: var(--color7);
+    color: var(--color1);
+    color: white;
     font-family: 'Poppins', sans-serif;
 
 }
 .pawbutton{
-    background-color: var(--color7);
+    background-color: var(--color3);
     border: none;
-    color: var(--color2);
-    font-weight: 900;
-    border-radius: 10px;
-    width: 80px;
+    color: var(--color5);
+    font-weight: 600;
+    width: 100px;
     height: 40px;
+    border-radius: 5px;
     margin-top: 40px;
     margin-left: auto;
 }
-
+.pawbutton:hover,
+.pawbutton:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
+    transform: translateY(-0.25em);
+    background-color: #78c059;
+}
 /*post*/
 
 .post__avatar img{
@@ -295,7 +295,7 @@ aside{
 .post{
     display: flex;
     align-items: flex-start;
-    border-bottom: 1px solid var(--color7);
+    border-bottom: 1px solid var(--color5);
     padding-bottom: 10px;
     padding-top: 10px;
 
@@ -305,6 +305,7 @@ aside{
 .post__body{
     padding: 20px;
     border-radius: 10px;
+    background-color: gray;
     box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
     10px 10px 15px rgba(70, 70, 70, 0.15),
     inset -10px -10px 15px rgba(255, 255, 255, 0.3),
@@ -316,6 +317,7 @@ aside{
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
+
 }
 
 .post__badge{
@@ -327,14 +329,14 @@ aside{
 .post__headerSpecial{
     font-weight: 600;
     font-size: 16px;
-    color: var(--color7);
+    color: var(--color5);
 }
 .post__headerText {
-  display: flex;
+    display: flex;
     align-items: center;
 }
 #favicon{
- width: 24px;
+    width: 24px;
     height: 24px;
     cursor: pointer;
 
@@ -392,7 +394,7 @@ aside{
 
 .commentwrite{
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--color7);
+    border-bottom: 1px solid var(--color5);
     padding-right: 10px;
 
 }
@@ -402,7 +404,7 @@ aside{
     flex-direction: column;
 }
 .commentwrite__input{
-    color: var(--color7);
+    color: var(--color5);
     display: flex;
     padding: 20px;
     height: 100px;
@@ -425,7 +427,7 @@ aside{
     resize: none;
     padding: 10px;
     background-color: var(--color2);
-    color: var(--color7);
+    color: var(--color5);
     flex: 1;
     margin-left: 20px;
     font-size: 12px;
@@ -440,12 +442,12 @@ aside{
 }
 
 .commentwrite-textarea::placeholder{
-    color: var(--color7);
+    color: var(--color5);
     font-family: 'Poppins', sans-serif;
 
 }
 .commentbutton{
-    background-color: var(--color7);
+    background-color: var(--color5);
     border: none;
     color: var(--color2);
     font-weight: 900;
@@ -472,7 +474,7 @@ aside{
 .commentread{
     display: flex;
     align-items: flex-start;
-    border-bottom: 1px solid var(--color7);
+    border-bottom: 1px solid var(--color5);
     padding-bottom: 10px;
     padding-top: 10px;
 }
@@ -492,7 +494,7 @@ aside{
 .commentread__headerSpecial{
     font-weight: 600;
     font-size: 14px;
-    color: var(--color7);
+    color: var(--color5);
 }
 .commentread__headerText h3{
     font-size: 16px;
@@ -572,7 +574,7 @@ aside{
 .little-dot {
     width: 6px;
     height: 6px;
-    background: var(--color7);
+    background: var(--color5);
     border-radius: 100%;
     display: inline-block;
     vertical-align: middle;
@@ -704,7 +706,7 @@ aside{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    fill: var(--color7);
+    fill: var(--color5);
     cursor: pointer;
     transition: opacity 0.2s;
 }
