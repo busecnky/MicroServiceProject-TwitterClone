@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ApiGateway/SocialMedia_Pawer.ApiGateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ApiGateway/SocialMedia_Pawer.ApiGateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/AuthMicroService/SocialMedia_Pawer.AuthMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/AuthMicroService/SocialMedia_Pawer.AuthMicroService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/SocialMedia_Pawer.ConfigServer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ElasticServicePosts/SocialMedia_Pawer.ElasticServicePosts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ElasticServicePosts/SocialMedia_Pawer.ElasticServicePosts.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PostMicroService/SocialMedia_Pawer.PostMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PostMicroService/SocialMedia_Pawer.PostMicroService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ApiGateway/com.crower.SocialMedia_Pawer.ApiGateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ApiGateway/com.crower.SocialMedia_Pawer.ApiGateway.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/com.crower.SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/com.crower.SocialMedia_Pawer.ConfigServer.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.crower.SocialMedia_Pawer.ElasticServicePosts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.crower.SocialMedia_Pawer.ElasticServicePosts.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/com.pawer.SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/com.pawer.SocialMedia_Pawer.ConfigServer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.pawer.SocialMedia_Pawer.ElasticServicePosts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.pawer.SocialMedia_Pawer.ElasticServicePosts.main.iml" />
     </modules>
   </component>
 </project>

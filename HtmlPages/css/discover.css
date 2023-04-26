@@ -104,7 +104,7 @@ aside{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
     color: var(--color1);
     background-color: var(--color5);
     margin-right: 50px;
@@ -124,7 +124,6 @@ aside{
     border: var(--color1) 2px solid;
     border-inline: var(--color5);
     padding: 20px;
-    cursor: pointer;
 
 }
 .aside__home img{
@@ -141,26 +140,45 @@ aside{
     border-bottom-color: var(--color5) 3px solid;
     cursor: pointer;
 }
-
+.aside__otherpeople img{
+    height: 30px;
+    margin-right: 10px;
+}
 .aside__friendrequest{
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom-color: var(--color5) 3px solid;
-    cursor: pointer;
 }
-
+.aside__friendrequest img{
+    height: 30px;
+    margin-right: 10px;
+}
 .aside__myposts{
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
+.aside__myposts img{
+    height: 20px;
+    margin-right: 10px;
+}
+.listspan{
+    margin-right: 10px;
 
+}
 .aside__profile{
     display: flex;
     align-items: center;
     margin-right: 10px;
-    cursor: pointer;
+
+}
+
+.aside__profile img{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 20px;
+
 }
 
 .logout{
@@ -178,7 +196,6 @@ aside{
 .logout:focus {
     box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
     transform: translateY(-0.25em);
-    background-color: var(--color4);
 }
 
 .main__section{
@@ -196,7 +213,7 @@ aside{
     flex-direction: column;
     background-color: var(--color5);
     border-top:5px solid var(--color3);
-    border-radius: 5px;
+
 }
 .pawerbox__input{
     display: flex;
@@ -205,6 +222,9 @@ aside{
     padding: 20px;
     height: 100px;
     font-size: 20px;
+    border: solid;
+
+
 }
 
 .pawerbox__input img{
@@ -225,18 +245,20 @@ aside{
     border-radius: 50%;
     height: 40px;
     width: 150px;
+
 }
 
 .md-textarea{
     height: 100px;
     resize: none;
     padding: 20px;
+    /*background-color: var(--color5);*/
+    /*color: var(--color1);*/
     margin: 20px;
     font-size: 14px;
     color: var(--color1);
     background-color: var(--color5);
     outline: none;
-    border: none;
 }
 
 .md-textarea::placeholder{
@@ -251,6 +273,7 @@ aside{
     font-weight: 600;
     width: 100px;
     height: 40px;
+    border-radius: 5px;
     margin-top: 40px;
     margin-left: auto;
 }
@@ -258,7 +281,7 @@ aside{
 .pawbutton:focus {
     box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
     transform: translateY(-0.25em);
-    background-color: var(--color4);
+    background-color: #78c059;
 }
 /*post*/
 

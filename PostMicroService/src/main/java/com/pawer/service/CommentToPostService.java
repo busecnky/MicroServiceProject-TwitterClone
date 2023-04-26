@@ -44,6 +44,7 @@ public class CommentToPostService extends ServiceManagerImpl<CommentToPost,Strin
             commentToPostResponse.setComment(comment.getComment());
             commentToPostResponse.setPostId(comment.getPostId());
             commentToPostResponse.setUserId(String.valueOf(comment.getUserId()));
+            commentToPostResponse.setUsername(comment.getUsername());
             comments.add(commentToPostResponse);
         }
         return comments;

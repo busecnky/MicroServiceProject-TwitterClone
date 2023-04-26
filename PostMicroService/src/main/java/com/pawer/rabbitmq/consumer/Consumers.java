@@ -26,7 +26,7 @@ public class Consumers {
 
     @RabbitListener(queues = "queue-follow-id-list")
     public void follodIdList (ModelFollowId model){
-        System.out.println(model.getFollodId().toString());
+        System.out.println(model.getFollowId().toString());
 
         StaticValues.modelFollowId=model;
     }

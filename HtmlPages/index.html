@@ -56,7 +56,7 @@
             <p>Fav Posts </p>
         </section>
 
-        <section onclick="discoverpage()" class="aside__friendrequest">
+        <section onclick="discoverpage()" class="aside__discover">
             <p>Discover</p>
         </section>
 
@@ -286,7 +286,7 @@
 
 
         Promise.all([
-            fetch(pageelastic, {
+            fetch(page, {
                 method: 'Post',
                 headers: {
                     "Content-Type": "application/json",
@@ -515,7 +515,7 @@
                                     alt="">
                                     </div>
                                     <div class="commentread__headerText">
-                                        <h3> ${response[i].userId}
+                                        <h3> ${response[i].name}
                                             <span class="commentread__headerSpecial">
                                             </span>
                                         </h3>

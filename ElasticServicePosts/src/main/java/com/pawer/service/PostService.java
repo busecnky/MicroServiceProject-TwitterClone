@@ -108,7 +108,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     public List<Post> homePagePosts(){
 
         List<Post> posts = new ArrayList<>();
-        for (Long folloId: StaticValues.modelFollowId.getFollodId()){
+        for (Long folloId: StaticValues.modelFollowId.getFollowId()){
             Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
             for (Post post : posts1.get()){
                 posts.add(post);
@@ -120,7 +120,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     public List<Post> discover( ){
         List<Post> posts = new ArrayList<>();
-        for (Long folloId: StaticValues.modelFollowId.getFollodId()){
+        for (Long folloId: StaticValues.modelFollowId.getFollowId()){
             Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
             for (Post post : posts1.get()){
                 posts.add(post);

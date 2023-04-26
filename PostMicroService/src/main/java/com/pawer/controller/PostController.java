@@ -65,7 +65,7 @@ public class PostController {
 
         try {
             System.out.println("thread sleep bekleniyor");
-            Thread.sleep(1000);
+            Thread.sleep(500);
             System.out.println("thread sleep bekleme bitti");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -89,10 +89,10 @@ public class PostController {
 
     @PostMapping("/createlikepost")
     @CrossOrigin("*")
-    public ResponseEntity<Void> createLikePost(@RequestBody BaseRequestDto dto){
+    public ResponseEntity<Boolean> createLikePost(@RequestBody BaseRequestDto dto){
         System.out.println("create like post a geldi");
         likeToPostService.createLikePost(dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(true);
     }
 
     @PostMapping ("/findallmypost")
@@ -135,11 +135,10 @@ public class PostController {
 
     @PostMapping("/createcommenttopost")
     @CrossOrigin("*")
-    public ResponseEntity<Void> createCommentToPost(@RequestBody CommentToPostRequestDto dto){
+    public ResponseEntity<Boolean> createCommentToPost(@RequestBody CommentToPostRequestDto dto){
         System.out.println("create comment post a geldi");
-
         commentToPostService.createCommentToPost(dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(true);
     }
 
 

@@ -1,11 +1,10 @@
 :root{
-  --color7: #312d2e;
-  --color6: #c7c7c7;
-  --color5: rgba(73, 45, 45, 0.72);
+  --color7: #001634;
+  --color5: #002254;
   --color4: #D0B8A8;
   --color3: #DFD3C3;
   --color2: #d0c8c0;
-  --color1: #fff9f4;
+  --color1: #ffffff;
 }
 
 *,
@@ -15,17 +14,21 @@
   margin: 0;
   padding: 0;
 }
-
+body, html {
+  height: 100%;
+  margin: 0;
+}
 body {
   font-family: 'Poppins', sans-serif;
-  background: var(--color7);
+  background-color: var(--color2);
+
 }
 
 input{
   border: none;
   outline: none;
   background: none;
-  background-color: var(--color3);
+  background-color: var(--color1);
   font-family: 'Poppins', sans-serif;
   display: block;
   width: 100%;
@@ -33,7 +36,6 @@ input{
   font-size: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
-  border-radius: 30px;
 
 }
 button {
@@ -41,25 +43,24 @@ button {
   margin: 0 auto;
   width: 260px;
   height: 30px;
-  border-radius: 30px;
   color: var(--color1);
   font-size: 15px;
   cursor: pointer;
 }
-
+button:hover,
+button:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--color5);
+  transform: translateY(-0.25em);
+}
 
 .cont {
-  border-radius: 20px;
   overflow: hidden;
   position: relative;
   width: 900px;
   height: 600px;
   margin: 0 auto 100px;
-  background: var(--color2);
-  box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
-  10px 10px 15px rgba(70, 70, 70, 0.15),
-  inset -10px -10px 15px rgba(255, 255, 255, 0.3),
-  inset 10px 10px 15px rgba(70, 70, 70, 0.15);
+  background: var(--color1);
+  box-shadow: 30px 30px 15px rgba(70, 70, 70, 0.5);
 }
 .logo-right{
     margin-left: 80%;
@@ -70,12 +71,12 @@ button {
 .logo1{
     display: flex;
     justify-content: right;
-    height: 40px;
+    height: 60px;
 }
 .logo2{
     display: flex;
     justify-content: right;
-    height: 40px;
+    height: 60px;
   margin-bottom: 0;
 }
 
@@ -100,7 +101,8 @@ button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: var(--color2);
+  background: var(--color1);
+  box-shadow: 20px 20px 15px rgba(70, 70, 70, 0.9);
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;
@@ -217,8 +219,6 @@ button {
   width: 100%;
   height: 100%;
   border: 2px solid var(--color1);
-;
-  border-radius: 30px;
 }
 
 .img__btn span {
@@ -300,7 +300,7 @@ label span {
 }
 
 .sign-in {
-  margin-top: 100px;
+  margin-top: 50px;
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }

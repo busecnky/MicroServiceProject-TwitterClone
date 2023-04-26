@@ -16,4 +16,5 @@ public class CommentToPost extends BaseEntity {
     private String postId;
     private Long userId;
     private String comment;
+    private String username;
 }

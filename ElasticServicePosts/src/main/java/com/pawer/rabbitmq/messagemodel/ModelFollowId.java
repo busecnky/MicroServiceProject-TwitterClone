@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class ModelFollowId implements Serializable {
-    private List<Long> follodId;
+    private List<Long> followId;
 }

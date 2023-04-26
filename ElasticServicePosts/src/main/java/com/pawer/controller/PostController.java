@@ -37,12 +37,7 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/getalldata")
-    private ResponseEntity<Void> getAllData(@RequestBody PostSaveRequestDto dto){
-        System.out.println("Furkan buraya sout at dedi");
-        postService.getAllDataFromPost(dto);
-        return ResponseEntity.ok().build();
-    }
+
 
 
     @PostMapping("/findallpage")
@@ -53,7 +48,15 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
 
+        try {
+            System.out.println("thread sleep bekleniyor");
+            Thread.sleep(500);
+            System.out.println("thread sleep bekleme bitti");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
+        System.out.println("thread beklemedi");
         return ResponseEntity.ok(postService.findAllPosts(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
     @PostMapping("/discoverpage")

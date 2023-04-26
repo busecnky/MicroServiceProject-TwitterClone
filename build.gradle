@@ -15,7 +15,7 @@ allprojects{
     apply from: "${rootDir}/dependencies.gradle"
 }
 subprojects {
-    group = "com.crower"
+    group = "com.pawer"
     version = "v.0.1"
     targetCompatibility =  JavaVersion.VERSION_17
     sourceCompatibility = JavaVersion.VERSION_17
