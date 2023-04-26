@@ -39,6 +39,18 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "0") int pageNumber,
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
+        try {
+            /**
+             * sayfa yüklenirken
+             * kullanicinin takip ettiklerinin id listesi gerekiyor
+             * bu da rabbit den geliyor ama rabbit yavaş kalıyor bu yüzden hata veriyor
+             * bu hatanın çözümü olarak thread sleep atıldı ve 1sn verildi.
+             *
+             */
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
 
         return ResponseEntity.ok(postService.findAllPosts(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
@@ -51,7 +63,15 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
 
+        try {
+            System.out.println("thread sleep bekleniyor");
+            Thread.sleep(1000);
+            System.out.println("thread sleep bekleme bitti");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
+        System.out.println("thread beklemedi");
         return ResponseEntity.ok(postService.discoverPage(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
     /*
@@ -70,6 +90,7 @@ public class PostController {
     @PostMapping("/createlikepost")
     @CrossOrigin("*")
     public ResponseEntity<Void> createLikePost(@RequestBody BaseRequestDto dto){
+        System.out.println("create like post a geldi");
         likeToPostService.createLikePost(dto);
         return ResponseEntity.ok().build();
     }
@@ -115,6 +136,8 @@ public class PostController {
     @PostMapping("/createcommenttopost")
     @CrossOrigin("*")
     public ResponseEntity<Void> createCommentToPost(@RequestBody CommentToPostRequestDto dto){
+        System.out.println("create comment post a geldi");
+
         commentToPostService.createCommentToPost(dto);
         return ResponseEntity.ok().build();
     }

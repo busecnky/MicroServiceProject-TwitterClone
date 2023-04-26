@@ -104,6 +104,7 @@ aside{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    border-radius: 10px;
     color: var(--color1);
     background-color: var(--color5);
     margin-right: 50px;
@@ -158,7 +159,7 @@ aside{
     align-items: center;
 }
 .aside__myposts img{
-   height: 20px;
+    height: 20px;
     margin-right: 10px;
 }
 .listspan{
@@ -221,6 +222,8 @@ aside{
     padding: 20px;
     height: 100px;
     font-size: 20px;
+    border: solid;
+
 
 }
 
@@ -249,16 +252,19 @@ aside{
     height: 100px;
     resize: none;
     padding: 20px;
-    background-color: var(--color5);
-    color: var(--color1);
+    /*background-color: var(--color5);*/
+    /*color: var(--color1);*/
     margin: 20px;
     font-size: 14px;
-    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #002254;
     outline: none;
 }
 
 .md-textarea::placeholder{
     color: var(--color1);
+    color: white;
     font-family: 'Poppins', sans-serif;
 
 }
@@ -269,6 +275,7 @@ aside{
     font-weight: 600;
     width: 100px;
     height: 40px;
+    border-radius: 5px;
     margin-top: 40px;
     margin-left: auto;
 }
@@ -276,6 +283,7 @@ aside{
 .pawbutton:focus {
     box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
     transform: translateY(-0.25em);
+    background-color: #78c059;
 }
 /*post*/
 
@@ -297,6 +305,7 @@ aside{
 .post__body{
     padding: 20px;
     border-radius: 10px;
+    background-color: gray;
     box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
     10px 10px 15px rgba(70, 70, 70, 0.15),
     inset -10px -10px 15px rgba(255, 255, 255, 0.3),
@@ -308,6 +317,7 @@ aside{
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
+
 }
 
 .post__badge{
@@ -322,11 +332,11 @@ aside{
     color: var(--color5);
 }
 .post__headerText {
-  display: flex;
+    display: flex;
     align-items: center;
 }
 #favicon{
- width: 24px;
+    width: 24px;
     height: 24px;
     cursor: pointer;
 

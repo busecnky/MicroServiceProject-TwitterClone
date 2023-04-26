@@ -3,6 +3,7 @@ package com.pawer.service;
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.CommentToPostRequestDto;
 import com.pawer.dto.response.CommentToPostResponse;
+import com.pawer.manager.IElasticServiceManager;
 import com.pawer.repository.ICommentToPostRepository;
 import com.pawer.repository.entity.CommentToPost;
 import com.pawer.utility.JwtTokenManager;
@@ -16,20 +17,24 @@ import java.util.List;
 public class CommentToPostService extends ServiceManagerImpl<CommentToPost,String> {
     private final ICommentToPostRepository commentToPostRepository;
     private final JwtTokenManager jwtTokenManager;
+    private final IElasticServiceManager elasticServiceManager;
 
-    public CommentToPostService(ICommentToPostRepository commentToPostRepository, JwtTokenManager jwtTokenManager) {
+
+    public CommentToPostService(ICommentToPostRepository commentToPostRepository, JwtTokenManager jwtTokenManager, IElasticServiceManager elasticServiceManager) {
         super(commentToPostRepository);
         this.commentToPostRepository = commentToPostRepository;
         this.jwtTokenManager = jwtTokenManager;
+        this.elasticServiceManager = elasticServiceManager;
     }
 
-    public void createCommentToPost(CommentToPostRequestDto model){
+    public void createCommentToPost(CommentToPostRequestDto dto){
         CommentToPost commentToPost= new CommentToPost();
-        Long userId = jwtTokenManager.validToken(model.getToken()).get();
-        commentToPost.setComment(model.getComment());
+        Long userId = jwtTokenManager.validToken(dto.getToken()).get();
+        commentToPost.setComment(dto.getComment());
         commentToPost.setUserId(userId);
-        commentToPost.setPostId(model.getPostId());
+        commentToPost.setPostId(dto.getPostId());
         commentToPostRepository.save(commentToPost);
+        elasticServiceManager.createCommentToPost(dto);
     }
 
     public List<CommentToPostResponse> findAllComment(BaseRequestDto dto){

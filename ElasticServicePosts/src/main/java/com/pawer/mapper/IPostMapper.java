@@ -15,7 +15,7 @@ public interface IPostMapper {
     IPostMapper INSTANCE= Mappers.getMapper(IPostMapper.class);
 
 
-   // Post toPost(final ModelCreatePost modelCreatePost);
+    // Post toPost(final ModelCreatePost modelCreatePost);
 
     PostFindAllResponse toPostFindAllResponse(final Post post);
 

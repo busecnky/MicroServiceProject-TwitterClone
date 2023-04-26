@@ -124,7 +124,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
 
 
-
     public Optional<User> findOptionalByUsername(String username){
         return userRepository.findOptionalByUsername(username);
     }
@@ -166,7 +165,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         return profileCartResponses;
     }
 
-    @Cacheable(value = "findMe")
     public FindByIdResponseDto findMe(BaseRequestDto dto){
         Optional<Long> userId= jwtTokenManager.validToken(dto.getToken());
         User user=findById(userId.get()).get();
@@ -175,13 +173,14 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         findByIdResponseDto.setSurname(user.getSurname());
         findByIdResponseDto.setUsername(user.getUsername());
         Optional<List<Long>> follows = followService.findOptionalFollowList(userId.get());
-        follows.get().add(5L);
         ModelFollowId model = new ModelFollowId();
-        model.setFollowId(follows.get());
+        model.setFollodId(follows.get());
         System.out.println("follow ıd'leri getir... "+model.toString());
-        producerDirectService.sendFollowId(model);
+        producerDirectService.sendFollodId(model);
+        producerDirectService.sendFollodIdElastic(model);
         return findByIdResponseDto;
     }
+
 
 
     /**storage

@@ -34,66 +34,66 @@
 
 <main>
 
-        <aside>
-            <section class="aside__home">
-                <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
-                <p>Home</p>
-            </section>
-
-            <section onclick="otherpeople4()" class="aside__otherpeople">
-                <p>People</p>
-            </section>
-
-            <section onclick="friendRequest()" class="aside__friendrequest">
-                <p>Requests</p>
-            </section>
-
-            <section onclick="mypost()" class="aside__myposts">
-                <p>My Posts</p>
-            </section>
-
-            <section onclick="favpostpage()" class="aside__myposts">
-                <p>Fav Posts </p>
-            </section>
-
-            <section onclick="discoverpage()" class="aside__friendrequest">
-                <p>Discover</p>
-            </section>
-
-
-
-            <section onclick="profile()" class="aside__profile">
-                <p>Profile</p>
-            </section>
-            <button onclick="logout()" class="logout">Log Out</button>
-        </aside>
-
-        <section class="main__section">
-            <!-- pawerbox Starts-->
-            <form class="pawerbox">
-                <section class="pawerbox__input">
-                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                         alt="">
-                    <textarea type="text" id="content" class="md-textarea"
-                              placeholder="What's happening?"></textarea>
-                    <button class="pawbutton" onclick="pawPost()">Paw</button>
-
-
-                    <!-- ************************ baslangic
-                    dosya gönderme islemi
-                      ************
-                    <section class="pawerbox__input__file">
-                        <input type="file" name="image" id="file">
-                    </section>
-
-                   ************************ bitis
-                    dosya gönderme islemi
-                      ************-->
-                </section>
-            </form>
-            <!-- pawerbox ends-->
-            <div class="feed" id="feed"></div>
+    <aside>
+        <section class="aside__home">
+            <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+            <p>Home</p>
         </section>
+
+        <section onclick="otherpeople4()" class="aside__otherpeople">
+            <p>People</p>
+        </section>
+
+        <section onclick="friendRequest()" class="aside__friendrequest">
+            <p>Requests</p>
+        </section>
+
+        <section onclick="mypost()" class="aside__myposts">
+            <p>My Posts</p>
+        </section>
+
+        <section onclick="favpostpage()" class="aside__myposts">
+            <p>Fav Posts </p>
+        </section>
+
+        <section onclick="discoverpage()" class="aside__friendrequest">
+            <p>Discover</p>
+        </section>
+
+
+
+        <section onclick="profile()" class="aside__profile">
+            <p>Profile</p>
+        </section>
+        <button onclick="logout()" class="logout">Log Out</button>
+    </aside>
+
+    <section class="main__section">
+        <!-- pawerbox Starts-->
+        <form class="pawerbox">
+            <section class="pawerbox__input">
+                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                     alt="">
+                <textarea type="text" id="content" class="md-textarea"
+                          placeholder="What's happening?"></textarea>
+                <button class="pawbutton" onclick="pawPost()">Paw</button>
+
+
+                <!-- ************************ baslangic
+                dosya gönderme islemi
+                  ************
+                <section class="pawerbox__input__file">
+                    <input type="file" name="image" id="file">
+                </section>
+
+               ************************ bitis
+                dosya gönderme islemi
+                  ************-->
+            </section>
+        </form>
+        <!-- pawerbox ends-->
+        <div class="feed" id="feed"></div>
+    </section>
 
 
 
@@ -105,7 +105,7 @@
 
 
 
-   <!--        burada bitti profile cartları-->
+    <!--        burada bitti profile cartları-->
 
 
 
@@ -139,6 +139,7 @@
     </div>
 </div>
 <!-- Feed Ends-->
+
 
 
 <script src="../HtmlPages/js/pagination.js"></script>
@@ -270,6 +271,7 @@
         const isFav= document.getElementById('isFav');
 
         const page= 'http://localhost:6160/post/findallpage';
+        const pageelastic= 'http://localhost:9999/post/findallpage';
 
         // bu metod fetch isteği ile atılacak. on click ile aktifleştirilececk
 
@@ -284,7 +286,7 @@
 
 
         Promise.all([
-            fetch(page, {
+            fetch(pageelastic, {
                 method: 'Post',
                 headers: {
                     "Content-Type": "application/json",
@@ -392,7 +394,7 @@
     }
 
     function likepostheart(index,isliked){
-        const postliked = 'http://localhost:6260/user/createlikepost';
+        const postliked = 'http://localhost:6160/post/createlikepost';
 
         let id = document.getElementById(index+'in').value;
         let token = sessionStorage.getItem("token");
@@ -608,7 +610,7 @@
 
 
 
-        fetch("http://localhost:6260/user/createcommenttopost",{
+        fetch("http://localhost:6160/post/createcommenttopost",{
             method : "POST",
             headers: {
                 "Content-Type": "application/json",

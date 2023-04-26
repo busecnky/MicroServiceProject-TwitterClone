@@ -11,7 +11,6 @@ import com.pawer.utility.ServiceManagerImpl;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,13 +26,6 @@ public class LikeToPostService extends ServiceManagerImpl<LikeToPost, String> {
         this.postService = postService;
     }
 
-    public Optional<List<LikeToPost>> findByUserIdList(Long userId){
-        return likePostRepository.findOptionalByUserId(userId);
-    }
-
-    public  Optional<LikeToPost> findByPostIdAndUserId(String postId, Long userId) {
-       return likePostRepository.findOptionalByPostIdAndUserId(postId,userId);
-    }
 
     public Boolean findByPostIdAndUserIdBoolean(String postId, Long userId) {
         Optional<LikeToPost> likeToPost = likePostRepository.findOptionalByPostIdAndUserId(postId, userId);

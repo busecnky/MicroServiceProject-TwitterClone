@@ -2,7 +2,6 @@ package com.pawer.mapper;
 
 
 import com.pawer.dto.request.PostSaveRequestDto;
-import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.repository.entity.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -90,8 +90,6 @@ public class FavToPostService extends ServiceManagerImpl<FavToPost,String> {
                     myFavPostListResponseDtos.add(myFavPostListResponseDto);
                 }
             }
-            System.out.println("for cikisi");
-            System.out.println(myFavPostListResponseDtos.toString());
             return myFavPostListResponseDtos;
         }
         System.out.println("en alt return oncesi");

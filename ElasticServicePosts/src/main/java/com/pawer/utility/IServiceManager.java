@@ -1,6 +1,5 @@
 package com.pawer.utility;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface IServiceManager <T,ID>{
