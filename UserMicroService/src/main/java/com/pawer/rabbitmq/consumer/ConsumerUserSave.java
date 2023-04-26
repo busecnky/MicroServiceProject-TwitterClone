@@ -1,6 +1,7 @@
 package com.pawer.rabbitmq.consumer;
 
 
+import com.pawer.rabbitmq.messagemodel.ModelFindUsernameForCreateComment;
 import com.pawer.rabbitmq.messagemodel.ModelUserSave;
 import com.pawer.service.FollowService;
 import com.pawer.service.UserService;
@@ -16,7 +17,11 @@ public class ConsumerUserSave {
     @RabbitListener(queues = "queue-create-user")
     public void listenerSaveDriver(ModelUserSave modelUserSave){
         userService.createUser(modelUserSave);
+    }
 
-
+    @RabbitListener(queues = "queue-create-comment")
+    public String listenerCreateComment(ModelFindUsernameForCreateComment model){
+        System.out.println("user microda consumer model ici.. "+model.getToken());
+       return userService.findUsernameForComment(model.getToken());
     }
 }

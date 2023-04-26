@@ -4,6 +4,8 @@ import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.CommentToPostRequestDto;
 import com.pawer.dto.response.CommentToPostResponse;
 import com.pawer.manager.IElasticServiceManager;
+import com.pawer.rabbitmq.messagemodel.ModelFindUsernameForCreateComment;
+import com.pawer.rabbitmq.producer.ProducerDirectService;
 import com.pawer.repository.ICommentToPostRepository;
 import com.pawer.repository.entity.CommentToPost;
 import com.pawer.utility.JwtTokenManager;
@@ -18,21 +20,28 @@ public class CommentToPostService extends ServiceManagerImpl<CommentToPost,Strin
     private final ICommentToPostRepository commentToPostRepository;
     private final JwtTokenManager jwtTokenManager;
     private final IElasticServiceManager elasticServiceManager;
+    private final ProducerDirectService producerDirectService;
 
 
-    public CommentToPostService(ICommentToPostRepository commentToPostRepository, JwtTokenManager jwtTokenManager, IElasticServiceManager elasticServiceManager) {
+    public CommentToPostService(ICommentToPostRepository commentToPostRepository, JwtTokenManager jwtTokenManager, IElasticServiceManager elasticServiceManager, ProducerDirectService producerDirectService) {
         super(commentToPostRepository);
         this.commentToPostRepository = commentToPostRepository;
         this.jwtTokenManager = jwtTokenManager;
         this.elasticServiceManager = elasticServiceManager;
+        this.producerDirectService = producerDirectService;
     }
 
     public void createCommentToPost(CommentToPostRequestDto dto){
         CommentToPost commentToPost= new CommentToPost();
+        ModelFindUsernameForCreateComment model = new ModelFindUsernameForCreateComment();
+        model.setToken(dto.getToken());
+        String username=producerDirectService.sendfindUsernameForCreateComment(model);
+        System.out.println("postmicro da create comment ici username... "+username);
         Long userId = jwtTokenManager.validToken(dto.getToken()).get();
         commentToPost.setComment(dto.getComment());
         commentToPost.setUserId(userId);
         commentToPost.setPostId(dto.getPostId());
+        commentToPost.setUsername(username);
         commentToPostRepository.save(commentToPost);
         elasticServiceManager.createCommentToPost(dto);
     }
