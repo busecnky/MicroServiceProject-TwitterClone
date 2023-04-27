@@ -45,6 +45,9 @@ yenilememiz gerekiyor. bi sacmaliyor elastic muhtemelen feign istekleri elastic'
 * sol taraftaki cubukta hangi sayfadaysak o büyütülecek vs.
 * profile.html
 * people.html
+* commentread ler için commenttoposta tarih ve saat eklenmeli
+* comment tuşu çok saçma duruyor comment alanı comment tuşuna basılarak açılmalı
+
 
 
 ---

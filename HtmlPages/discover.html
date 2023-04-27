@@ -35,8 +35,7 @@
 <main>
 
   <aside>
-    <section class="aside__home">
-      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+    <section onclick="homepage()" class="aside__home">
       <p>Home</p>
     </section>
 
@@ -56,7 +55,9 @@
       <p>Fav Posts </p>
     </section>
 
-    <section onclick="discoverpage()" class="aside__friendrequest">
+    <section onclick="discoverpage()" class="aside__discover">
+      <img src="../HtmlPages/images/earth.png" alt="">
+
       <p>Discover</p>
     </section>
 
@@ -341,7 +342,7 @@
                             <span class="post__time">${data[0].content[index].time}</span>
                          </div>
                         <div class="post__footer">
-                            <span class="material-symbols-outlined likecomment">chat</span>
+                            <img class="post__comment_img" src="../HtmlPages/images/comment.png" alt="">
                             <div class="post__like">
                                  <img class="post__like_img" onclick="likepostheart(${index},${data[0].content[index].isLiked})" src="${data[0].content[index].isLiked === true ? '../HtmlPages/images/redheart.png' :  '../HtmlPages/images/whiteheart.png'}" alt="">
                                 <label>${data[0].content[index].likeCount}</label>
@@ -352,7 +353,7 @@
                             <div class="commenttext_avatar">
                                 <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
                                     alt="">
-                                    <p><sub><i>@${data[1].username}</i> </sub></p>
+                                    <p hidden="hidden"><sub><i>@${data[1].username}</i> </sub></p>
                                  </div>
 
                                 <textarea type="text" id=${index+'cm'} class="commentwrite-textarea"

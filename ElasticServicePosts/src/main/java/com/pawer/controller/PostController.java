@@ -50,7 +50,7 @@ public class PostController {
 
         try {
             System.out.println("thread sleep bekleniyor");
-            Thread.sleep(500);
+            Thread.sleep(300);
             System.out.println("thread sleep bekleme bitti");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

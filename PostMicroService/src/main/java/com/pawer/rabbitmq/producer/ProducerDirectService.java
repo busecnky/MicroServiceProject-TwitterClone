@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class ProducerDirectService {
     private final RabbitTemplate rabbitTemplate;
     public String sendfindUsernameForCreateComment(ModelFindUsernameForCreateComment model){
-        System.out.println("producer girdi model ici.." +model.getToken());
        return (String) rabbitTemplate.convertSendAndReceive("exchange-direct","binding-key-create-comment",model);
             }
 }

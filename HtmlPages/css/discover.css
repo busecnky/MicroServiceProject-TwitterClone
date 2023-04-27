@@ -43,7 +43,6 @@ main{
     max-width: 70%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-evenly;
 }
 
 .header__logo{
@@ -100,11 +99,12 @@ header nav ul li a{
 aside{
     display: flex;
     height: 450px;
+    width: 250px;
     padding-top: 20px;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 5px;
     color: var(--color1);
     background-color: var(--color5);
     margin-right: 50px;
@@ -115,6 +115,23 @@ aside{
 }
 
 .aside__home{
+    cursor: pointer;
+
+}
+
+
+.aside__otherpeople{
+    cursor: pointer;
+}
+
+.aside__friendrequest{
+    cursor: pointer;
+}
+
+.aside__myposts{
+    cursor: pointer;
+}
+.aside__discover{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -124,61 +141,16 @@ aside{
     border: var(--color1) 2px solid;
     border-inline: var(--color5);
     padding: 20px;
-
+    cursor: pointer;
 }
-.aside__home img{
+.aside__discover img{
     height: 40px;
     width: 40px;
     border-radius: 50%;
-
 }
 
-.aside__otherpeople{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom-color: var(--color5) 3px solid;
-    cursor: pointer;
-}
-.aside__otherpeople img{
-    height: 30px;
-    margin-right: 10px;
-}
-.aside__friendrequest{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom-color: var(--color5) 3px solid;
-}
-.aside__friendrequest img{
-    height: 30px;
-    margin-right: 10px;
-}
-.aside__myposts{
-    display: flex;
-    align-items: center;
-}
-.aside__myposts img{
-    height: 20px;
-    margin-right: 10px;
-}
-.listspan{
-    margin-right: 10px;
-
-}
 .aside__profile{
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-
-}
-
-.aside__profile img{
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    margin-right: 20px;
-
+    cursor: pointer;
 }
 
 .logout{
@@ -196,6 +168,7 @@ aside{
 .logout:focus {
     box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
     transform: translateY(-0.25em);
+    background-color: var(--color4);
 }
 
 .main__section{
@@ -203,7 +176,7 @@ aside{
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-
+    width: 75%;
 }
 
 /*pawer box*/
@@ -211,9 +184,10 @@ aside{
 .pawerbox{
     display: flex;
     flex-direction: column;
+    width: 80%;
     background-color: var(--color5);
     border-top:5px solid var(--color3);
-
+    border-radius: 5px;
 }
 .pawerbox__input{
     display: flex;
@@ -222,43 +196,29 @@ aside{
     padding: 20px;
     height: 100px;
     font-size: 20px;
-    border: solid;
-
-
 }
 
 .pawerbox__input img{
     border-radius: 50%;
     height: 40px;
 }
-.pawerbox__input__file{
-    border-radius: 10%;
-    margin-left: 10%;
-
-}
-.pawerbox__input__file input{
-    background-color: var(--color4);
-    width: 50%;
-}
 
 .mypostavatar{
     border-radius: 50%;
     height: 40px;
     width: 150px;
-
 }
 
 .md-textarea{
     height: 100px;
     resize: none;
     padding: 20px;
-    /*background-color: var(--color5);*/
-    /*color: var(--color1);*/
     margin: 20px;
     font-size: 14px;
     color: var(--color1);
     background-color: var(--color5);
     outline: none;
+    border: none;
 }
 
 .md-textarea::placeholder{
@@ -273,7 +233,6 @@ aside{
     font-weight: 600;
     width: 100px;
     height: 40px;
-    border-radius: 5px;
     margin-top: 40px;
     margin-left: auto;
 }
@@ -281,7 +240,7 @@ aside{
 .pawbutton:focus {
     box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
     transform: translateY(-0.25em);
-    background-color: #78c059;
+    background-color: var(--color4);
 }
 /*post*/
 
@@ -290,25 +249,21 @@ aside{
     height: 40px;
 }
 
-.post{
-    display: flex;
-    align-items: flex-start;
+.feed{
+    margin: 0 auto;
     border-bottom: 1px solid var(--color5);
-    padding-bottom: 10px;
-    padding-top: 10px;
-
-
+    color: var(--color1);
+    align-items: center;
+    width: 80%;
+    border-radius: 5px;
 }
 
 .post__body{
     padding: 20px;
-    border-radius: 10px;
-    background-color: gray;
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
-    10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
-    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
-    width: 500px;
+    background-color: var(--color5);
+    color: var(--color1);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .post__footer{
@@ -319,15 +274,13 @@ aside{
 }
 
 .post__badge{
-    font-size: 14px !important;
-    color: var(--color3);
+    color: var(--color1);
     margin-right: 5px;
 }
 
 .post__headerSpecial{
     font-weight: 600;
-    font-size: 16px;
-    color: var(--color5);
+    color: var(--color1);
 }
 .post__headerText {
     display: flex;
@@ -343,21 +296,14 @@ aside{
     width: 80%;
 }
 .post__headerText h3{
-    font-size: 20px;
     margin-bottom: 5px;
     margin-left: 20px;
 }
 .post__headerDescription{
     margin-bottom: 10px;
-    font-size: 16px;
     padding: 10px;
-    border-radius: 10px;
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
-    10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
-    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
-}
 
+}
 
 .likecomment:hover{
     cursor: pointer;
@@ -368,7 +314,6 @@ aside{
 .post__timer{
     display: flex;
     flex-direction: row;
-    font-size: 14px;
     gap: 10px;
 
 }
@@ -380,21 +325,24 @@ aside{
     gap: 2px;
 }
 .post__like_img{
-    height: 25px;
+    height: 20px;
+    cursor: pointer;
+}
+.post__comment_img{
+    height: 20px;
     cursor: pointer;
 }
 
 /*commentwrite*/
 .commentwrite__input img{
     border-radius: 50%;
-    height: 30px;
+    height: 20px;
 }
 
 .commentwrite{
     padding-bottom: 10px;
     border-bottom: 1px solid var(--color5);
     padding-right: 10px;
-
 }
 
 .commentwrite form{
@@ -402,17 +350,16 @@ aside{
     flex-direction: column;
 }
 .commentwrite__input{
-    color: var(--color5);
+    color: var(--color1);
     display: flex;
     padding: 20px;
     height: 100px;
-    font-size: 16px;
 
 }
 .commenttext_avatar p{
     flex-wrap: wrap;
     font-weight: bold;
-    color: #020259;
+    color: var(--color1);
     width: 80px;
     overflow: hidden;
     white-space: nowrap;
@@ -424,38 +371,39 @@ aside{
     height: 50px;
     resize: none;
     padding: 10px;
-    background-color: var(--color2);
-    color: var(--color5);
+    background-color: var(--color5);
+    color: var(--color1);
     flex: 1;
     margin-left: 20px;
-    font-size: 12px;
     border: none;
     outline: none;
     border-radius: 10px;
-    box-shadow: -10px -10px 15px rgba(37, 43, 87, 0.39),
-    10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(89, 86, 35, 0.3),
-    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
+    box-shadow: -10px 10px 15px rgba(37, 43, 87, 0.39),
+    10px 10px 15px rgba(70, 70, 70, 0.15);
 
 }
 
 .commentwrite-textarea::placeholder{
-    color: var(--color5);
+    color: var(--color1);
     font-family: 'Poppins', sans-serif;
 
 }
 .commentbutton{
-    background-color: var(--color5);
+    background-color: var(--color3);
     border: none;
-    color: var(--color2);
-    font-weight: 900;
-    border-radius: 10px;
+    color: var(--color5);
+    font-weight: 600;
     width: 80px;
-    height: 40px;
-    margin-top: 5px;
-    margin-left: 100px;
+    height: 30px;
+    margin-left: 70%;
 }
 
+.commentbutton:hover,
+.commentbutton:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
+    transform: translateY(-0.25em);
+    background-color: var(--color4);
+}
 /*commentread*/
 .commentread__header{
     display: flex;
@@ -472,7 +420,7 @@ aside{
 .commentread{
     display: flex;
     align-items: flex-start;
-    border-bottom: 1px solid var(--color5);
+    border-bottom: 1px solid var(--color1);
     padding-bottom: 10px;
     padding-top: 10px;
 }
@@ -484,30 +432,25 @@ aside{
 }
 
 .commentread__badge{
-    font-size: 12px !important;
-    color: var(--color2);
+    color: var(--color1);
     margin-right: 5px;
 }
 
 .commentread__headerSpecial{
     font-weight: 600;
-    font-size: 14px;
     color: var(--color5);
 }
 .commentread__headerText h3{
-    font-size: 16px;
     margin-bottom: 5px;
 }
 .commentread__headerDescription{
     margin-bottom: 10px;
-    font-size: 14px;
 }
 
 
 .commentread__timer{
     display: flex;
     flex-direction: row;
-    font-size: 12px;
 
 }
 .commentread__date{
@@ -754,16 +697,11 @@ aside{
     font-weight: 600;
     margin-right: 5px;
     margin-bottom: 6px;
-    font-size: 18px;
     color: black;
 }
 .profilecartalltext .profilecarttext{
     text-align: center;
-    font-size: 17px;
     font-weight: 500;
     margin-right: 5px;
     margin-bottom: 5px;
-}
-hr{
-    width: 100%;
 }

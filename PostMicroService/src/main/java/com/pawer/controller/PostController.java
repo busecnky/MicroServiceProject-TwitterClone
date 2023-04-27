@@ -47,7 +47,7 @@ public class PostController {
              * bu hatanın çözümü olarak thread sleep atıldı ve 1sn verildi.
              *
              */
-            Thread.sleep(1000);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -65,7 +65,7 @@ public class PostController {
 
         try {
             System.out.println("thread sleep bekleniyor");
-            Thread.sleep(500);
+            Thread.sleep(300);
             System.out.println("thread sleep bekleme bitti");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

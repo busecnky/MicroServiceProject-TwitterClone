@@ -5,20 +5,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="../HtmlPages/css/changepass.css">
     <link rel="stylesheet" href="sweetalert2.min.css">
 
 </head>
 <body>
 
-<br>
-<br>
-<div class="cont">
-    <div class="form sign-in">
-        <div class="logo-right">
-            <img class="logo1" src="../HtmlPages/images/logolight.png" alt="">
-        </div>
-        <div>
+<header>
+    <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
+    <nav>
+        <ul>
+            <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+            <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+            </section>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <aside>
+        <section onclick="homepage()" class="aside__home">
+            <p>Home</p>
+        </section>
+
+        <section onclick="otherpeople4()" class="aside__otherpeople">
+            <p>People</p>
+        </section>
+
+        <section onclick="friendRequest()" class="aside__friendrequest">
+            <p>Requests</p>
+        </section>
+
+        <section onclick="mypost()" class="aside__myposts">
+            <p>My Posts</p>
+        </section>
+
+        <section onclick="favpostpage()" class="aside__myposts">
+            <p>Fav Posts </p>
+        </section>
+
+        <section onclick="discoverpage()" class="aside__discover">
+            <p>Discover</p>
+        </section>
+
+        <section onclick="profile()" class="aside__profile">
+            <section class="aside__profile__mini">
+                <img src="https://i.pinimg.com/564x/a6/58/32/a65832155622ac173337874f02b218fb--people-icon-avatar.jpg" alt="">
+                <p>Profile</p>
+            </section>
+            <p class="updateprofile" onclick="profile()">Update Profile</p>
+            <p class="changepassword" onclick="changepasslink()">Change Password</p>
+        </section>
+        <button onclick="logout()" class="logout">Log Out</button>
+    </aside>
+
+    <section class="main__section">
+        <!-- pawerbox Starts-->
+        <section class="main__section__mini">
+            <label>
+                <img src="https://i.pinimg.com/564x/a6/58/32/a65832155622ac173337874f02b218fb--people-icon-avatar.jpg" alt="">
+            </label>
             <label>
                 <span>Old Password</span>
                 <input type="password" id="oldpassword"/>
@@ -31,46 +89,55 @@
                 <span>Confirm New Password</span>
                 <input type="password" id="confirmpassword"/>
             </label>
+        </section>
+
             <button type="submit" class="submitbutton" onclick="changepass()">Change Password</button>
 
 
-        </div>
+        <!-- pawerbox ends-->
+    </section>
 
+</main>
 
-    </div>
-    <div class="sub-cont">
-        <div class="img">
-            <div class="img__text">
-
-                <h3>Update Your Profile</h3>
-            </div>
-
-            <div class="img__btn" >
-                <button onclick="profile()">UPDATE PROFILE</button>
-
-            </div>
-            <br>
-            <br>
-            <div class="img__btn" >
-                <button onclick="homepage()">HOME</button>
-
-            </div>
-
-        </div>
-
-
-    </div>
-</div>
 
 
 <script>
-    function homepage(){
-        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/index.html';
+    function profile(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/profile.html';
+    }
+    function changepasslink(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/changepass.html';
     }
 
-    function profile(){
-        window.location.href = 'http://localhost:63342/TwitterReplica_Crower/HtmlPages/profile.html';
+    function homepage(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
     }
+
+    function mypost(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+    }
+    function favpostpage(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
+    }
+    function discoverpage(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/discover.html';
+    }
+    function otherpeople4(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+    }
+    function friendRequest(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
+    }
+
+    function aboutus(){
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/aboutus.html';
+    }
+
+    function logout(){
+        sessionStorage.setItem("token", null);
+        window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
+    }
+
     function changepass() {
         const token = sessionStorage.getItem("token");
         const oldpassword = document.getElementById('oldpassword').value;
