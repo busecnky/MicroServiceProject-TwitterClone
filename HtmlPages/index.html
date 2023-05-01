@@ -35,34 +35,37 @@
 <main>
 
     <aside>
-        <section class="aside__home">
+        <section class="aside__active">
             <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
             <p>Home</p>
         </section>
 
-        <section onclick="otherpeople4()" class="aside__otherpeople">
+        <section onclick="otherpeople4()" class="aside__deactive">
             <p>People</p>
         </section>
 
-        <section onclick="friendRequest()" class="aside__friendrequest">
-            <p>Requests</p>
+        <section onclick="friendRequest()" class="aside__deactive">
+            <section class="aside__requestcount">
+                <p>Requests</p>
+                <p id="friendrequestcount"></p>
+            </section>
         </section>
 
-        <section onclick="mypost()" class="aside__myposts">
+        <section onclick="mypost()" class="aside__deactive">
             <p>My Posts</p>
         </section>
 
-        <section onclick="favpostpage()" class="aside__myposts">
+        <section onclick="favpostpage()" class="aside__deactive">
             <p>Fav Posts </p>
         </section>
 
-        <section onclick="discoverpage()" class="aside__discover">
+        <section onclick="discoverpage()" class="aside__deactive">
             <p>Discover</p>
         </section>
 
 
 
-        <section onclick="profile()" class="aside__profile">
+        <section onclick="profile()" class="aside__deactive">
             <p>Profile</p>
         </section>
         <button onclick="logout()" class="logout">Log Out</button>
@@ -197,6 +200,7 @@
 
 
     window.addEventListener('load', getData);
+    window.addEventListener('load', getfriendrequestcount);
 
 
 
@@ -550,17 +554,17 @@
     function pawPost(){
         let token = sessionStorage.getItem("token");
         const content = document.getElementById('content').value;
-        const fileInput = document.getElementById('file');
-        const file = fileInput.files[0];
+        //const fileInput = document.getElementById('file');
+        //const file = fileInput.files[0];
 
 
 
         const data = {
             "content": content,
             "token": token,
-            "image": file
+            //"image": file
         }
-
+        alert("furkan")
         fetch("http://localhost:6260/user/createpost",{
             method : "POST",
             headers: {
@@ -626,6 +630,37 @@
                 console.log(err)
             });
 
+    }
+
+    function getfriendrequestcount(){
+        const token = sessionStorage.getItem("token");
+        const data = {
+            "token": token
+        }
+
+        fetch("http://localhost:6260/user/findallrequestscount",{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response)=>response.json())
+            .then((response)=>{
+                if (response !== 0){
+                    document.getElementById('friendrequestcount').innerHTML = response;
+
+
+                }
+                else{
+                    console.log(response.message);
+                    document.getElementById('friendrequestcount').hidden = "hidden";
+                }
+            })
+            .catch((err) => {
+
+                console.log(err)
+            });
     }
 //------------------CARDS-------------------------
     /*

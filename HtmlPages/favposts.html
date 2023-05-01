@@ -35,28 +35,31 @@
 <main>
 
   <aside>
-    <section class="aside__home">
-      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
+    <section onclick="homepage()" class="aside__home">
       <p>Home</p>
     </section>
 
-    <section onclick="otherpeople4()" class="aside__otherpeople">
+    <section onclick="otherpeople4()" class="aside__deactive">
       <p>People</p>
     </section>
 
-    <section onclick="friendRequest()" class="aside__friendrequest">
-      <p>Requests</p>
+    <section onclick="friendRequest()" class="aside__deactive">
+      <section class="aside__requestcount">
+        <p>Requests</p>
+        <p id="friendrequestcount"></p>
+      </section>
     </section>
 
-    <section onclick="mypost()" class="aside__myposts">
+    <section onclick="mypost()" class="aside__deactive">
       <p>My Posts</p>
     </section>
 
-    <section onclick="favpostpage()" class="aside__myposts">
+    <section onclick="favpostpage()" class="aside__active">
+      <img class="nav__home"  src="../HtmlPages/images/star.png" alt="">
       <p>Fav Posts </p>
     </section>
 
-    <section onclick="discoverpage()" class="aside__friendrequest">
+    <section onclick="discoverpage()" class="aside__deactive">
       <p>Discover</p>
     </section>
 
@@ -74,7 +77,7 @@
       <section class="pawerbox__input">
 
 
-        <h2 style="color: black">Welcome Favorite Posts</h2>
+        <h2>Welcome To Favorite Posts</h2>
 
         <!-- ************************ baslangic
         dosya gönderme islemi
@@ -195,6 +198,7 @@
 
 
   window.addEventListener('load', getData);
+  window.addEventListener('load', getfriendrequestcount);
 
 
   function getData() {
@@ -531,6 +535,35 @@
               console.log(err)
             });
 
+  }
+  function getfriendrequestcount(){
+    const token = sessionStorage.getItem("token");
+    const data = {
+      "token": token
+    }
+
+    fetch("http://localhost:6260/user/findallrequestscount",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response !== 0){
+                document.getElementById('friendrequestcount').innerHTML = response
+
+              }
+              else{
+                console.log(response.message)
+                document.getElementById('friendrequestcount').hidden = "hidden";
+              }
+            })
+            .catch((err) => {
+
+              console.log(err)
+            });
   }
   //------------------CARDS-------------------------
   /*

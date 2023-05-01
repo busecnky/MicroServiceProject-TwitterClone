@@ -36,27 +36,30 @@
 <main>
 
     <aside>
-        <section onclick="homepage()" class="aside__home">
+        <section onclick="homepage()" class="aside__deactive">
             <p>Home</p>
         </section>
 
-        <section onclick="otherpeople4()" class="aside__otherpeople">
+        <section onclick="otherpeople4()" class="aside__deactive">
             <p>People</p>
         </section>
 
-        <section onclick="friendRequest()" class="aside__friendrequest">
-            <p>Requests</p>
+        <section onclick="friendRequest()" class="aside__deactive">
+            <section class="aside__requestcount">
+                <p>Requests</p>
+                <p id="friendrequestcount"></p>
+            </section>
         </section>
 
-        <section onclick="mypost()" class="aside__myposts">
+        <section onclick="mypost()" class="aside__deactive">
             <p>My Posts</p>
         </section>
 
-        <section onclick="favpostpage()" class="aside__myposts">
+        <section onclick="favpostpage()" class="aside__deactive">
             <p>Fav Posts </p>
         </section>
 
-        <section onclick="discoverpage()" class="aside__discover">
+        <section onclick="discoverpage()" class="aside__deactive">
             <p>Discover</p>
         </section>
 
@@ -138,6 +141,8 @@
         window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
     }
 
+
+    window.addEventListener('load', getfriendrequestcount);
     function changepass() {
         const token = sessionStorage.getItem("token");
         const oldpassword = document.getElementById('oldpassword').value;
@@ -177,7 +182,35 @@
             })
             .catch(error => console.log('error', error));
     }
+    function getfriendrequestcount(){
+        const token = sessionStorage.getItem("token");
+        const data = {
+            "token": token
+        }
 
+        fetch("http://localhost:6260/user/findallrequestscount",{
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response)=>response.json())
+            .then((response)=>{
+                if (response !== 0){
+                    document.getElementById('friendrequestcount').innerHTML = response
+
+                }
+                else{
+                    document.getElementById('friendrequestcount').hidden = "hidden";
+                    console.log(response.message)
+                }
+            })
+            .catch((err) => {
+
+                console.log(err)
+            });
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

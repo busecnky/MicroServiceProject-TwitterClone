@@ -3,71 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="css/friendrequests.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="css/otherpeople.css">
 
 </head>
 <body>
 
 
 <header>
-  <h1>
-    <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
-  </h1>
+  <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
   <nav>
     <ul>
-      <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
-      <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Hire Us</a></li>
+      <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+      <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+      </section>
     </ul>
   </nav>
 </header>
 
 <main>
 
+
   <aside>
-    <section class="aside__home">
-      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
-      <label>Home</label>
+    <section onclick="homepage()" class="aside__deactive">
+      <p>Home</p>
     </section>
 
-
-    <section onclick="otherpeople4()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/earth.png" alt="">
-      <label>People4</label>
+    <section onclick="otherpeople4()" class="aside__deactive">
+      <p>People</p>
     </section>
 
-    <section onclick="friendRequest()" class="aside__friendrequest">
-      <img src="../HtmlPages/images/pet-care.png" alt="">
-      <p>Friend Requests</p>
-      <p id="friendrequestcount"> </p>
+    <section onclick="friendRequest()" class="aside__active">
+      <img class="nav__home"  src="../HtmlPages/images/pet-care.png" alt="">
+      <section class="aside__requestcount">
+        <p>Requests</p>
+        <p id="friendrequestcount"></p>
+      </section>
+
     </section>
 
-    <section onclick="mypost()" class="aside__myposts">
-      <img src="../HtmlPages/images/social-media.png" alt="">
-      <label>My Posts</label>
+    <section onclick="mypost()" class="aside__deactive">
+      <p>My Posts</p>
     </section>
 
-    <section onclick="fawpostpage()" class="aside__myposts">
-      <img src="../HtmlPages/images/social-media.png" alt="">
-      <label>Faw Posts </label>
+    <section onclick="favpostpage()" class="aside__deactive">
+      <p>Fav Posts </p>
     </section>
 
+    <section onclick="discoverpage()" class="aside__deactive">
+      <p>Discover</p>
+    </section>
 
-
-    <section onclick="profile()" class="aside__profile">
-      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-           alt="">
-      <label>Profile</label>
+    <section onclick="profile()" class="aside__deactive">
+      <p>Profile</p>
     </section>
     <button onclick="logout()" class="logout">Log Out</button>
   </aside>
 
 
 
-
-
-  <div id="profilecart">
-
-  </div>
+  <div id="profilecart"></div>
 
 </main>
 <script>
@@ -304,7 +309,8 @@
 
               }
               else{
-                console.log(response.message)
+                console.log(response.message);
+                document.getElementById('friendrequestcount').hidden = "hidden";
               }
             })
             .catch((err) => {

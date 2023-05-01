@@ -1,25 +1,27 @@
 @import url("https://fonts.googleapis.com/css?family=Sofia");
 
 :root{
-    --color7: #312d2e;
-    --color6: #f5f5f5;
-    --color5: #85586F;
-    --color4: #D0B8A8;
-    --color3: #DFD3C3;
-    --color2: #d3cfcc;
-    --color1: #fff9f4;
+    --color5: #fff9f4;
+    --color4: #78c059;
+    --color3: #002254; /*header*/
+    --color2: #EFEFEF; /* background*/
+    --color1: #001634;
 }
+
 .dark-theme{
-    --color1: #f30505; /*yok */
-    --color2: #232323; /*body tamami */
-    --color3: rgba(185, 164, 142, 0.65); /*header */
-    --color4: #646464; /*post arka plani */
-    --color5: #ea0808; /*yok */
-    --color6: #ff0000; /*yok */
-    --color7: rgb(255, 252, 252); /*yazi rengi */
+    --color1: rgb(66, 66, 66);
+    --color2: rgba(42,39,40);
+    --color3: rgba(32,31,30);
+    --color4: #78c059;
+    --color5: #fff9f4;
 }
-#lightmode{
-    color: var(--color6);
+#light_mode{
+    color: var(--color4);
+    cursor: pointer;
+}
+#dark_mode{
+    color: var(--color4);
+    cursor: pointer;
 }
 
 *{
@@ -29,33 +31,30 @@
 
 }
 
-
-
 body{
     background-color: var(--color2);
     color: var(--color7);
-    font-family: 'Poppins', sans-serif;
     width: 100%;
 }
 
 main{
     display: flex;
-    gap: 40px;
+    max-width: 70%;
+    margin: 0 auto;
 }
 
 
-.header__logo{
-    margin-left: 20px;
-    height: 40px;
-}
 h1{
     font-size: 2em;
     margin: 0;
-    color: var(--color3);
-    -webkit-text-stroke:2px  var(--color7);
+    color: var(--color2);
+    -webkit-text-stroke:1px var(--color4);
     padding: 10px;
 }
-
+.header__logo{
+    margin-left: 10px;
+    height: 30px;
+}
 
 header{
     background-color: var(--color3);
@@ -70,139 +69,104 @@ header{
 header h1:hover{
     cursor: pointer;
 }
-
+header nav{
+    display: flex;
+    align-items: center;
+}
 header nav ul{
     display: flex;
+    align-items: center;
     list-style: none;
     gap: 20px;
 }
 header nav ul li img{
     height: 20px;
 }
-header nav ul li{
-    height: 20px;
-    margin-right: 30px;
+header nav ul span{
+    margin-right: 20px;
 }
 header nav ul li a{
     text-decoration: none;
-    color: var(--color7);
+    color: var(--color4);
+}
+.aboutus{
+    font-size: 14px;
+    cursor: pointer;
 }
 
-
 aside{
-
     display: flex;
-    height: 470px;
-    margin-top: 30px;
-    /*margin-right: 100px;*/
-    /*margin-bottom: 20px;*/
-    margin-left: 60px;
-    padding: 50px 50px;
+    height: 450px;
+    width: 250px;
+    padding-top: 20px;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
-    position: static;
-    gap: 25px;
-    width: 17%;
-    border-radius: 10px;
+    border-radius: 5px;
+    color: var(--color1);
+    background-color: var(--color5);
+    margin-right: 50px;
+    margin-top: 20px;
+    border-top:5px solid var(--color3);
     box-shadow: -10px -10px 15px rgba(152, 150, 150, 0.282),
     10px 10px 15px rgba(70, 70, 70, 0.15);
 }
 
-.hr{
-    border: none;
-    background-color: var(--color7);
-    height: 3px;
-    width: 75%;
-}
-.aside__home{
+.aside__active{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 600;
-    border-bottom-color: var(--color7) 3px solid;
-}
-.aside__home img{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
+    border-radius: 10px;
+    border: var(--color1) 2px solid;
+    border-inline: var(--color5);
+    padding: 20px;
+    cursor: pointer;
 
 }
-
-.aside__otherpeople{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom-color: var(--color7) 3px solid;
-}
-.aside__otherpeople img{
+.aside__active img{
     height: 30px;
+    width: 30px;
     margin-right: 10px;
+
 }
-.aside__friendrequest{
+.aside__deactive{
+    cursor: pointer;
+}
+.aside__requestcount{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-bottom-color: var(--color7) 3px solid;
+    gap: 10px;
 }
-.aside__friendrequest img{
-    height: 30px;
-    margin-right: 10px;
+#friendrequestcount{
+    text-align: center;
+    border-radius: 40%;
+    background-color: var(--color1);
+    color: var(--color2);
+    min-width: 20px;
 }
-
-.aside__myposts{
-    display: flex;
-    align-items: center;
-}
-.aside__myposts img{
-    height: 20px;
-    margin-right: 10px;
-}
-.listspan{
-    margin-right: 10px;
-
-}
-.aside__profile{
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-
-}
-
-.aside__profile img{
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    margin-right: 20px;
-
+h2{
+    color: var(--color1);
 }
 
 .logout{
     width: 90px;
-    height: 40px;color: var(--color2);
-    background-color: var(--color7);
-    border-radius: 10px;
+    height: 40px;
+    color: var(--color5);
+    background-color: var(--color3);
     border: none;
-}
-
-.logout:hover{
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
-    10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
-    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
+    cursor: pointer;
+    font-weight: 600;
 }
 
 
-
-
-
-
-
-
-
-
-
+.logout:hover,
+.logout:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
+    transform: translateY(-0.25em);
+    background-color: var(--color4);
+}
 
 
 #profilecart{
@@ -215,11 +179,10 @@ aside{
 .containerrr {
     display: flex;
     font-family: "Sofia", sans-serif;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--color5);
     border-radius: 20px;
     width: 430px;
     height: 160px;
-    margin-left: 0px;
     margin-right: 10px;
     margin-bottom: 20px;
     flex-wrap: wrap;
@@ -245,13 +208,8 @@ aside{
     margin-left: 5px;
     overflow: hidden;
 }
-.textt h3{
-    padding-right: 25px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.textt h4{
+
+.textt h4,h5{
     padding-right: 25px;
     overflow: hidden;
     white-space: nowrap;

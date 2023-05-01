@@ -115,22 +115,21 @@ aside{
     10px 10px 15px rgba(70, 70, 70, 0.15);
 }
 
-.aside__home{
+.aside__deactive{
     cursor: pointer;
 
 }
-
-
-.aside__otherpeople{
-    cursor: pointer;
+.aside__requestcount{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-
-.aside__friendrequest{
-    cursor: pointer;
-}
-
-.aside__myposts{
-    cursor: pointer;
+#friendrequestcount{
+    text-align: center;
+    border-radius: 40%;
+    background-color: var(--color1);
+    color: var(--color2);
+    min-width: 20px;
 }
 .aside__profile{
     display: flex;

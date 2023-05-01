@@ -3,20 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <link rel="stylesheet" href="css/otherpeople.css">
 
 </head>
 <body>
 
-
 <header>
-  <h1>
-    <img class="header__logo" onclick="homepage()" src="../HtmlPages/images/foot-print.png" alt="">Pawer
-  </h1>
+  <h1 onclick="homepage()"><img class="header__logo"  src="../HtmlPages/images/pawprint.png" alt="">Pawer</h1>
   <nav>
     <ul>
-      <li><img class="nav__aboutus" src="../HtmlPages/images/high-five.png"><a href="#">About Us</a></li>
-      <li><img class="nav__contact" src="../HtmlPages/images/hotline.png"><a href="#">Hire Us</a></li>
+      <li><a class="aboutus" onclick="aboutus()">About Us</a></li>
+      <section>
+                <span onclick="lightdarkmode()" class="material-symbols-outlined" id="dark_mode">
+                dark_mode</span>
+      </section>
     </ul>
   </nav>
 </header>
@@ -24,53 +33,48 @@
 <main>
 
   <aside>
-    <hr class="hr">
-    <section class="aside__home">
-      <img class="nav__home" onclick="homepage()" src="../HtmlPages/images/home-dark.png" alt="">
-      <label>Home</label>
+    <section onclick="homepage()" class="aside__deactive">
+      <p>Home</p>
     </section>
 
+    <section onclick="otherpeople4()" class="aside__active">
+      <img class="nav__home"  src="../HtmlPages/images/networking.png" alt="">
 
-    <section onclick="otherpeople4()" class="aside__otherpeople">
-      <img src="../HtmlPages/images/pet-care.png" alt="">
-      <label>People4</label>
+      <p>People</p>
     </section>
 
-    <section onclick="friendRequest()" class="aside__friendrequest">
-      <img src="../HtmlPages/images/earth.png" alt="">
-      <p>Friend Requests</p>
-    </section>
-    <section onclick="mypost()" class="aside__myposts">
-      <img src="../HtmlPages/images/social-media.png" alt="">
-      <label>My Posts</label>
+    <section onclick="friendRequest()" class="aside__deactive">
+      <section class="aside__requestcount">
+        <p>Requests</p>
+        <p id="friendrequestcount"></p>
+      </section>
     </section>
 
-    <section onclick="favpostpage()" class="aside__myposts">
-      <img src="../HtmlPages/images/social-media.png" alt="">
-      <label>Fav Posts </label>
+    <section onclick="mypost()" class="aside__deactive">
+      <p>My Posts</p>
     </section>
 
+    <section onclick="favpostpage()" class="aside__deactive">
+      <p>Fav Posts </p>
+    </section>
 
+    <section onclick="discoverpage()" class="aside__deactive">
+      <p>Discover</p>
+    </section>
 
-    <section onclick="profile()" class="aside__profile">
-      <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-           alt="">
-      <label>Profile</label>
+    <section onclick="profile()" class="aside__deactive">
+      <p>Profile</p>
     </section>
     <button onclick="logout()" class="logout">Log Out</button>
   </aside>
 
 
-
-
-
-  <div id="profilecart">
-
-  </div>
+  <div id="profilecart"></div>
 
 </main>
 <script>
   window.addEventListener('load', getProfileCart);
+  window.addEventListener('load', getfriendrequestcount);
 
 
   function profile(){
@@ -150,25 +154,21 @@
             .then(responses => Promise.all(responses.map(response => response.json())))
             .then(data => { console.log(data[0]), console.log(data[1])
               for (let index = 0; index < data[0].length; index++) {
-                document.getElementById("profilecart").innerHTML += ` <div class="containerrr">
+                document.getElementById("profilecart").innerHTML += `
+ <div class="containerrr">
       <div class="photo__text">
-        <div>
-        <img
-          src="https://storage.cloud.google.com/pawerallphoto/ErSirm9W4AAwUnt.jpg"
+        <img src="https://i.pinimg.com/564x/a6/58/32/a65832155622ac173337874f02b218fb--people-icon-avatar.jpg"
           alt=""/>
-
-        </div>
-
         <div class="textt">
           <h4>${data[0] [index].name} </h4>
-          <h5 >java web</h5>
-         <h5 >123235 posts</h5>
+          <h5>java web</h5>
+         <h5>123235 posts</h5>
 
         <button class="btn btn-pink"  onclick="acceptfollowrequest(${index})" >${data[0][index].follower}</button>
 
-<input hidden="hidden" value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
- <button id="followwbtn" class="btn ${data[0][index].follow === 'Takip Et' ? 'btn-blue' : (data[0][index].follow === 'İstek Gönderildi' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
-</div>
+        <input hidden="hidden" value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
+         <button id="followwbtn" class="btn ${data[0][index].follow === 'Takip Et' ? 'btn-blue' : (data[0][index].follow === 'İstek Gönderildi' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
+        </div>
       </div>
     </div>`;
 
@@ -277,7 +277,35 @@
               console.log(err)
             });
   }
+  function getfriendrequestcount(){
+    const token = sessionStorage.getItem("token");
+    const data = {
+      "token": token
+    }
 
+    fetch("http://localhost:6260/user/findallrequestscount",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response !== 0){
+                document.getElementById('friendrequestcount').innerHTML = response
+
+              }
+              else{
+                console.log(response.message);
+                document.getElementById('friendrequestcount').hidden = "hidden";
+              }
+            })
+            .catch((err) => {
+
+              console.log(err)
+            });
+  }
 </script>
 </body>
 </html>
