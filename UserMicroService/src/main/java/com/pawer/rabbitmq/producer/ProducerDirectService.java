@@ -11,6 +11,7 @@ public class ProducerDirectService {
     private final RabbitTemplate rabbitTemplate;
 
     public void sendCreatePost(ModelCreatePost modelCreatePost){
+        System.out.println("topic ici");
         rabbitTemplate.convertAndSend("exchange-topic","binding-key-create-post-topic",modelCreatePost);
         rabbitTemplate.convertAndSend("exchange-topic","binding-key-create-post-topic-elastic",modelCreatePost);
     }

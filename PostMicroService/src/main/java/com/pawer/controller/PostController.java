@@ -74,18 +74,7 @@ public class PostController {
         System.out.println("thread beklemedi");
         return ResponseEntity.ok(postService.discoverPage(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
-    /*
-    @GetMapping("/findallpage")
-    @CrossOrigin("*")
-    public ResponseEntity<Page<Post>> findallPage(@RequestParam(defaultValue = "10")Integer pageSize,
-                                                  @RequestParam(defaultValue = "0")   int pageNumber,
-                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
-                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
 
-        return ResponseEntity.ok(postService.findAll(pageSize,pageNumber,direction,sortParameter));
-    }
-
-*/
 
     @PostMapping("/createlikepost")
     @CrossOrigin("*")

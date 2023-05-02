@@ -61,6 +61,15 @@ public class PostService extends ServiceManagerImpl<Post,String> {
     }
 
 
+
+
+
+
+
+
+
+
+
     public Page<PostFindAllResponse> findAllPosts(String token,
                                                   Integer pageSize,
                                                   int currentPage, Sort.Direction direction,

@@ -81,8 +81,6 @@ public class UserService extends ServiceManagerImpl<User, Long> {
         ModelCreatePost modelCreatePost = IPostMapper.INSTANCE.toCreatePost(user);
         modelCreatePost.setToken(dto.getToken());
         modelCreatePost.setContent(dto.getContent());
-        //modelCreatePost.setImage(dto.getImage());
-        //System.out.println(modelCreatePost.getImage());
         producerDirectService.sendCreatePost(modelCreatePost);
         return true;
     }

@@ -5,14 +5,6 @@
 bu yüzden önce elastic calistirilip sonra postmicro calistirilmali
 ki post istek atinca elastic alsin      
 
---> ana sayfa ya thread atildi cünkü sayfa yüklenirken takip ettiklerimizin postlarini
-görüntülüyoruz.bunun icinde rabbitten istek atmamiz lazim. rabbitte yavas kaldigi
-icin post controller'da findallpage'e 1sn lik thread atildi ki o rabbit
-istegi 1sn de alinsin.(postmicro controller)       
-
---> userda alinan serilizeiable hatasinin sebebi rabbitden 
-istek attigimiz metodu redis ile Cacheable etmekmis. cach kaldirildi düzeldi.
-
 
 
 ## yapilanlar:
@@ -38,11 +30,11 @@ istek attigimiz metodu redis ile Cacheable etmekmis. cach kaldirildi düzeldi.
 
 
 ## yarim kalanlar:
---> elastic bir sacma calisiyor suan findallpage fetch istegi elastic e atiliyor.
-like ve fav tusları tamamen calisiyor ama degisiklik görmek icin sayfayı manuel sekilde kendimiz
-yenilememiz gerekiyor. bi sacmaliyor elastic muhtemelen feign istekleri elastic'in hizina yetisemiyor.
+
 ## yapilacaklar.
-* sol taraftaki cubukta hangi sayfadaysak o büyütülecek vs.
+* elastic search de db ye kayıtlı veri var ise kaydetme yok ise kaydet işlemi.
+* change password bağlanacak.
+* a
 * profile.html
 * people.html
 * commentread ler için commenttoposta tarih ve saat eklenmeli
