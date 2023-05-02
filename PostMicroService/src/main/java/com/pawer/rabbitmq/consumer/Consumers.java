@@ -21,13 +21,12 @@ public class Consumers {
 
     @RabbitListener(queues = "queue-create-post-topic")
     public void createPostConsumerListener(ModelCreatePost modelCreatePost) throws IOException {
+        System.out.println("model consumer ici: "+modelCreatePost.toString());
         postService.savePost(modelCreatePost);
     }
 
     @RabbitListener(queues = "queue-follow-id-list")
     public void follodIdList (ModelFollowId model){
-        System.out.println(model.getFollowId().toString());
-
         StaticValues.modelFollowId=model;
     }
 

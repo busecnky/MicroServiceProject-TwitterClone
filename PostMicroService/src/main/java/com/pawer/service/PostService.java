@@ -44,6 +44,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
     public void savePost(ModelCreatePost modelCreatePost){
         Long id = jwtTokenManager.validToken(modelCreatePost.getToken()).get();
+        System.out.println("model ici gelenler: " +modelCreatePost.toString() );
         Post post = Post.builder()
                 .userId(id)
                 .content(modelCreatePost.getContent())

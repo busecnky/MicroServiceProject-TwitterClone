@@ -40,6 +40,9 @@ public class PostController {
 
 
 
+
+
+
     @PostMapping("/findallpage")
     @CrossOrigin("*")
     public ResponseEntity<Page<PostFindAllResponse>> findallPage(@RequestBody BaseResponseDto dto,
@@ -47,7 +50,18 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "0") int pageNumber,
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
-
+        try {
+            /**
+             * sayfa yüklenirken
+             * kullanicinin takip ettiklerinin id listesi gerekiyor
+             * bu da rabbit den geliyor ama rabbit yavaş kalıyor bu yüzden hata veriyor
+             * bu hatanın çözümü olarak thread sleep atıldı ve 1sn verildi.
+             *
+             */
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         try {
             System.out.println("thread sleep bekleniyor");
             Thread.sleep(300);
@@ -66,7 +80,18 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "0") int pageNumber,
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
-
+        try {
+            /**
+             * sayfa yüklenirken
+             * kullanicinin takip ettiklerinin id listesi gerekiyor
+             * bu da rabbit den geliyor ama rabbit yavaş kalıyor bu yüzden hata veriyor
+             * bu hatanın çözümü olarak thread sleep atıldı ve 1sn verildi.
+             *
+             */
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         return ResponseEntity.ok(postService.discoverPage(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }

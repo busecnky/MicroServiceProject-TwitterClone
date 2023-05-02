@@ -14,6 +14,8 @@ public interface IPostRepository extends ElasticsearchRepository<Post,String> {
 
     Page<Post> findByUserId(Long id,Pageable pageable);
     Optional<List<Post>> findOptionalByUserId (Long id);
+    Optional<List<Post>> findOptionalByUserId (Long id,Pageable pageable);
+
 
 
 
