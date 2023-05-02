@@ -34,7 +34,7 @@ ki post istek atinca elastic alsin
 ## yapilacaklar.
 * elastic search de db ye kayıtlı veri var ise kaydetme yok ise kaydet işlemi.
 * change password bağlanacak.
-* 
+* a
 * profile.html
 * people.html
 * commentread ler için commenttoposta tarih ve saat eklenmeli

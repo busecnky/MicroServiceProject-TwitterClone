@@ -35,7 +35,7 @@ public class AuthController {
     @PostMapping("/changepassword")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> changePassword(@RequestBody ChangePasswordDto dto){
-
+        System.out.println("aaaxxaa");
         return ResponseEntity.ok(authService.changePassword(dto));
     }
 
