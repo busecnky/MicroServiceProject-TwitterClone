@@ -26,7 +26,6 @@ public class UserController {
     @PostMapping("/createpost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createPost(@RequestBody CreatePostDto dto) {
-        System.out.println("bahça duvarından aştım");
         return ResponseEntity.ok(userService.createPost(dto));
     }
     @PostMapping("/update")
