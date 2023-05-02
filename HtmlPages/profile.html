@@ -224,7 +224,9 @@
         const name = document.getElementById('name').value;
         const surname = document.getElementById('surname').value;
         const age = document.getElementById('age').value;
-
+        if(age === undefined){
+            document.getElementById('age').hidden = "hidden";
+        }
         const data = {
             "username": username,
             "name": name,
