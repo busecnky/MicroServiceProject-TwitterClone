@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.pawer.exception.EErrorType.BAD_REQUEST_ERROR;
 import static com.pawer.exception.EErrorType.INTERNAL_ERROR;
-
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -25,7 +23,6 @@ public class GlobalExceptionHandler {
         EErrorType EErrorType = INTERNAL_ERROR;
         return new ResponseEntity<>(createError(EErrorType,exception), HttpStatus.BAD_REQUEST);
     }
-
 
     @ExceptionHandler(PostException.class)
     @ResponseBody
@@ -39,7 +36,6 @@ public class GlobalExceptionHandler {
         EErrorType EErrorType = BAD_REQUEST_ERROR;
         return new ResponseEntity<>(createError(EErrorType, exception), EErrorType.getHttpStatus());
     }
-
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public final ResponseEntity<ErrorMessage> handleMethodArgumentMisMatchException(
@@ -70,12 +66,10 @@ public class GlobalExceptionHandler {
     }
 
     private ErrorMessage createError(EErrorType EErrorType, Exception exception){
-        System.out.println("HATA OLDU.....: "+ exception.getMessage());
+        System.out.println("Error occurred.....: "+ exception.getMessage());
         return ErrorMessage.builder()
                 .code(EErrorType.getCode())
                 .message(EErrorType.getMessage())
                 .build();
     }
-
-
 }

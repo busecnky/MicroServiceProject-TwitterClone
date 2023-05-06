@@ -13,8 +13,9 @@ import java.util.Optional;
 
 @ControllerAdvice
 public class JwtTokenManager {
-    private final String sifreAnahtari = "#luC}VB>IsC)*>&x**zMqIdD}Pct_%T3w>{9&Zl$tbXZwfF3J+p%iD~o]8-!^`;";
-    private final Long exTime = 1000L * 60 * 30; // token gecerlilik süresi: 30 dk
+    private final String passwordKey = "#luC}VB>IsC)*>&x**zMqIdD}Pct_%T3w>{9&Zl$tbXZwfF3J+p%iD~o]8-!^`;";
+    //For social media, token expiration time is one hour.
+    private final Long exTime = 1000L * 60 * 60;
 
     public Optional<String> createToken(Long id) {
         String token = "";
@@ -24,7 +25,7 @@ public class JwtTokenManager {
                     .withIssuer("pawer")
                     .withIssuedAt(new Date())
                     .withExpiresAt(new Date(System.currentTimeMillis() + exTime))
-                    .sign(Algorithm.HMAC512(sifreAnahtari));
+                    .sign(Algorithm.HMAC512(passwordKey));
             return Optional.of(token);
         } catch (Exception exception) {
             return Optional.empty();
@@ -35,14 +36,12 @@ public class JwtTokenManager {
            String[] newToken = token.split("\"");
             token = newToken[3];
         }
-
             try {
-                Algorithm algorithm = Algorithm.HMAC512(sifreAnahtari);
+                Algorithm algorithm = Algorithm.HMAC512(passwordKey);
                 JWTVerifier verifier = JWT.require(algorithm).withIssuer("pawer").build();
                 DecodedJWT decodedJWT = verifier.verify(token);
                 if (decodedJWT == null) return Optional.empty();
                 return Optional.of(decodedJWT.getClaim("id").asLong());
-
 
             } catch (Exception e) {
                 throw new PostException(EErrorType.INVALID_TOKEN);

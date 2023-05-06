@@ -16,8 +16,5 @@ import java.util.List;
 public class ErrorMessage {
     private int code;
     private String message;
-    /**
-     * String username -> @Valid => min=3, max=16, notNull, Regex(aZ,0-9,'*-/?')
-     */
     private List<String> fields;
 }

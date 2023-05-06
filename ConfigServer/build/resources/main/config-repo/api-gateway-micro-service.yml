@@ -1,0 +1,43 @@
+server:
+  port: 80
+spring:
+  zipkin:
+    enabled: true
+    base-url: http://localhost:9411
+    service:
+      name: api-gateway-service
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      default-filters:
+        - RewritePath= /(?<segment>.*), /$\{segment}
+      routes:
+        - id: auth-micro-service
+          predicates:
+            - Path=/auth/**
+          uri: http://localhost:6060
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: auth
+                fallbackUri: forward:/fallbackauth
+                
+        - id: user-micro-service
+          predicates:
+            - Path=/user/**
+          uri: http://localhost:6260
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: user
+                fallbackUri: forward:/fallbackuser
+        - id: post-micro-service
+          predicates:
+            - Path=/post/**
+          uri: http://localhost:6160
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: post
+                fallbackUri: forward:/fallbackpost

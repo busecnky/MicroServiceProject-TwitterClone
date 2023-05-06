@@ -26,5 +26,4 @@ public class ProducerDirectService {
     public void sendFollodIdElastic(ModelFollowId model){
         rabbitTemplate.convertAndSend("exchange-direct","binding-key-follow-id-list-elastic",model);
     }
-
 }

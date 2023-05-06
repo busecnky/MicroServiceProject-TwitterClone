@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @FeignClient(
         name = "post-service-feign",
         url = "http://localhost:9999/post",
@@ -24,7 +23,6 @@ public interface IElasticServiceManager {
     @CrossOrigin("*")
     ResponseEntity<Void> createLikePost(@RequestBody BaseRequestDto dto);
 
-
     @PostMapping("/createfavpost")
     @CrossOrigin("*")
     ResponseEntity<Boolean> createFavPost(@RequestBody BaseRequestDto dto);
@@ -32,6 +30,5 @@ public interface IElasticServiceManager {
     @PostMapping("/createcommenttopost")
     @CrossOrigin("*")
     ResponseEntity<Void> createCommentToPost(@RequestBody CommentToPostRequestDto dto);
-
 
 }

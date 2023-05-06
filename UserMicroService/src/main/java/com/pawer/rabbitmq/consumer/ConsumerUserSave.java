@@ -1,9 +1,7 @@
 package com.pawer.rabbitmq.consumer;
 
-
 import com.pawer.rabbitmq.messagemodel.ModelFindUsernameForCreateComment;
 import com.pawer.rabbitmq.messagemodel.ModelUserSave;
-import com.pawer.service.FollowService;
 import com.pawer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -205,63 +205,201 @@
     const content = document.getElementById('content');
     const date = document.getElementById('date');
     const time = document.getElementById('time');
+    const id = document.getElementById('id');
+    const isLiked= document.getElementById('isLiked');
+    const isFav= document.getElementById('isFav');
 
-    const data = JSON.stringify({
-      "name": name,
-      "username": username,
-      "content": content,
-      "date":date,
-      "time":time
-    });
+    const page= 'http://localhost:6160/post/findallpage';
+    const pageelastic= 'http://localhost:9999/post/findallpage';
+
+    // bu metod fetch isteği ile atılacak. on click ile aktifleştirilececk
+
+    const findme = 'http://localhost:6260/user/findme';
+
     const data2 = {
-
       "token": token
     }
 
+    Promise.all([
+      fetch(page, {
+        method: 'Post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data2)
+        ,
+      }),
+      fetch(findme, {
+        method: 'Post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data2)
+        ,
 
-    fetch("http://localhost:6160/post/findallmypost", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data2)
-    })
-            .then(response => response.json())
-            .then(response => { console.log(response)
-              for (let index = 0; index < response.content.length; index++) {
-                document.getElementById("feed").innerHTML += `<div class="post">
-                    <div class="post__avatar">
-                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                            alt="">
-                    </div>
+      })
 
-                    <div class="post__body">
+
+    ])
+            .then(responses => Promise.all(responses.map(response => response.json())))
+            .then(data => { console.log(data[0].content), console.log(data[1].username)
+              for (let index = 0; index < data[0].content.length; index++) {
+                document.getElementById("feed").innerHTML += `
+                    <div class="post__body" >
+
                         <div class="post__header">
                             <div class="post__headerText">
-                                <h3>
-                                    <span class="post__headerSpecial">
-                                    </span>
-                                </h3>
+                                <div class="post__avatar">
+                                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"alt="">
+                                </div>
+                                <div class="divforh3">
+                                    <h3>${data[0].content[index].username}
+
+                                        <span class="post__headerSpecial">
+                                        </span>
+                                    </h3>
+                                </div>
+                                <img id="favicon"  onclick="favpost(${index},${data[0].content[index].isFav})" src="${data[0].content[index].isFav === true ? '../HtmlPages/images/favfill.png' :  '../HtmlPages/images/favempty.png'}" alt="">
+
                             </div>
                             <div class="post__headerDescription">
-                                <p>${response.content[index].content}</p>
+                                <p>${data[0].content[index].content}</p>
+
                             </div>
+                            <div class="post__image">
+                               <img src="">
+                            </div>
+
                         </div>
                         <div class="post__timer">
-                            <span class="postdate">${response.content[index].date}</span>
-                            <span class="post__time">${response.content[index].time}</span>
+                            <span class="postdate">${data[0].content[index].date}</span>
+                            <span class="post__time">${data[0].content[index].time}</span>
                          </div>
                         <div class="post__footer">
-                            <span class="material-symbols-outlined likecomment">chat</span>
-                            <span class="material-symbols-outlined likecomment">favorite</span>
+                            <img class="post__comment_img" src="../HtmlPages/images/comment.png" alt="">
+                            <div class="post__like">
+                                 <img class="post__like_img" onclick="likepostheart(${index},${data[0].content[index].isLiked})" src="${data[0].content[index].isLiked === true ? '../HtmlPages/images/redheart.png' :  '../HtmlPages/images/whiteheart.png'}" alt="">
+                                <label>${data[0].content[index].likeCount}</label>
+                            </div>
                         </div>
-                    </div>
-                </div>`;
+                        <div class="commentwrite">
+                            <div class="commentwrite__input">
+                                    <div class="commenttext_avatar">
+                                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                        alt="">
+                                        <p hidden="hidden"><sub><i>@${data[1].username}</i> </sub></p>
+                                    </div>
+
+                                    <textarea type="text" id=${index+'cm'} class="commentwrite-textarea"
+                                    placeholder="Write a comment"></textarea>
+
+                            </div>
+                            <input hidden="hidden" value=${data[0].content[index].id} class="twitId" id=${index+'in'}>  </input>
+
+                            <button class="commentbutton" onclick="commentbtn(${index})">Comment</button>
+
+                        </div>
+
+                        <div id="commentsss${index}" ></div>
+
+                    </div>`;
+                var myDiv = document.getElementById(`commentsss${index}`);
+
+
+                setTimeout(() => {
+                  getComment(index);
+                }, 0);
               }
 
             })
             .catch(error => console.log('error', error));
   }
+
+  function likepostheart(index,isliked){
+    const postliked = 'http://localhost:6160/post/createlikepost';
+
+    let id = document.getElementById(index+'in').value;
+    let token = sessionStorage.getItem("token");
+    let statement=true;
+    if (isliked===true){
+      statement= false;
+    }else{
+      statement=true;
+    }
+
+    const data = {
+      "postId" : id,
+      "statement": statement,
+      "token": token
+    }
+
+    fetch(postliked,{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+              }
+              else{
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+  }
+
+  function favpost(index,isfav){
+    const createfavtopost = 'http://localhost:6160/post/createfavpost';
+
+    let id = document.getElementById(index+'in').value;
+    let token = sessionStorage.getItem("token");
+    let statement=true;
+    if (isfav===true){
+      statement= false;
+    }else{
+      statement=true;
+    }
+
+    const data = {
+      "postId" : id,
+      "statement": statement,
+      "token": token
+    }
+
+    fetch(createfavtopost,{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+              }
+              else{
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+
+
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+  }
+
+
+
   function getfriendrequestcount(){
     const token = sessionStorage.getItem("token");
     const data = {
@@ -292,7 +430,97 @@
             });
   }
 
+  function getComment(index) {
+    window.addEventListener('load', getData);
 
+    console.log(index)
+    const token = sessionStorage.getItem("token");
+    let id = document.getElementById(index+'in').value;
+    let commentDiv = document.getElementById(`commentsss${index}`);
+
+    /*
+            const data = JSON.stringify({
+                "comment": comment
+            });
+    */
+    fetch("http://localhost:6160/post/findallcomment"+"?postId="+id, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+              for (let i = 0; i < response.length; i++) {
+                //if (id === response.postId) {
+                commentDiv.innerHTML += `
+                        <div class="commentread">
+
+
+                            <div class="commentread__header">
+
+                                   <div class="commentread__avatar">
+                                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
+                                    alt="">
+                                    </div>
+                                    <div class="commentread__headerText">
+                                        <h3> ${response[i].name}
+                                            <span class="commentread__headerSpecial">
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="commentread__headerDescription">
+                                        <p>${response[i].comment}</p>
+                                    </div>
+                                    <div class="commentread__timer">
+                                        <span class="commentread__date"></span>
+                                        <span class="commentread__time"></span>
+                                    </div>
+                                </div>
+                        </div>
+                `;
+              }
+
+
+              //    }
+            })
+            .catch(error => console.log('error', error));
+
+  }
+  function commentbtn(index){
+    let id = document.getElementById(index+'in').value;
+    let token = sessionStorage.getItem("token");
+    // const comment = document.getElementById('comment').value;
+    let comment= document.getElementById(index+'cm').value;
+    const data = {
+      "postId" : id,
+      "comment": comment,
+      "token": token
+    }
+
+    fetch("http://localhost:6160/post/createcommenttopost",{
+      method : "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+            .then((response)=>response.json())
+            .then((response)=>{
+              if (response===true){
+                console.log("Lets go")
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
+              }
+              else{
+                console.log(response.message)
+                alert(response.message)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+
+  }
 
 </script>
 </body>

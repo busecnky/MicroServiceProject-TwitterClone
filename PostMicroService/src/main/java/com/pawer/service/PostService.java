@@ -1,16 +1,9 @@
 package com.pawer.service;
 
-//import com.google.cloud.storage.BlobId;
-//import com.google.cloud.storage.BlobInfo;
-//import com.google.cloud.storage.Storage;
-
 import com.pawer.dto.response.PostFindAllResponse;
 import com.pawer.exception.EErrorType;
 import com.pawer.exception.PostException;
-import com.pawer.rabbitmq.consumer.Consumers;
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
-import com.pawer.rabbitmq.messagemodel.ModelFollowId;
-import com.pawer.repository.ICommentToPostRepository;
 import com.pawer.repository.IPostRepository;
 import com.pawer.repository.entity.Post;
 import com.pawer.utility.JwtTokenManager;
@@ -41,7 +34,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         this.likeToPostService = likeToPostService;
     }
 
-
     public void savePost(ModelCreatePost modelCreatePost){
         Long id = jwtTokenManager.validToken(modelCreatePost.getToken()).get();
         Post post = Post.builder()
@@ -54,7 +46,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         save(post);
 
     }
-
 
     public Page<PostFindAllResponse> findAllPosts(String token,
                                                   Integer pageSize,
@@ -88,7 +79,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return myPage;
     }
 
-
     public  Page<Post> myPost(String token,
                               Integer pageSize,
                               int currentPage, Sort.Direction direction,
@@ -98,10 +88,7 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         return postrepository.findByUserId(userid,pageable);
     }
 
-
-
     public List<Post> homePagePosts(){
-        System.out.println("model ici gelen mesaj:... "+StaticValues.modelFollowId.toString());
         List<Post> posts = new ArrayList<>();
         for (Long folloId: StaticValues.modelFollowId.getFollowId()){
             Optional<List<Post>> posts1= postrepository.findOptionalByUserId(folloId);
@@ -109,7 +96,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
                 posts.add(post);
             }
         }
-        System.out.println("postss " + posts.toString());
         return posts;
     }
 
@@ -123,10 +109,8 @@ public class PostService extends ServiceManagerImpl<Post,String> {
         }
         List<Post> findallPosts= findAll();
         findallPosts.removeAll(posts);
-        System.out.println("postss " + findallPosts.toString());
         return findallPosts;
     }
-
 
     public Page<PostFindAllResponse> discoverPage(String token,
                                                   Integer pageSize,
@@ -141,7 +125,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
 
         for(Post post: discover()){
             if (post.getUserId()!=userId){
-
 
             PostFindAllResponse postFindAllResponse = new PostFindAllResponse();
             postFindAllResponse.setId(post.getId());
@@ -160,68 +143,6 @@ public class PostService extends ServiceManagerImpl<Post,String> {
             }
         }
         Page<PostFindAllResponse> myPage = new PageImpl<>(postFindAllResponses, pageable, postFindAllResponses.size());
-
         return myPage;
     }
-
-    /**storage
-     *  baslangic
-
-
-    public Optional<String> uploadFile(MultipartFile file){
-        try {
-            String mediaUrl;
-            if(file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")){
-                mediaUrl = UUID.randomUUID().toString()+".png";
-            }else
-                mediaUrl = UUID.randomUUID().toString()+".mp4";
-            BlobInfo blobInfo = BlobInfo.newBuilder(bucketname, mediaUrl).build();
-            storage.create(blobInfo, file.getBytes());
-            return Optional.of(mediaUrl);
-        }catch (Exception e){
-            return Optional.empty();
-        }
-    }
-
-
-
-    private BlobId constructBlobId(String bucketname, String subdirectory,
-                                   String filename) {
-        return Optional.ofNullable(subdirectory)
-                .map(s -> BlobId.of(bucketname, subdirectory + "/" + filename))
-                .orElse(BlobId.of(bucketname, filename));
-    }
-
-    public Optional<URL> getGoogleSignedMediaPath(String mediaName, int minutes) {
-        BlobId blobId = constructBlobId(bucketname, null, mediaName);
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-        return createSignedPathStyleUrl(blobInfo, minutes, TimeUnit.MINUTES);
-    }
-
-    private Optional<URL> createSignedPathStyleUrl(BlobInfo blobInfo,
-                                                   int duration, TimeUnit unit) {
-        return Optional.of(getStorage()
-                .signUrl(blobInfo,duration,unit, Storage.SignUrlOption.withPathStyle()));
-
-    }
-
-
-
-     * storage
-     * baslangic
-     */
-
-
-
-    public String ekranaYildizBastirma(int adet){
-        String [] yildiz= new String[adet];
-        int i =0;
-        while (i<adet){
-            yildiz[i]="*";
-            i++;
-        }
-        return yildiz.toString();
-    }
-
-
 }

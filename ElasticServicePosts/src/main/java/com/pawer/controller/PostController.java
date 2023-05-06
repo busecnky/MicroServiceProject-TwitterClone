@@ -1,6 +1,5 @@
 package com.pawer.controller;
 
-
 import com.pawer.dto.request.BaseRequestDto;
 import com.pawer.dto.request.CommentToPostRequestDto;
 import com.pawer.dto.request.PostSaveRequestDto;
@@ -37,12 +36,6 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-
-
-
-
-
-
     @PostMapping("/findallpage")
     @CrossOrigin("*")
     public ResponseEntity<Page<PostFindAllResponse>> findallPage(@RequestBody BaseResponseDto dto,
@@ -51,26 +44,10 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
         try {
-            /**
-             * sayfa yüklenirken
-             * kullanicinin takip ettiklerinin id listesi gerekiyor
-             * bu da rabbit den geliyor ama rabbit yavaş kalıyor bu yüzden hata veriyor
-             * bu hatanın çözümü olarak thread sleep atıldı ve 1sn verildi.
-             *
-             */
             Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        try {
-            System.out.println("thread sleep bekleniyor");
-            Thread.sleep(300);
-            System.out.println("thread sleep bekleme bitti");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("thread beklemedi");
         return ResponseEntity.ok(postService.findAllPosts(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
     @PostMapping("/discoverpage")
@@ -81,18 +58,10 @@ public class PostController {
                                                                  @RequestParam(defaultValue = "DESC") Sort.Direction direction,
                                                                  @RequestParam(defaultValue = "createDate") String sortParameter){
         try {
-            /**
-             * sayfa yüklenirken
-             * kullanicinin takip ettiklerinin id listesi gerekiyor
-             * bu da rabbit den geliyor ama rabbit yavaş kalıyor bu yüzden hata veriyor
-             * bu hatanın çözümü olarak thread sleep atıldı ve 1sn verildi.
-             *
-             */
             Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         return ResponseEntity.ok(postService.discoverPage(dto.getToken(),pageSize,pageNumber,direction,sortParameter));
     }
 
@@ -127,8 +96,6 @@ public class PostController {
         return ResponseEntity.ok(likeToPostService.likePostCount(dto));
     }
 
-
-
     @PostMapping("/createfavpost")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> createFavPost(@RequestBody BaseRequestDto dto){
@@ -147,10 +114,6 @@ public class PostController {
         commentToPostService.createCommentToPost(dto);
         return ResponseEntity.ok().build();
     }
-
-
-
-
 }
 
 

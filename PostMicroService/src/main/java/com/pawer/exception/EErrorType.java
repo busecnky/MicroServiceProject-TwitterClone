@@ -13,11 +13,10 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 @Getter
 public enum EErrorType {
 
-    INTERNAL_ERROR(3000,"Sunucuda beklenmeyen hata",INTERNAL_SERVER_ERROR),
-    INVALID_TOKEN(4001,"Geçersiz token bilgisi",BAD_REQUEST),
-    BAD_REQUEST_ERROR(1202,"Geçersiz Parametre Girişi Yaptınız",BAD_REQUEST),
-
-    POST_BULUNAMADI(2302,"Aradığınız id ye ait post bulunamamıştır",INTERNAL_SERVER_ERROR);
+    INTERNAL_ERROR(3000,"Unexpected error on the server.",INTERNAL_SERVER_ERROR),
+    INVALID_TOKEN(4001,"Invalid token error",BAD_REQUEST),
+    BAD_REQUEST_ERROR(1202,"You have entered an invalid parameter.",BAD_REQUEST),
+    POST_BULUNAMADI(2302,"There are no posts with the id you are looking for.",INTERNAL_SERVER_ERROR);
     private int code;
     private String message;
     private HttpStatus httpStatus;

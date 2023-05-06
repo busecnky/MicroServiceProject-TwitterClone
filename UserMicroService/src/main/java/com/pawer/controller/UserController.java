@@ -1,6 +1,5 @@
 package com.pawer.controller;
 
-
 import com.pawer.dto.request.*;
 import com.pawer.dto.response.FindAllRequestsResponse;
 import com.pawer.dto.response.FindByIdResponseDto;
@@ -45,7 +44,6 @@ public class UserController {
         return ResponseEntity.ok(userService.findMe(dto));
     }
 
-
     @PostMapping("/follow")
     @CrossOrigin("*")
     public  ResponseEntity<Integer> followUser(@RequestBody BaseRequestDto dto){
@@ -72,7 +70,6 @@ public class UserController {
     @PostMapping("/findallcarts")
     @CrossOrigin("*")
     public ResponseEntity<List<ProfileCartResponse>> findAllForUserCart(@RequestBody BaseRequestDto dto){
-        System.out.println(dto.getToken());
         return ResponseEntity.ok(userService.isFollow(dto));
     }
 

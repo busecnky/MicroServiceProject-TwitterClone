@@ -12,18 +12,18 @@ public class FallbackController {
     @GetMapping("/fallbackauth")
     public ResponseEntity<String> fallbackauth(){
 
-        return ResponseEntity.ok("Auth servis geçici bir süre devre dışıdır lütfen daha sonra tekrar deneyin");
+        return ResponseEntity.ok("Auth service is temporarily disabled please try again later.");
     }
 
     @GetMapping("/fallbackpost")
     public ResponseEntity<String> fallbackpost(){
 
-        return ResponseEntity.ok("Post servis geçici bir süre devre dışıdır lütfen daha sonra tekrar deneyin");
+        return ResponseEntity.ok("Post service is temporarily disabled please try again later.");
     }
 
     @GetMapping("/fallbackuser")
     public ResponseEntity<String> fallbackuser(){
 
-        return ResponseEntity.ok("User servis geçici bir süre devre dışıdır lütfen daha sonra tekrar deneyin");
+        return ResponseEntity.ok("User service is temporarily disabled please try again later.");
     }
 }

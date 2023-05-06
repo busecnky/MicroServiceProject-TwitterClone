@@ -19,7 +19,7 @@ public class RabbitConfig {
 
 
 
-    // Queu
+    // Queue
     private String queueCreateUser = "queue-create-user";
     private String queueCreatePost = "queue-create-post";
     private String queueUpdateUser= "queue-update-user";
@@ -46,7 +46,7 @@ public class RabbitConfig {
     }
 
     /**
-     * ---- Queu ----
+     * ---- Queue ----
      */
     @Bean
     Queue queueCreateUser() {
@@ -70,7 +70,7 @@ public class RabbitConfig {
 
 
     /**
-     * ---- Queu ----
+     * ---- Queue ----
      */
     @Bean
     Queue queueSaveUser() {

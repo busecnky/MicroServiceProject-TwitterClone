@@ -9,7 +9,6 @@ public class PostException extends RuntimeException{
         super(EErrorType.getMessage());
         this.EErrorType = EErrorType;
     }
-
     public PostException(EErrorType EErrorType, String message){
         super(message);
         this.EErrorType = EErrorType;

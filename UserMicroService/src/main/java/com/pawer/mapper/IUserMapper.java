@@ -11,6 +11,5 @@ import org.mapstruct.factory.Mappers;
 public interface IUserMapper {
     IUserMapper INSTANCE= Mappers.getMapper(IUserMapper.class);
     User toUser(final ModelUserSave model);
-
     FindByIdResponseDto toFindByIdResponseDto(final User user);
 }

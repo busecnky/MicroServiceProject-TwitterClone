@@ -8,7 +8,6 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
-
 @Data
 @SuperBuilder
 @AllArgsConstructor
@@ -21,9 +20,12 @@ public class Follower extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long userId; // benim ıd'm
-    private Long followerId; //bana takip isteği atan insanlar
-    private int statee; // 0_ bana istek atmamış 1_ bana istek atmış 2_ bana attığı isteği onaylamışım ->
+    //my id
+    private Long userId;
+    //bana takip isteği atan insanlar
+    private Long followerId;
+    // 0_ bana istek atmamış 1_ bana istek atmış 2_ bana attığı isteği onaylamışım ->
+    private int statee;
 
 
 

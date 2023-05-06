@@ -92,10 +92,10 @@
   function mypost(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/mypost.html';
   }
-  function otherpeople(){
+  function otherpeople4(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople.html';
   }
-  function fawpostpage(){
+  function favpostpage(){
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/fawposts.html';
   }
 
@@ -115,9 +115,6 @@
     sessionStorage.setItem("token", null);
     window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/login.html';
   }
-
-
-
 
   function getProfileCart() {
     const token = sessionStorage.getItem("token");
@@ -183,15 +180,10 @@
       </div>
     </div>`;
 
-
-
               }
-
             })
             .catch(error => console.log('error', error));
   }
-
-
 
 
   function followbtn(index){
@@ -244,11 +236,11 @@
             .then((response)=>response.json())
             .then((response)=>{
               if (response){
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
 
               }
               else{
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
                 console.log(response.message)
               }
             })
@@ -275,11 +267,11 @@
             .then((response)=>response.json())
             .then((response)=>{
               if (response){
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
 
               }
               else{
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/otherpeople4.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/friendrequests.html';
                 console.log(response.message)
               }
             })

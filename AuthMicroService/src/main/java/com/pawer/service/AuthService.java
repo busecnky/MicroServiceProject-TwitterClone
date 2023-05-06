@@ -1,6 +1,5 @@
 package com.pawer.service;
 
-
 import com.pawer.dto.request.AuthLoginDto;
 import com.pawer.dto.request.AuthRegisterRequestDto;
 import com.pawer.dto.request.ChangePasswordDto;
@@ -30,28 +29,24 @@ public class AuthService extends ServiceManagerImpl<Auth,Long> {
         this.producerDirectSave = producerDirectSave;
         this.jwtTokenManager = jwtTokenManager;
     }
-
-
-
-    public  Boolean register(AuthRegisterRequestDto dto) throws InterruptedException {
-//        if (!dto.getPassword().equals(dto.getRepassword()))
-//            throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR);
+    public  Boolean register(AuthRegisterRequestDto dto) {
+        if (!dto.getPassword().equals(dto.getRepassword()))
+            throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR);
         Auth auth= IAuthMapper.INSTANCE.toAuth(dto);
-//        if (authRepository.findByUsername(auth.getUsername()).stream().count()!=0){
-//            throw new AuthException(EErrorType.AUTH_USERNAME_ERROR);}
+        if (authRepository.findByUsername(auth.getUsername()).stream().count()!=0){
+            throw new AuthException(EErrorType.AUTH_USERNAME_ERROR);}
         save(auth);
         producerDirectSave.sendMessageSaveUser(IAuthMapper.INSTANCE.ToModel(auth));
         return true;
     }
 
     public AuthLoginResponse doLogin(AuthLoginDto dto){
-        Optional<Auth> auth =  authRepository.findOptionalByUsernameAndPassword(dto.getUsername(),dto.getPassword());
+        Optional<Auth> auth = authRepository.findOptionalByUsernameAndPassword(dto.getUsername(),dto.getPassword());
         if(auth.isEmpty())
             throw new AuthException(EErrorType.AUTH_PARAMETRE_ERROR);
         Optional<String> token = jwtTokenManager.createToken(auth.get().getId());
         if(token.isEmpty())
             throw new AuthException(EErrorType.INVALID_TOKEN);
-
 
         return AuthLoginResponse.builder()
                 .token(token.get())
@@ -62,10 +57,9 @@ public class AuthService extends ServiceManagerImpl<Auth,Long> {
         Long id= jwtTokenManager.validToken(dto.getToken()).get();
         Auth auth= findById(id).get();
 
-
         if (auth==null) throw new AuthException(EErrorType.INVALID_TOKEN);
-        if (auth.getPassword()!= dto.getOldpassword()) throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR,"eski sifre ve yeni sifre eslesmiyor");
-        if (dto.getNewpassword()!= dto.getConfirmpassword()) throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR,"sifreler eslesmiyor");
+        if (auth.getPassword()!= dto.getOldpassword()) throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR);
+        if (dto.getNewpassword()!= dto.getConfirmpassword()) throw new AuthException(EErrorType.AUTH_PASSWORD_ERROR);
         auth.setPassword(dto.getNewpassword());
         update(auth);
         return true;
@@ -74,12 +68,12 @@ public class AuthService extends ServiceManagerImpl<Auth,Long> {
 
     public void updateAuth(ModelUpdateUser model){
 
-        if (model.getAuthId()==null) throw new AuthException(EErrorType.BAD_REQUEST_ERROR,"auth ıd yanlis geldi veya gelmedi");
+        if (model.getAuthId()==null) throw new AuthException(EErrorType.BAD_REQUEST_ERROR);
         Auth auth = findById(model.getAuthId()).get();
-        if (auth==null) throw new AuthException(EErrorType.BAD_REQUEST_ERROR,"auth nesneni boş geldi");
+        if (auth==null) throw new AuthException(EErrorType.BAD_REQUEST_ERROR);
         auth.setName(model.getName());
         auth.setSurname(model.getSurname());
-        if (auth.getId()==null||auth.getId().describeConstable().isEmpty())throw new AuthException(EErrorType.BAD_REQUEST_ERROR,"auth id güncellenerek olusturulmadi") ;
+        if (auth.getId()==null||auth.getId() == -1)throw new AuthException(EErrorType.BAD_REQUEST_ERROR) ;
         update(auth);
     }
 }

@@ -47,48 +47,20 @@ ki post istek atinca elastic alsin
 * pagination a bi bakılacak (front)
 ---
 
+--- DOCKER IMAGE OLUSTURMA ---
+### YAPILACAKLAR:
+* application.yml ---> ZIPKIN_URL düzenlencek
+* microservice git ymllarında ----> url şifre her şeye bakılacak.
 
 
+#### Image oluştururken dikkat edilecekler
+* microservicelere clean build build dependants yapmayı unutmuyoruz.
+* microservicelerin içindeki build içindeki LİBS klasörünün copy pathini alıyoruz.
+* sonra alttakiler gibi image versiyonu neyse ordan devam ediyoruz ilk sefer değilse.
 
-    # style.css' de yaptigim tüm degisiklikler. renklerden dolayı kör oluyordum
-
-
-    .md-textarea{
-    height: 100px;
-    resize: none;
-    padding: 20px;
-    /*background-color: var(--color5);*/
-    /*color: var(--color1);*/
-    margin: 20px;
-    font-size: 14px;
-    border-radius: 25px;                -->0
-    color: white;                       -->1
-    background-color: #002254;          -->2
-    outline: none; }
-    
-    
-    .md-textarea::placeholder{
-    color: var(--color1);
-    color: white;                       -->3
-    font-family: 'Poppins', sans-serif;}
-    
-
-    .pawbutton:hover,
-    .pawbutton:focus {
-    box-shadow: 0 0.5em 0.5em -0.4em var(--color3);
-    transform: translateY(-0.25em);
-    background-color: #78c059;          -->4
-    }
-
-    .post__body{
-    padding: 20px;
-    border-radius: 10px;
-    background-color: gray;             -->5
-    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.389),
-    10px 10px 15px rgba(70, 70, 70, 0.15),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.3),
-    inset 10px 10px 15px rgba(70, 70, 70, 0.15);
-    width: 500px;
-    }
+* docker build  --build-arg JAR_FILE=ConfigServerGit/build/libs/ConfigServerGit-v.0.1.jar --platform linux/amd64 -t busecnky/pawerconfigservergit:003 .
+* docker build --build-arg JAR_FILE=AuthMicroService/build/libs/AuthMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerauthmicroservice:001 .
+* docker build --build-arg JAR_FILE=UserMicroService/build/libs/UserMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerusermicroservice:001 .
+* docker build --build-arg JAR_FILE=PostMicroService/build/libs/PostMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerpostmicroservice:001 .
 
 

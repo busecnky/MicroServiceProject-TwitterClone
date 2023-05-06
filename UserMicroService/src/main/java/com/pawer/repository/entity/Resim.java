@@ -17,7 +17,6 @@ public class Resim {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     byte[] resim;
     String resimname;
 }

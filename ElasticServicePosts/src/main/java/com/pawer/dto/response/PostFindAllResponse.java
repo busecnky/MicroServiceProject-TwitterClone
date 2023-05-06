@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostFindAllResponse {
-
     @Id
     private String id;
     private Long userId;

@@ -4,7 +4,6 @@ import com.pawer.repository.entity.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +21,6 @@ public class ServiceManagerImpl<T extends BaseEntity,ID> implements IServiceMana
         t.setState(true);
         return repository.save(t);
     }
-
 
     @Override
     public T update(T t) {

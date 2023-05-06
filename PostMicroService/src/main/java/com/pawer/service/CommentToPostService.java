@@ -36,7 +36,6 @@ public class CommentToPostService extends ServiceManagerImpl<CommentToPost,Strin
         ModelFindUsernameForCreateComment model = new ModelFindUsernameForCreateComment();
         model.setToken(dto.getToken());
         String username=producerDirectService.sendfindUsernameForCreateComment(model);
-        System.out.println("postmicro da create comment ici username... "+username);
         Long userId = jwtTokenManager.validToken(dto.getToken()).get();
         commentToPost.setComment(dto.getComment());
         commentToPost.setUserId(userId);
@@ -58,6 +57,4 @@ public class CommentToPostService extends ServiceManagerImpl<CommentToPost,Strin
         }
         return comments;
     }
-
-
 }

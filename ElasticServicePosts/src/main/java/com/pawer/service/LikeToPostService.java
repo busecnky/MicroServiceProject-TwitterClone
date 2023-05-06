@@ -26,7 +26,6 @@ public class LikeToPostService extends ServiceManagerImpl<LikeToPost, String> {
         this.postService = postService;
     }
 
-
     public Boolean findByPostIdAndUserIdBoolean(String postId, Long userId) {
         Optional<LikeToPost> likeToPost = likePostRepository.findOptionalByPostIdAndUserId(postId, userId);
 
@@ -67,7 +66,6 @@ public class LikeToPostService extends ServiceManagerImpl<LikeToPost, String> {
         }
     }
 
-
     public Integer likePostCount(BaseRequestDto dto) {
         if (dto.getToken() == null || dto.getToken() == "") {
             throw new PostException(EErrorType.INVALID_TOKEN);
@@ -75,5 +73,4 @@ public class LikeToPostService extends ServiceManagerImpl<LikeToPost, String> {
         Optional<Post> post = postService.findById(dto.getPostId());
         return post.get().getLikeCount();
     }
-
 }

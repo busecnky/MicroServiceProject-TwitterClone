@@ -17,12 +17,9 @@ public class RabbitConfig {
     private String bindingKeyCreateComment = "binding-key-create-comment";
 
 
-    // Queu
+    // Queue
     private String queueCreatePost = "queue-create-post";
     private String queueCreateComment = "queue-create-comment";
-
-
-
 
     /**
      * ---- Exchange ----
@@ -42,18 +39,13 @@ public class RabbitConfig {
         return new TopicExchange(exchangeTopic);
     }
 
-
-
-
     /**
-     * ---- Queu ----
+     * ---- Queue ----
      */
     @Bean
     Queue queueCreatePost(){return new Queue(queueCreatePost);}
     @Bean
     Queue queueCreateComment(){return new Queue(queueCreateComment);}
-
-
 
     /**
      * ---- Binding ----
@@ -67,8 +59,4 @@ public class RabbitConfig {
     public Binding bindingCreateComment(final Queue queueCreateComment, final DirectExchange directExchange) {
         return BindingBuilder.bind(queueCreateComment).to(directExchange).with(bindingKeyCreateComment);
     }
-
-
-
-
 }

@@ -9,14 +9,12 @@ ext {
             jwt                     : "4.3.0",
             gcloud                  : "1.2.8.RELEASE"
 
-
     ]
     libs=[
             springBootStarterWeb        : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
             springBootStarterDataJpa    : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
             springBootStarterDataRedis  : "org.springframework.boot:spring-boot-starter-data-redis:$versions.springBoot",
             springBootStarterDataElasticSearch  : "org.springframework.boot:spring-boot-starter-data-elasticsearch:$versions.springBoot",
-
             springBootStarterValidation : "org.springframework.boot:spring-boot-starter-validation:$versions.springBoot",
 
             // Spring Cloud
@@ -37,8 +35,6 @@ ext {
             postgreSql                  : "org.postgresql:postgresql:$versions.postgreSql",
             Mongodb                     : "org.springframework.boot:spring-boot-starter-data-mongodb:$versions.springBoot",
 
-
-
             // Genel BAğımlılıklar
             lombok                      : "org.projectlombok:lombok:$versions.lombok",
             mapstruct                   : "org.mapstruct:mapstruct:$versions.mapstruct",
@@ -46,11 +42,9 @@ ext {
             swaggerui                   : "org.springdoc:springdoc-openapi-ui:$versions.swaggerui",
             gson                        :'com.google.code.gson:gson:2.7',
 
-
             // Güvenlik
             jwt                         : "com.auth0:java-jwt:$versions.jwt",
             //springBootStarterSecurity   : "org.springframework.boot:spring-boot-starter-security:$versions.springBoot",
-
 
             //Zipkin Server
             springCloudSleuth           : "org.springframework.cloud:spring-cloud-starter-sleuth:$versions.springCloud",
@@ -58,7 +52,6 @@ ext {
 
             // rabbitmq
             springBootRabbitMQ          : "org.springframework.boot:spring-boot-starter-amqp:$versions.springBoot"
-
     ]
 }
 

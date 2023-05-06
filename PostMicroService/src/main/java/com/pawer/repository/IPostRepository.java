@@ -1,6 +1,5 @@
 package com.pawer.repository;
 
-
 import com.pawer.repository.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

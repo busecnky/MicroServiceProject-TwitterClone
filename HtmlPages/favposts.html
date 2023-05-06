@@ -335,7 +335,7 @@
   }
 
   function likepostheart(index,isliked){
-    const postliked = 'http://localhost:6260/user/createlikepost';
+    const postliked = 'http://localhost:6160/post/createlikepost';
 
     let id = document.getElementById(index+'in').value;
     let token = sessionStorage.getItem("token");
@@ -363,10 +363,10 @@
             .then((response)=>{
               if (response===true){
                 console.log("Lets go")
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
               }
               else{
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
 
               }
             })
@@ -482,21 +482,6 @@
 
 
 
-  //*****************
-  //--------------------------
-
-
-
-
-
-  //--------------------------
-
-
-
-  //*****************************Paw Tuşu
-
-
-
   //*****************************comment Tuşu
 
   function commentbtn(index){
@@ -510,9 +495,6 @@
       "token": token
     }
 
-
-
-
     fetch("http://localhost:6260/user/createcommenttopost",{
       method : "POST",
       headers: {
@@ -524,7 +506,7 @@
             .then((response)=>{
               if (response===true){
                 console.log("Lets go")
-                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/index.html';
+                window.location.href = 'http://localhost:63342/SocialMedia_Pawer/HtmlPages/favposts.html';
               }
               else{
                 console.log(response.message)
@@ -565,59 +547,7 @@
               console.log(err)
             });
   }
-  //------------------CARDS-------------------------
-  /*
-  window.addEventListener('load', getProfileCart);
 
-
-  function getProfileCart() {
-      const token = sessionStorage.getItem("token");
-      const name = document.getElementById('name');
-      const username = document.getElementById('username');
-      const content = document.getElementById('content');
-      const id = document.getElementById('id');
-
-
-      const data = JSON.stringify({
-          "name": name,
-          "username": username,
-          "content": content,
-          "id": id
-      });
-
-      fetch("http://localhost:6260/user/findalluser", {
-          method: 'GET',
-          headers: {
-              "Content-Type": "application/json",
-          },
-      })
-          .then(response => response.json())
-          .then(response => { console.log(response)
-              for (let index = 0; index < response.length; index++) {
-                  document.getElementById("profilecart").innerHTML += `
-  <div class="mySlides fade">
-
-<div class="profilecartcontainer">
-      <div class="profilecartphoto"> <img src="https://storage.cloud.google.com/pawerallphoto/unnamed.jpeg" alt=""></div>
-      <div class="profilecartalltext">
-      <div class="profilecarttitle"> ${response[index].name} </div>
-      <div class="profilecarttext"> ${response[index].username}</div>
-  </div>
-  </div>
-</div>`;
-                  var myDiv = document.getElementById(`commentsss${index}`);
-
-
-                  setTimeout(() => {
-                      getComment(index);
-                  }, 0);
-              }
-
-          })
-          .catch(error => console.log('error', error));
-  }
-
-*/
 </script>
 
 </body>

@@ -43,6 +43,4 @@ public class CommentToPostService extends ServiceManagerImpl<CommentToPost,Strin
         }
         return comments;
     }
-
-
 }

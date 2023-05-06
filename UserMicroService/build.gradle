@@ -8,5 +8,4 @@ dependencies {
     implementation libs.postgreSql
     implementation libs.springBootRabbitMQ
     implementation libs.springBootStarterDataRedis
-
 }

@@ -1,6 +1,5 @@
 package com.pawer.repository;
 
-
 import com.pawer.repository.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +13,5 @@ public interface IPostRepository extends ElasticsearchRepository<Post,String> {
 
     Page<Post> findByUserId(Long id,Pageable pageable);
     Optional<List<Post>> findOptionalByUserId (Long id);
-    Optional<List<Post>> findOptionalByUserId (Long id,Pageable pageable);
-
-
-
 
 }

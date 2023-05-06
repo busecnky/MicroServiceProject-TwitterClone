@@ -9,7 +9,6 @@ import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +109,4 @@ public class FollowService extends ServiceManagerImpl<Follow, Long>  {
         }
         return followIdList;
     }
-
-
 }

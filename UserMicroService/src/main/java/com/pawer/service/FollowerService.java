@@ -52,11 +52,9 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             }
             i++;
         }
-
     }
 
     public Integer acceptFollower(AcceptFollowerRequestDto dto) {
-
         Optional<Long> userId = jwtTokenManager.validToken(dto.getToken());
         Optional<User> followerUser = userService.findOptionalByUsername(dto.getUsername());
         Optional<Follower> follower = followerRepository.findOptionalByUserIdAndFollowerId(userId.get(), followerUser.get().getId());
@@ -67,7 +65,6 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
             //followerRepository.save(follower.get()); //furkan dursun dedi ama buse silmek istedi
             return 0;
         } else if (follower.get().getStatee() == 1) { // gelen isteği kabul etmek & reddetmek
-
                 follower.get().setStatee(2);
                 update(follower.get());
                 follow.get().setFollowRequest(2);
@@ -76,7 +73,6 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
 
 
         } else if (follower.get().getStatee() == 2) { // beni takip edeni çıkartmak
-
             follower.get().setStatee(0);
             follower.get().setUpdateDate(LocalDateTime.now().toString());
             followerRepository.save(follower.get());
@@ -166,23 +162,5 @@ public class FollowerService extends ServiceManagerImpl<Follower, Long> {
     public Integer findAllRequestsCount(BaseRequestDto dto) {
         return findAllRequests(dto).size();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 

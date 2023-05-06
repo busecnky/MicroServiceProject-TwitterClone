@@ -30,7 +30,7 @@ public class FavToPostService extends ServiceManagerImpl<FavToPost,String> {
     }
 
     public Boolean findFavToPostBoolean(String postId,Long userId){
-        Optional<FavToPost> favToPost=  favPostRepository.findOptionalByPostIdAndUserId(postId,userId);
+        Optional<FavToPost> favToPost = favPostRepository.findOptionalByPostIdAndUserId(postId,userId);
         if (favToPost.isPresent()){
             if (favToPost.get().getStatement()==true){
                 return true;
@@ -41,8 +41,6 @@ public class FavToPostService extends ServiceManagerImpl<FavToPost,String> {
             return false;
         }
     }
-
-
 
     public Boolean createFavPost(BaseRequestDto dto) {
         Long userId= jwtTokenManager.validToken(dto.getToken()).get();
@@ -61,7 +59,6 @@ public class FavToPostService extends ServiceManagerImpl<FavToPost,String> {
         }
     }
 
-
     public List<PostFindAllResponse> myFavPostList(BaseRequestDto dto){
         Long userId=jwtTokenManager.validToken(dto.getToken()).get();
 
@@ -69,7 +66,6 @@ public class FavToPostService extends ServiceManagerImpl<FavToPost,String> {
         List<PostFindAllResponse> myFavPostListResponseDtos =new ArrayList<>();
 
         if (favToPosts.get()!=null){
-            System.out.println("\n\n\nvar ise girilen yer 243");
             for (FavToPost favToPost : favToPosts.get()){
                 if (favToPost.getStatement()==true){
 
@@ -92,11 +88,6 @@ public class FavToPostService extends ServiceManagerImpl<FavToPost,String> {
             }
             return myFavPostListResponseDtos;
         }
-        System.out.println("en alt return oncesi");
         return myFavPostListResponseDtos;
     }
-
-
-
-
 }

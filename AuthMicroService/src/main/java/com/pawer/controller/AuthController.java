@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @CrossOrigin("*")
-    public ResponseEntity<Boolean> register(@RequestBody /*@Valid*/ AuthRegisterRequestDto dto) throws InterruptedException {
+    public ResponseEntity<Boolean> register(@RequestBody @Valid AuthRegisterRequestDto dto) throws InterruptedException {
         return ResponseEntity.ok( authService.register(dto));
 
     }
@@ -35,7 +35,6 @@ public class AuthController {
     @PostMapping("/changepassword")
     @CrossOrigin("*")
     public ResponseEntity<Boolean> changePassword(@RequestBody ChangePasswordDto dto){
-        System.out.println("aaaxxaa");
         return ResponseEntity.ok(authService.changePassword(dto));
     }
 

@@ -35,6 +35,4 @@ public class Post extends BaseEntity {
     @Builder.Default
     private String  time= LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
 
-
-
 }

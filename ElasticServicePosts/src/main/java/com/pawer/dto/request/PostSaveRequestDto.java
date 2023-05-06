@@ -27,6 +27,4 @@ public class PostSaveRequestDto {
     private String date= LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     @Builder.Default
     private String  time= LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-
-
 }

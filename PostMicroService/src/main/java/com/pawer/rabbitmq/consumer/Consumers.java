@@ -2,7 +2,6 @@ package com.pawer.rabbitmq.consumer;
 
 import com.pawer.rabbitmq.messagemodel.ModelCreatePost;
 import com.pawer.rabbitmq.messagemodel.ModelFollowId;
-import com.pawer.repository.entity.Post;
 import com.pawer.service.PostService;
 import com.pawer.utility.StaticValues;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ public class Consumers {
 
     private final PostService postService;
 
-
     @RabbitListener(queues = "queue-create-post-topic")
     public void createPostConsumerListener(ModelCreatePost modelCreatePost) throws IOException {
         System.out.println("model consumer ici: "+modelCreatePost.toString());
@@ -29,6 +27,5 @@ public class Consumers {
     public void follodIdList (ModelFollowId model){
         StaticValues.modelFollowId=model;
     }
-
 
 }
