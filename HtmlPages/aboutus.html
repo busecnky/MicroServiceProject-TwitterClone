@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="css/aboutus.css">
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -196,6 +197,20 @@
           slides[slideIndex-1].style.display = "block";  
           dots[slideIndex-1].className += " active";
           setTimeout(showSlides, 2500); // Change image every 2 seconds
+        }
+
+        function lightdarkmode() {
+            document.body.classList.toggle("dark-theme");
+            if (document.body.classList.contains("dark-theme")) {
+                mode.textContent = 'light_mode';
+                mode.id = 'light_mode';
+                console.log(mode.textContent)
+                console.log(mode.id)
+            } else {
+                mode.textContent = "dark_mode";
+                mode.id = 'dark_mode';
+            }
+
         }
         </script>
     

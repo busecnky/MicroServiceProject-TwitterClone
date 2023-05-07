@@ -17,6 +17,7 @@ import com.pawer.repository.entity.Follow;
 import com.pawer.repository.entity.User;
 import com.pawer.utility.JwtTokenManager;
 import com.pawer.utility.ServiceManagerImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -103,7 +104,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
         return IUserMapper.INSTANCE.toFindByIdResponseDto(user.get());
     }
-
+    @Cacheable(value = "findOptionalByUsername")
     public Optional<User> findOptionalByUsername(String username) {
         return userRepository.findOptionalByUsername(username);
     }
