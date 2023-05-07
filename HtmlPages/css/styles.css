@@ -12,7 +12,7 @@
     --color2: rgba(42,39,40);
     --color3: rgba(32,31,30);
     --color4: #78c059;
-    --color5: #fff9f4;
+    --color5: #d0d0d0;
 }
 #light_mode{
     color: var(--color4);
