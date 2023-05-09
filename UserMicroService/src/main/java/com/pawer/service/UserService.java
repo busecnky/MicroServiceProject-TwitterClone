@@ -104,7 +104,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
         return IUserMapper.INSTANCE.toFindByIdResponseDto(user.get());
     }
-    @Cacheable(value = "findOptionalByUsername")
+    //@Cacheable(value = "findOptionalByUsername")
     public Optional<User> findOptionalByUsername(String username) {
         return userRepository.findOptionalByUsername(username);
     }
@@ -126,7 +126,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
                 profileCartResponse.setUsername(user.getUsername());
                 profileCartResponse.setPostCount(0);
                 //ben karttaki kullanıcıyı takip ediyor muyum?
-                profileCartResponse.setFollow(f.getFollowRequest() == 0 ? "Takip Et" : (f.getFollowRequest() == 1 ? "İstek Gönderildi" : "Takiptesin"));
+                profileCartResponse.setFollow(f.getFollowRequest() == 0 ? "Follow" : (f.getFollowRequest() == 1 ? "Request Sent" : "Following"));
                 profileCartResponses.add(profileCartResponse);
 
             }
@@ -135,7 +135,7 @@ public class UserService extends ServiceManagerImpl<User, Long> {
 
             for (ProfileCartResponse responses : profileCartResponses) {
                 if (i < followerService.isFollower(userId).size()) {
-                    responses.setFollower(followerService.isFollower(userId).get(i).getStatee() == 0 ? "Takip Etmiyor" : (followerService.isFollower(userId).get(i).getStatee() == 1 ? "Cevap Bekleniyor" : "Cikart"));
+                    responses.setFollower(followerService.isFollower(userId).get(i).getStatee() == 0 ? "Does not Follow" : (followerService.isFollower(userId).get(i).getStatee() == 1 ? "Awaiting Reply" : "Remove"));
                     i++;
                 }
             }

@@ -15,5 +15,5 @@ spring:
           uri: "https://github.com/MicroServiceSocialMedia/ConfigCloud.git"
           default-label: main
           skip-ssl-validation: true
-          username: busecnky
+          username: ${AUDIENCE}
           password: ${GIT_PASSWORD}

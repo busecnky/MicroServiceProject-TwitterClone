@@ -161,15 +161,15 @@
       <div class="photo__text">
         <div>
         <img
-          src="https://storage.cloud.google.com/pawerallphoto/ErSirm9W4AAwUnt.jpg"
+          src="../HtmlPages/images/user.png"
           alt=""/>
 
         </div>
 
         <div class="textt">
-          <h4>${data[0] [index].name} </h4>
-          <h5 >java web</h5>
-         <h5 >123235 posts</h5>
+          <h4>${data[0] [index].username} </h4>
+          <h5>${data[0] [index].name} ${data[0] [index].surname}</h5>
+         <h5>${data[0] [index].postCount} posts</h5>
 
         <button class="btn btn-pink"  onclick="acceptfollowrequest(${index})" >Accept</button>
         <button class="btn btn-pink"  onclick="rejectfollowrequest(${index})" >Reject</button>

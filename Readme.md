@@ -33,12 +33,10 @@ ki post istek atinca elastic alsin
 
 ## yapilacaklar.
 * elastic search de db ye kayıtlı veri var ise kaydetme yok ise kaydet işlemi.
-* change password bağlanacak.
-* a
-* profile.html
-* people.html
+* change password bağlanacak.(bağlı ama hata var değiştiremiyoruz hata veriyor. Düzgün şifre ve veritabanı ile tekrar denencek!) 
 * commentread ler için commenttoposta tarih ve saat eklenmeli
 * comment tuşu çok saçma duruyor comment alanı comment tuşuna basılarak açılmalı
+* avatar updateini yapana kadar avatarları kaldıralım bence(buse) 
 
 
 
@@ -58,9 +56,9 @@ ki post istek atinca elastic alsin
 * microservicelerin içindeki build içindeki LİBS klasörünün copy pathini alıyoruz.
 * sonra alttakiler gibi image versiyonu neyse ordan devam ediyoruz ilk sefer değilse.
 
-* docker build  --build-arg JAR_FILE=ConfigServerGit/build/libs/ConfigServerGit-v.0.1.jar --platform linux/amd64 -t busecnky/pawerconfigservergit:003 .
-* docker build --build-arg JAR_FILE=AuthMicroService/build/libs/AuthMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerauthmicroservice:001 .
-* docker build --build-arg JAR_FILE=UserMicroService/build/libs/UserMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerusermicroservice:001 .
-* docker build --build-arg JAR_FILE=PostMicroService/build/libs/PostMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerpostmicroservice:001 .
+* docker build  --build-arg JAR_FILE=ConfigServerGit/build/libs/ConfigServerGit-v.0.1.jar --platform linux/amd64 -t busecnky/pawerconfigservergit:004 .
+* docker build --build-arg JAR_FILE=AuthMicroService/build/libs/AuthMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerauthmicroservice:002 .
+* docker build --build-arg JAR_FILE=UserMicroService/build/libs/UserMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerusermicroservice:003 .
+* docker build --build-arg JAR_FILE=PostMicroService/build/libs/PostMicroService-v.0.1.jar --platform linux/amd64 -t busecnky/pawerpostmicroservice:002 .
 
 

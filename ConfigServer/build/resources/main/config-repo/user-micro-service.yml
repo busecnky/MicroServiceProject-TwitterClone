@@ -15,7 +15,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/CrowerUserDB
+    url: jdbc:postgresql://localhost:5432/PawerUserDB
     username: postgres
     password: 4628
   jpa:

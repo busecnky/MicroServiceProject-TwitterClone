@@ -171,6 +171,7 @@ h2{
 
 #profilecart{
     margin-top: 30px;
+    width: 60%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -181,11 +182,10 @@ h2{
     font-family: "Sofia", sans-serif;
     background-color: var(--color5);
     border-radius: 20px;
-    width: 430px;
-    height: 160px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    width: 375px;
+    height: 165px;
+    margin: 10px;
+    padding: 20px;
     box-shadow: -10px -10px 15px rgba(152, 150, 150, 0.282),
     10px 10px 15px rgba(70, 70, 70, 0.15);
 }
@@ -198,8 +198,8 @@ h2{
 
 .photo__text img {
     margin-left: 10px;
-    width: 130px;
-    height: 130px;
+    width: 90px;
+    height:90px;
     border-radius: 50%;
     margin-right: 10px;
 }
@@ -219,12 +219,17 @@ h2{
 .btn {
     border: none;
     margin-top: 12px;
-    padding: 11px 18px;
+    margin-bottom: 12px;
+    padding: 11px 15px;
     border-radius: 7px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 10px;
 }
-
+.btn-orange {
+    background: #dc5c00;
+    color: white;
+}
 .btn-pink {
     background: #b82151;
     color: white;

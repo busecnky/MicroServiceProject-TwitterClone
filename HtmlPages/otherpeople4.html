@@ -123,13 +123,11 @@
     const content = document.getElementById('content');
     const email= document.getElementById('email')
     const id = document.getElementById('id');
-    const follow = document.getElementById('follow');
     const urluser= 'http://localhost:6260/user/findallcarts';
     const urlpost= 'http://localhost:6160/post/findallpage';
 
 
     const data = JSON.stringify({
-      "follow": follow,
       "name": name,
       "username": username,
       "surname": surname,
@@ -159,17 +157,17 @@
                 document.getElementById("profilecart").innerHTML += `
  <div class="containerrr">
       <div class="photo__text">
-        <img src="https://i.pinimg.com/564x/a6/58/32/a65832155622ac173337874f02b218fb--people-icon-avatar.jpg"
+        <img           src="../HtmlPages/images/avatarimage.png"
           alt=""/>
         <div class="textt">
-          <h4>${data[0] [index].name} </h4>
-          <h5>java web</h5>
-         <h5>123235 posts</h5>
+          <h4>${data[0] [index].username} </h4>
+          <h5>${data[0] [index].name} ${data[0] [index].surname}</h5>
+         <h5>${data[0] [index].postCount} posts</h5>
 
-        <button class="btn btn-pink"  onclick="acceptfollowrequest(${index})" >${data[0][index].follower}</button>
+        <button class="btn ${data[0][index].follower === 'Does not Follow' ? 'btn-pink' : (data[0][index].follower === 'Awaiting Reply' ? 'btn-gray' : 'btn-orange')} "  onclick="acceptfollowrequest(${index})" >${data[0][index].follower}</button>
 
         <input hidden="hidden" value=${data[0] [index].username} class="followUsername" id=${index+'in'}  </input>
-         <button id="followwbtn" class="btn ${data[0][index].follow === 'Takip Et' ? 'btn-blue' : (data[0][index].follow === 'İstek Gönderildi' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
+         <button id="followwbtn" class="btn ${data[0][index].follow === 'Follow' ? 'btn-blue' : (data[0][index].follow === 'Request Sent' ? 'btn-gray' : 'btn-green')} " onclick="followbtn(${index})">${data[0][index].follow}</button>
         </div>
       </div>
     </div>`;
