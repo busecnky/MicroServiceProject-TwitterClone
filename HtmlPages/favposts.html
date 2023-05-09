@@ -260,7 +260,6 @@
                         <div class="post__header">
                             <div class="post__headerText">
                                 <div class="post__avatar">
-                                    <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"alt="">
                                 </div>
                                 <div class="divforh3">
                                 <h3>${data[0][index].username}
@@ -295,9 +294,7 @@
                         <div class="commentwrite">
                             <div class="commentwrite__input">
                             <div class="commenttext_avatar">
-                                <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                                    alt="">
-                                    <p><sub><i>@${data[1].username}</i> </sub></p>
+                                    <p><sub><i>${data[1].username}</i> </sub></p>
                                  </div>
 
                                 <textarea type="text" id=${index+'cm'} class="commentwrite-textarea"
@@ -452,8 +449,6 @@
                             <div class="commentread__header">
 
                                    <div class="commentread__avatar">
-                                        <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg"
-                                    alt="">
                                     </div>
                                     <div class="commentread__headerText">
                                         <h3> ${response[i].userId}
