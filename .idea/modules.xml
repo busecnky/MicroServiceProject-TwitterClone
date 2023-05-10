@@ -9,9 +9,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ElasticServicePosts/SocialMedia_Pawer.ElasticServicePosts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ElasticServicePosts/SocialMedia_Pawer.ElasticServicePosts.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PostMicroService/SocialMedia_Pawer.PostMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PostMicroService/SocialMedia_Pawer.PostMicroService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/UserMicroService/SocialMedia_Pawer.UserMicroService.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ApiGateway/com.pawer.SocialMedia_Pawer.ApiGateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ApiGateway/com.pawer.SocialMedia_Pawer.ApiGateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/com.pawer.SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/com.pawer.SocialMedia_Pawer.ConfigServer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServerGit/com.pawer.SocialMedia_Pawer.ConfigServerGit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServerGit/com.pawer.SocialMedia_Pawer.ConfigServerGit.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.pawer.SocialMedia_Pawer.ElasticServicePosts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ElasticServicePosts/com.pawer.SocialMedia_Pawer.ElasticServicePosts.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServer/repository-pawer.SocialMedia_Pawer.ConfigServer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServer/repository-pawer.SocialMedia_Pawer.ConfigServer.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigServerGit/repository-pawer.SocialMedia_Pawer.ConfigServerGit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigServerGit/repository-pawer.SocialMedia_Pawer.ConfigServerGit.main.iml" />
     </modules>
   </component>
 </project>

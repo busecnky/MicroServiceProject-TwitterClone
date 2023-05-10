@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    config:
-      uri: ${CONFIG_URL}
-  config:
-    import: "configserver:"
-  application:
-    name: auth-micro-service
