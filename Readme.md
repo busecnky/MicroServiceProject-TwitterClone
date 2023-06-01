@@ -20,9 +20,25 @@ GCloud: The application is deployed on the Google Cloud Platform, leveraging its
 Kubernetes: Kubernetes is used for container orchestration, allowing us to manage and scale the application's microservices effectively.
 Docker: Docker is used to containerize the application's microservices, providing consistency and ease of deployment.
 
-![Screen Shot 2023-05-09 at 17 54 45]()
-<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/fd289048-cce6-4a44-b76c-7aafe890e937" alt="Alt Text" width="300">
+Register & Login Pages
+<div>
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/fd289048-cce6-4a44-b76c-7aafe890e937" alt="Alt Text" width="400">
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/d9b10a19-d77a-4c82-a217-76c9f12be494" alt="Alt Text" width="400">
+</div>
+Home Page
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/8a82ab7b-93e3-4ba0-be80-d465d245f6c5" alt="Alt Text" width="400">
 
+People Page
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/735cd27e-84e6-4c4a-a60d-cb37d5926ba6" alt="Alt Text" width="400">
+
+Requests Page
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/1b85d013-3228-4499-9063-c53c5e05665a" alt="Alt Text" width="400">
+
+Profile & Change Password Pages
+<div>
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/80ef4ad2-4fcc-4b32-87ad-46cd2ff01bd7" alt="Alt Text" width="400">
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/3b8a6f3b-4480-4625-9386-4260831740f1" alt="Alt Text" width="400">
+</div>
 
 
 ### Contributors
