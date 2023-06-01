@@ -22,17 +22,24 @@ Docker: Docker is used to containerize the application's microservices, providin
 
 Register & Login Pages
 <div>
-<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/fd289048-cce6-4a44-b76c-7aafe890e937" alt="Alt Text" width="400">
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/4b2c1369-4693-49ae-b5fb-756d336ee1ee" alt="Alt Text" width="400">
 <img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/d9b10a19-d77a-4c82-a217-76c9f12be494" alt="Alt Text" width="400">
 </div>
+
 Home Page
+<div>
 <img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/8a82ab7b-93e3-4ba0-be80-d465d245f6c5" alt="Alt Text" width="400">
+</div>
 
 People Page
+<div>
 <img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/735cd27e-84e6-4c4a-a60d-cb37d5926ba6" alt="Alt Text" width="400">
+</div>
 
 Requests Page
+<div>
 <img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/1b85d013-3228-4499-9063-c53c5e05665a" alt="Alt Text" width="400">
+</div>
 
 Profile & Change Password Pages
 <div>
