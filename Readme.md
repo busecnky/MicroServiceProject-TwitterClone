@@ -49,8 +49,11 @@ Profile & Change Password Pages
 
 
 ### Contributors
+<div>
 Buse Çankaya
 Muhammed Furkan Türkmen 
+</div>
+
 ### License
 This project is licensed under the MIT License.
 
