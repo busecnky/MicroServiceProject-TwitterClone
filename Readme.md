@@ -20,7 +20,8 @@ GCloud: The application is deployed on the Google Cloud Platform, leveraging its
 Kubernetes: Kubernetes is used for container orchestration, allowing us to manage and scale the application's microservices effectively.
 Docker: Docker is used to containerize the application's microservices, providing consistency and ease of deployment.
 
-![Screen Shot 2023-05-09 at 17 54 45](https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/fd289048-cce6-4a44-b76c-7aafe890e937)
+![Screen Shot 2023-05-09 at 17 54 45]()
+<img src="https://github.com/busecnky/MicroServiceProject-TwitterClone/assets/116001471/fd289048-cce6-4a44-b76c-7aafe890e937" alt="Alt Text" width="300">
 
 
 
